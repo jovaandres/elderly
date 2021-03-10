@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "834995872363",
+    "project_id": "workout-app-ed12c",
+    "storage_bucket": "workout-app-ed12c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834995872363:android:acc0f87281cbb6195e072e",
+        "android_client_info": {
+          "package_name": "com.example.workout_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "834995872363-e3flvavmq4mjan5llk9julsleqf4pa2a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDk-5ju2tD3BV2mk0NP8bsxNV4EJEmoTSk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "834995872363-e3flvavmq4mjan5llk9julsleqf4pa2a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
