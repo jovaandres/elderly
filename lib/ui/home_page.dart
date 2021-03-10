@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:workout_flutter/ui/first_page.dart';
+import 'package:workout_flutter/ui/fourth_page.dart';
 import 'package:workout_flutter/ui/second_page.dart';
 import 'package:workout_flutter/ui/third_page.dart';
 import 'package:workout_flutter/widget/platform_widget.dart';
@@ -25,6 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
     FirstPage(),
     SecondPage(),
     ThirdPage(),
+    FourthPage(),
   ];
 
   List<BottomNavigationBarItem> _bottomBarItem = [
@@ -34,12 +36,15 @@ class _MyHomePageState extends State<MyHomePage> {
         icon: Icon(CupertinoIcons.heart_fill), label: 'Second'),
     BottomNavigationBarItem(
         icon: Icon(Platform.isIOS ? CupertinoIcons.settings : Icons.settings),
-        label: 'Third')
+        label: 'Third'),
+    BottomNavigationBarItem(icon: Icon(Icons.medical_services), label: 'Fourth')
   ];
 
   Widget _buildAndroid(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.blueAccent,
+        unselectedItemColor: Colors.grey,
         currentIndex: _bottomNavIndex,
         onTap: (index) {
           _pageController.animateToPage(index,

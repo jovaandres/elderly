@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/widget/menu_tile.dart';
 import 'package:workout_flutter/widget/sign_in_button.dart';
 
@@ -10,40 +11,56 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("First"),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              'Hello',
-              style: TextStyle(fontSize: 16),
+      body: Column(
+        children: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0, 0),
+                      blurRadius: 22,
+                      color: Colors.grey,
+                    )
+                  ],
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(8),
+                  ),
+                ),
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Column(
+                    children: [
+                      Text(
+                        "Hello User!",
+                        style: textStyle.copyWith(
+                          fontSize: 18,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        "Find or call nearest hospital",
+                        style: textStyle.copyWith(
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
-            Text(
-              'User!',
-              style: TextStyle(fontSize: 20),
-            )
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+          ),
+        ],
       ),
       drawer: Drawer(
         child: SafeArea(

@@ -6,7 +6,7 @@ Widget signInButton() {
   return OutlineButton(
     splashColor: Colors.grey,
     onPressed: () {
-      Navigation.intentNamed(LoginPage.routeName);
+      Navigation.intentReplace(LoginPage.routeName);
     },
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(40),
