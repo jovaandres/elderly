@@ -11,6 +11,18 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
+  final _nameFieldController = TextEditingController();
+  final _emailFieldController = TextEditingController();
+  final _passwordFieldController = TextEditingController();
+
+  @override
+  void dispose() {
+    _nameFieldController.dispose();
+    _emailFieldController.dispose();
+    _passwordFieldController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +45,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
+                controller: _nameFieldController,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.0),
@@ -45,6 +58,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
               padding:
                   EdgeInsets.only(left: 15.0, right: 15.0, top: 15, bottom: 0),
               child: TextField(
+                controller: _emailFieldController,
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.0),
@@ -57,6 +72,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               padding:
                   EdgeInsets.only(left: 15.0, right: 15.0, top: 15, bottom: 0),
               child: TextField(
+                controller: _passwordFieldController,
                 obscureText: true,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(

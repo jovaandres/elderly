@@ -17,13 +17,13 @@ class SecondPage extends StatefulWidget {
 
 class _SecondPageState extends State<SecondPage> {
   final _nameFieldController = TextEditingController();
-  final _reviewFieldController = TextEditingController();
+  final _numberFieldController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
     _nameFieldController.dispose();
-    _reviewFieldController.dispose();
+    _numberFieldController.dispose();
     super.dispose();
   }
 
@@ -71,7 +71,7 @@ class _SecondPageState extends State<SecondPage> {
                               }
                               return null;
                             },
-                            controller: _reviewFieldController,
+                            controller: _numberFieldController,
                             keyboardType: TextInputType.phone,
                             decoration: InputDecoration(
                               hintText: 'Phone Number',
@@ -89,7 +89,7 @@ class _SecondPageState extends State<SecondPage> {
                           ),
                           onPressed: () {
                             saveContact(_nameFieldController.text,
-                                _reviewFieldController.text);
+                                _numberFieldController.text);
                             Navigation.back();
                           },
                         )
