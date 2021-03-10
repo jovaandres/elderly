@@ -41,7 +41,7 @@ class _SecondPageState extends State<SecondPage> {
               builder: (context) {
                 return SimpleDialog(
                   title: Text(
-                    'Review Restaurant',
+                    'Add Contact',
                     style: textStyle.copyWith(
                       fontSize: 20,
                     ),
@@ -59,7 +59,7 @@ class _SecondPageState extends State<SecondPage> {
                         TextField(
                           controller: _nameFieldController,
                           decoration: InputDecoration(
-                            hintText: 'Nama Kamu',
+                            hintText: 'Name',
                           ),
                         ),
                         Form(
@@ -67,13 +67,14 @@ class _SecondPageState extends State<SecondPage> {
                           child: TextFormField(
                             validator: (value) {
                               if (value.isEmpty) {
-                                return 'Tulis Review Sedikitnya Satu Kata';
+                                return 'Phone must not be null';
                               }
                               return null;
                             },
                             controller: _reviewFieldController,
+                            keyboardType: TextInputType.phone,
                             decoration: InputDecoration(
-                              hintText: 'Tulis Review',
+                              hintText: 'Phone Number',
                             ),
                           ),
                         ),
@@ -81,7 +82,7 @@ class _SecondPageState extends State<SecondPage> {
                         RaisedButton(
                           color: Theme.of(context).accentColor,
                           child: Text(
-                            'SEND',
+                            'SAVE',
                             style: textStyle.copyWith(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
@@ -145,7 +146,7 @@ Widget _buildList() {
                               Scaffold.of(context).showSnackBar(
                                 SnackBar(
                                     content: Text(
-                                      'Deleted from favorite',
+                                      'Deleted from contact',
                                       style: textStyle.copyWith(
                                           color: Colors.white),
                                     ),
