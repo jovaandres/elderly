@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/data/model/medical.dart';
+import 'package:workout_flutter/main.dart';
 
 class MedicineDetail extends StatefulWidget {
   static const routeName = '/medicine_detail_page';
@@ -19,10 +20,12 @@ class MedicineDetail extends StatefulWidget {
 class _MedicineDetailState extends State<MedicineDetail> {
   Medical medical;
   File _image;
+  File medicalImage;
   final picker = ImagePicker();
 
   void initState() {
     medical = widget.medicine;
+    medicalImage = File('$path/${medical.name}.png');
     super.initState();
   }
 
@@ -54,15 +57,11 @@ class _MedicineDetailState extends State<MedicineDetail> {
               padding: const EdgeInsets.all(8),
               child: Column(
                 children: [
-                  _image == null
-                      ? Text(
-                          'No image selected.',
-                          style: textStyle,
-                        )
-                      : Image.file(
-                          _image,
-                          width: 240,
-                        ),
+                  !(medicalImage.existsSync())
+                      ? (_image == null)
+                          ? Text('No image selected')
+                          : Image.file(_image)
+                      : Image.file(medicalImage),
                   SizedBox(height: 16),
                   Text(
                     medical.name,
@@ -92,6 +91,9 @@ class _MedicineDetailState extends State<MedicineDetail> {
 
   Future getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.camera);
+    if (pickedFile != null) {
+      await File(pickedFile.path).copy('$path/${medical.name}.png');
+    }
 
     setState(() {
       if (pickedFile != null) {
