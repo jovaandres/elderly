@@ -19,7 +19,6 @@ class MedicineDetail extends StatefulWidget {
 
 class _MedicineDetailState extends State<MedicineDetail> {
   Medical medical;
-  File _image;
   File medicalImage;
   final picker = ImagePicker();
 
@@ -58,10 +57,12 @@ class _MedicineDetailState extends State<MedicineDetail> {
               child: Column(
                 children: [
                   !(medicalImage.existsSync())
-                      ? (_image == null)
-                          ? Text('No image selected')
-                          : Image.file(_image)
-                      : Image.file(medicalImage),
+                      ? Text('No image selected')
+                      : Image.file(
+                          medicalImage,
+                          width: 300,
+                          height: 300,
+                        ),
                   SizedBox(height: 16),
                   Text(
                     medical.name,
@@ -97,7 +98,7 @@ class _MedicineDetailState extends State<MedicineDetail> {
 
     setState(() {
       if (pickedFile != null) {
-        _image = File(pickedFile.path);
+        medicalImage = File(pickedFile.path);
       } else {
         print('No image selected.');
       }
