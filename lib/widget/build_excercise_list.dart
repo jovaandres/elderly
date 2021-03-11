@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:workout_flutter/common/constant.dart';
+import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/data/model/excercise.dart';
+import 'package:workout_flutter/ui/excercise_detail.dart';
 
 Widget buildExcercise(BuildContext context, Excercise excercise) {
   return Padding(
@@ -42,7 +44,9 @@ Widget buildExcercise(BuildContext context, Excercise excercise) {
                   color: Colors.blue,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigation.intentNamed(ExcerciseDetail.routeName);
+              },
             )
           ],
         ),

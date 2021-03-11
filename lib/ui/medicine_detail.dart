@@ -17,9 +17,6 @@ class MedicineDetail extends StatefulWidget {
 }
 
 class _MedicineDetailState extends State<MedicineDetail> {
-  final _nameFieldController = TextEditingController();
-  final _rulesFieldController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
   Medical medical;
   File _image;
   final picker = ImagePicker();
@@ -27,13 +24,6 @@ class _MedicineDetailState extends State<MedicineDetail> {
   void initState() {
     medical = widget.medicine;
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    _nameFieldController.dispose();
-    _rulesFieldController.dispose();
-    super.dispose();
   }
 
   @override

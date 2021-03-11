@@ -11,6 +11,8 @@ import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/data/preferences/preferences_helper.dart';
 import 'package:workout_flutter/provider/preferences_provider.dart';
 import 'package:workout_flutter/provider/scheduling_provider.dart';
+import 'package:workout_flutter/ui/excercise_detail.dart';
+import 'package:workout_flutter/ui/excercise_player.dart';
 import 'package:workout_flutter/ui/home_page.dart';
 import 'package:workout_flutter/ui/intro_screen.dart';
 import 'package:workout_flutter/ui/login_page.dart';
@@ -42,7 +44,6 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -79,7 +80,9 @@ class MyApp extends StatelessWidget {
                   ),
               MedicineDetail.routeName: (context) => MedicineDetail(
                     medicine: ModalRoute.of(context).settings.arguments,
-                  )
+                  ),
+              ExcerciseDetail.routeName: (context) => ExcerciseDetail(),
+              ExcercisePlayer.routeName: (context) => ExcercisePlayer()
             },
           );
         },
