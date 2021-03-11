@@ -3,26 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/common/navigation.dart';
-import 'package:workout_flutter/data/model/family_number.dart';
+import 'package:workout_flutter/data/model/medical.dart';
 import 'package:workout_flutter/main.dart';
-import 'package:workout_flutter/widget/build_contact_list.dart';
+import 'package:workout_flutter/widget/build_medicine_list.dart';
 
-class SecondPage extends StatefulWidget {
-  static const routeName = '/second_page';
+class FifthPage extends StatefulWidget {
+  static const routeName = '/fifth_page';
 
   @override
-  _SecondPageState createState() => _SecondPageState();
+  _FifthPageState createState() => _FifthPageState();
 }
 
-class _SecondPageState extends State<SecondPage> {
+class _FifthPageState extends State<FifthPage> {
   final _nameFieldController = TextEditingController();
-  final _numberFieldController = TextEditingController();
+  final _rulesFieldController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
     _nameFieldController.dispose();
-    _numberFieldController.dispose();
+    _rulesFieldController.dispose();
     super.dispose();
   }
 
@@ -30,7 +30,7 @@ class _SecondPageState extends State<SecondPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Second"),
+        title: Text("Fifth"),
       ),
       body: _buildList(),
       floatingActionButton: FloatingActionButton(
@@ -40,7 +40,7 @@ class _SecondPageState extends State<SecondPage> {
               builder: (context) {
                 return SimpleDialog(
                   title: Text(
-                    'Add Contact',
+                    'Add Medicine',
                     style: textStyle.copyWith(
                       fontSize: 20,
                     ),
@@ -66,14 +66,13 @@ class _SecondPageState extends State<SecondPage> {
                           child: TextFormField(
                             validator: (value) {
                               if (value.isEmpty) {
-                                return 'Phone must not be null';
+                                return 'Rules must not be null';
                               }
                               return null;
                             },
-                            controller: _numberFieldController,
-                            keyboardType: TextInputType.phone,
+                            controller: _rulesFieldController,
                             decoration: InputDecoration(
-                              hintText: 'Phone Number',
+                              hintText: 'Rules',
                             ),
                           ),
                         ),
@@ -88,7 +87,7 @@ class _SecondPageState extends State<SecondPage> {
                           ),
                           onPressed: () {
                             saveContact(_nameFieldController.text,
-                                _numberFieldController.text);
+                                _rulesFieldController.text);
                             Navigation.back();
                           },
                         )
@@ -104,13 +103,13 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
-  void saveContact(String name, String number) {
+  void saveContact(String name, String rules) {
     _nameFieldController.clear();
-    _numberFieldController.clear();
-    firestore.collection('family_contact_bi13rb8').add({
+    _rulesFieldController.clear();
+    firestore.collection('medicine_bi13rb8').add({
       'id': "abcdef",
       'name': name,
-      'phone': number,
+      'rules': rules,
     });
   }
 
@@ -122,7 +121,7 @@ class _SecondPageState extends State<SecondPage> {
         Expanded(
           child: StreamBuilder<QuerySnapshot>(
             stream: firestore
-                .collection('family_contact_bi13rb8')
+                .collection('medicine_bi13rb8')
                 .where('id', isEqualTo: 'abcdef')
                 .orderBy('name', descending: true)
                 .snapshots(),
@@ -132,22 +131,22 @@ class _SecondPageState extends State<SecondPage> {
                   child: CircularProgressIndicator(),
                 );
               } else if (snapshot.hasData) {
-                final contacts = snapshot.data.docs;
-                List<FamilyNumber> familyNumbers = [];
-                for (var contact in contacts) {
-                  final name = contact.data()['name'];
-                  final phone = contact.data()['phone'];
-                  final docId = contact.id;
+                final medicines = snapshot.data.docs;
+                List<Medical> medicals = [];
+                for (var medicine in medicines) {
+                  final name = medicine.data()['name'];
+                  final rules = medicine.data()['rules'];
+                  final docId = medicine.id;
 
-                  final familyNumber =
-                      FamilyNumber(name: name, number: phone, docId: docId);
-                  familyNumbers.add(familyNumber);
+                  final medical =
+                      Medical(name: name, rules: rules, docId: docId);
+                  medicals.add(medical);
                 }
                 return AnimationLimiter(
                   child: ListView.builder(
                     shrinkWrap: true,
                     padding: const EdgeInsets.all(8),
-                    itemCount: familyNumbers.length,
+                    itemCount: medicals.length,
                     itemBuilder: (context, index) {
                       return AnimationConfiguration.staggeredList(
                         position: index,
@@ -156,14 +155,13 @@ class _SecondPageState extends State<SecondPage> {
                           verticalOffset: 50.0,
                           child: FadeInAnimation(
                             child: Dismissible(
-                              key: Key(familyNumbers[index].name),
-                              child: buildContactList(
-                                  context, familyNumbers[index]),
+                              key: Key(medicals[index].name),
+                              child: buildMedicine(context, medicals[index]),
                               direction: DismissDirection.endToStart,
                               onDismissed: (direction) {
                                 firestore
-                                    .collection("family_contact_bi13rb8")
-                                    .doc(familyNumbers[index].docId)
+                                    .collection("medicine_bi13rb8")
+                                    .doc(medicals[index].docId)
                                     .delete();
                                 Scaffold.of(context).showSnackBar(
                                   SnackBar(

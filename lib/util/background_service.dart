@@ -34,7 +34,7 @@ class BackgroundService {
     final NotificationHelper _notificationHelper = NotificationHelper();
     var result = await DatabaseHelper;
     await _notificationHelper.showNotification(
-        flutterLocalNotificationsPlugin, Medical(name: "Obat", time: "08-00"));
+        flutterLocalNotificationsPlugin, Medical(name: "Obat", rules: "08-00"));
 
     _uiSendPort ??= IsolateNameServer.lookupPortByName(_isolateName);
     _uiSendPort.send(null);

@@ -2,22 +2,26 @@ class Medical {
   Medical({
     this.id,
     this.name,
-    this.time,
+    this.rules,
+    this.docId,
   });
 
   int id;
   String name;
-  String time;
+  String rules;
+  String docId;
 
   factory Medical.fromJson(Map<String, dynamic> json) => Medical(
         id: json["id"],
         name: json["name"],
-        time: json["time"],
+        rules: json["rules"],
+        docId: json["docId"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
-        "time": time,
+        "rules": rules,
+        "docId": docId,
       };
 }

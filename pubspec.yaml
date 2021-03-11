@@ -40,6 +40,8 @@ dependencies:
   android_alarm_manager: ^0.4.5+20
   rxdart: ^0.25.0
   shared_preferences: ^0.5.12+1
+  cloud_firestore: ^0.14.4
+  firebase_core: ^0.5.3
 
 dev_dependencies:
   flutter_test:

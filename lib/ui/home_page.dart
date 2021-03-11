@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:workout_flutter/ui/fifth_page.dart';
 import 'package:workout_flutter/ui/first_page.dart';
 import 'package:workout_flutter/ui/fourth_page.dart';
 import 'package:workout_flutter/ui/second_page.dart';
@@ -27,6 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
     SecondPage(),
     ThirdPage(),
     FourthPage(),
+    FifthPage(),
   ];
 
   List<BottomNavigationBarItem> _bottomBarItem = [
@@ -37,7 +39,9 @@ class _MyHomePageState extends State<MyHomePage> {
     BottomNavigationBarItem(
         icon: Icon(Platform.isIOS ? CupertinoIcons.settings : Icons.settings),
         label: 'Third'),
-    BottomNavigationBarItem(icon: Icon(Icons.medical_services), label: 'Fourth')
+    BottomNavigationBarItem(
+        icon: Icon(Icons.medical_services), label: 'Fourth'),
+    BottomNavigationBarItem(icon: Icon(Icons.album), label: 'Fith')
   ];
 
   Widget _buildAndroid(BuildContext context) {

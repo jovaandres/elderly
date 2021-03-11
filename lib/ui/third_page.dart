@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:workout_flutter/common/constant.dart';
+import 'package:workout_flutter/data/model/excercise.dart';
+import 'package:workout_flutter/widget/build_excercise_list.dart';
 
 class ThirdPage extends StatefulWidget {
   static const routeName = '/third_page';
@@ -9,6 +12,13 @@ class ThirdPage extends StatefulWidget {
 }
 
 class _ThirdPageState extends State<ThirdPage> {
+  List<Excercise> excersiceList = [
+    Excercise(name: 'Yoga', image: 'assets/yoga.jpg'),
+    Excercise(name: 'Taichi', image: 'assets/taichi.jpg'),
+    Excercise(name: 'Arm', image: 'assets/yoga.jpg'),
+    Excercise(name: 'Leg', image: 'assets/taichi.jpg'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,10 +26,11 @@ class _ThirdPageState extends State<ThirdPage> {
         title: Text("Third"),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Center(
             child: Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(4),
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -47,7 +58,7 @@ class _ThirdPageState extends State<ThirdPage> {
                       ),
                       SizedBox(height: 8),
                       Text(
-                        'Let\'s excercise by doing Yoga or Taichi',
+                        'Let\'s do some excercise',
                         style: textStyle,
                       ),
                     ],
@@ -56,100 +67,25 @@ class _ThirdPageState extends State<ThirdPage> {
               ),
             ),
           ),
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(8, 8, 8, 4),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        offset: Offset(0, 0),
-                        blurRadius: 22,
-                        color: Colors.grey,
-                      )
-                    ],
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(8),
-                    ),
-                  ),
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Column(
-                      children: [
-                        Text(
-                          "YOGA",
-                          style: textStyle.copyWith(
-                            fontSize: 18,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Image(
-                          height: 180,
-                          image: AssetImage('assets/yoga.jpg'),
-                        ),
-                        FlatButton(
-                          child: Text(
-                            'EXERCISE',
-                            style: textStyle.copyWith(
-                              color: Colors.blue,
-                            ),
-                          ),
-                          onPressed: () {},
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+          Expanded(
+            flex: 8,
+            child: AnimationLimiter(
+              child: ListView.builder(
+                shrinkWrap: true,
+                padding: const EdgeInsets.all(8),
+                itemCount: excersiceList.length,
+                itemBuilder: (context, index) {
+                  return AnimationConfiguration.staggeredList(
+                    position: index,
+                    duration: const Duration(milliseconds: 375),
+                    child: SlideAnimation(
+                        verticalOffset: 50.0,
+                        child: buildExcercise(context, excersiceList[index])),
+                  );
+                },
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(8, 8, 8, 4),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        offset: Offset(0, 0),
-                        blurRadius: 22,
-                        color: Colors.grey,
-                      )
-                    ],
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(8),
-                    ),
-                  ),
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Column(
-                      children: [
-                        Text(
-                          "TAICHI",
-                          style: textStyle.copyWith(
-                            fontSize: 18,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Image(
-                          height: 180,
-                          image: AssetImage('assets/taichi.jpg'),
-                        ),
-                        FlatButton(
-                          child: Text(
-                            'EXERCISE',
-                            style: textStyle.copyWith(color: Colors.blue),
-                          ),
-                          onPressed: () {},
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          )
+            ),
+          ),
         ],
       ),
     );
