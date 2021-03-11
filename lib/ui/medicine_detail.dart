@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/data/model/medical.dart';
 
@@ -17,6 +21,8 @@ class _MedicineDetailState extends State<MedicineDetail> {
   final _rulesFieldController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   Medical medical;
+  File _image;
+  final picker = ImagePicker();
 
   void initState() {
     medical = widget.medicine;
@@ -58,6 +64,16 @@ class _MedicineDetailState extends State<MedicineDetail> {
               padding: const EdgeInsets.all(8),
               child: Column(
                 children: [
+                  _image == null
+                      ? Text(
+                          'No image selected.',
+                          style: textStyle,
+                        )
+                      : Image.file(
+                          _image,
+                          width: 240,
+                        ),
+                  SizedBox(height: 16),
                   Text(
                     medical.name,
                     style: textStyle.copyWith(
@@ -77,6 +93,22 @@ class _MedicineDetailState extends State<MedicineDetail> {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: getImage,
+        child: Icon(Icons.add_a_photo),
+      ),
     );
+  }
+
+  Future getImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
   }
 }
