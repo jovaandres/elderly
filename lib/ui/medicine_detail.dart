@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:full_screen_image/full_screen_image.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/data/model/medical.dart';
@@ -58,10 +59,19 @@ class _MedicineDetailState extends State<MedicineDetail> {
                 children: [
                   !(medicalImage.existsSync())
                       ? Text('No image selected')
-                      : Image.file(
-                          medicalImage,
-                          width: 300,
-                          height: 300,
+                      : FullScreenWidget(
+                          child: Hero(
+                            tag: medical.name,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(16),
+                              child: Image.file(
+                                medicalImage,
+                                width: 300,
+                                height: 300,
+                                // fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
                         ),
                   SizedBox(height: 16),
                   Text(
