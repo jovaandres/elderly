@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:workout_flutter/common/constant.dart';
-import 'package:workout_flutter/data/model/family_number.dart';
-import 'package:workout_flutter/util/phone_call.dart';
+import 'package:workout_flutter/common/navigation.dart';
+import 'package:workout_flutter/data/model/nearby_search.dart';
+import 'package:workout_flutter/ui/hospital_detail.dart';
 
-Widget buildContactList(BuildContext context, FamilyNumber familyNumber) {
+Widget buildHospitalList(BuildContext context, NearbyResult result) {
   return Center(
     child: Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
@@ -25,17 +26,21 @@ Widget buildContactList(BuildContext context, FamilyNumber familyNumber) {
       child: Padding(
         padding: const EdgeInsets.all(4),
         child: ListTile(
-          leading: Icon(Icons.people),
+          leading: Image.network(
+            result.icon,
+            width: 75,
+            height: 75,
+          ),
           title: Text(
-            familyNumber.name,
+            result.name,
             style: textStyle,
           ),
           subtitle: Text(
-            familyNumber.number,
+            result.vicinity,
             style: textStyle,
           ),
           onTap: () {
-            makingPhoneCall(familyNumber.number);
+            Navigation.intentWithData(DetailHospital.routeName, result.placeId);
           },
         ),
       ),

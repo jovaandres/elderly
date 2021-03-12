@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:provider/provider.dart';
 import 'package:workout_flutter/common/constant.dart';
+import 'package:workout_flutter/provider/hospital_data_provider.dart';
+import 'package:workout_flutter/util/result_state.dart';
+import 'package:workout_flutter/widget/build_hospital_item.dart';
 import 'package:workout_flutter/widget/menu_tile.dart';
 import 'package:workout_flutter/widget/sign_in_button.dart';
 
@@ -60,6 +65,45 @@ class _FirstPageState extends State<FirstPage> {
               ),
             ),
           ),
+          Consumer<NearbyHostpitalProvider>(
+            builder: (context, state, _) {
+              if (state.state == ResultState.Loading) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state.state == ResultState.HasData) {
+                return AnimationLimiter(
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.all(8.0),
+                      itemCount: state.result.results.length,
+                      itemBuilder: (context, index) {
+                        return AnimationConfiguration.staggeredList(
+                          position: index,
+                          duration: const Duration(milliseconds: 375),
+                          child: SlideAnimation(
+                            verticalOffset: 50.0,
+                            child: FadeInAnimation(
+                              child: buildHospitalList(
+                                  context, state.result.results[index]),
+                            ),
+                          ),
+                        );
+                      }),
+                );
+              } else if (state.state == ResultState.NoData) {
+                return Center(
+                  child: Text('Data not displayed successfully'),
+                );
+              } else if (state.state == ResultState.Error) {
+                return Center(
+                  child: Text('Data not displayed successfully'),
+                );
+              } else {
+                return Center(child: Text(''));
+              }
+            },
+          )
         ],
       ),
       drawer: Drawer(

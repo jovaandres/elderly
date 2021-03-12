@@ -10,7 +10,7 @@ class ExcerciseDetail extends StatefulWidget {
 }
 
 class _ExcerciseDetailState extends State<ExcerciseDetail> {
-  List<String> videoList = ['Video1', 'Video2', 'Video3'];
+  List<String> videoList = ['Video 1', 'Video 2', 'Video 3'];
 
   @override
   Widget build(BuildContext context) {

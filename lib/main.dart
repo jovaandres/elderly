@@ -9,12 +9,16 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workout_flutter/common/navigation.dart';
+import 'package:workout_flutter/data/api/api_service.dart';
 import 'package:workout_flutter/data/preferences/preferences_helper.dart';
+import 'package:workout_flutter/provider/detail_hospital_provider.dart';
+import 'package:workout_flutter/provider/hospital_data_provider.dart';
 import 'package:workout_flutter/provider/preferences_provider.dart';
 import 'package:workout_flutter/provider/scheduling_provider.dart';
 import 'package:workout_flutter/ui/excercise_detail.dart';
 import 'package:workout_flutter/ui/excercise_player.dart';
 import 'package:workout_flutter/ui/home_page.dart';
+import 'package:workout_flutter/ui/hospital_detail.dart';
 import 'package:workout_flutter/ui/intro_screen.dart';
 import 'package:workout_flutter/ui/login_page.dart';
 import 'package:workout_flutter/ui/medicine_detail.dart';
@@ -27,6 +31,7 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 
 final firestore = FirebaseFirestore.instance;
 String path;
+final ApiService apiService = ApiService();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,6 +57,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<NearbyHostpitalProvider>(
+          create: (_) => NearbyHostpitalProvider(
+            apiService: apiService,
+          ),
+        ),
+        ChangeNotifierProvider<DetailHospitalProvider>(
+          create: (_) => DetailHospitalProvider(
+            apiService: apiService,
+          ),
+        ),
         ChangeNotifierProvider<PreferencesProvider>(
           create: (_) => PreferencesProvider(
             preferencesHelper: PreferencesHelper(
@@ -86,7 +101,10 @@ class MyApp extends StatelessWidget {
                     medicine: ModalRoute.of(context).settings.arguments,
                   ),
               ExcerciseDetail.routeName: (context) => ExcerciseDetail(),
-              ExcercisePlayer.routeName: (context) => ExcercisePlayer()
+              ExcercisePlayer.routeName: (context) => ExcercisePlayer(),
+              DetailHospital.routeName: (context) => DetailHospital(
+                    hospitalId: ModalRoute.of(context).settings.arguments,
+                  )
             },
           );
         },
