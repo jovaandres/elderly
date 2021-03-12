@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:android_alarm_manager/android_alarm_manager.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -32,6 +33,7 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 final firestore = FirebaseFirestore.instance;
 String path;
 final ApiService apiService = ApiService();
+final auth = FirebaseAuth.instance;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -82,12 +84,12 @@ class MyApp extends StatelessWidget {
         builder: (context, provider, child) {
           return MaterialApp(
             navigatorKey: navigatorKey,
-            title: 'Workout Demo',
+            title: 'Elderly App',
             theme: ThemeData(
               primarySwatch: Colors.blue,
               visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
-            initialRoute: (!provider.isUserLoggedIn)
+            initialRoute: (auth.currentUser != null)
                 ? MyHomePage.routeName
                 : IntroScreen.routeName,
             routes: {

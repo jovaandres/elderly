@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workout_flutter/common/navigation.dart';
+import 'package:workout_flutter/main.dart';
 import 'package:workout_flutter/ui/home_page.dart';
 import 'package:workout_flutter/ui/login_page.dart';
 
@@ -14,6 +15,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final _nameFieldController = TextEditingController();
   final _emailFieldController = TextEditingController();
   final _passwordFieldController = TextEditingController();
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -33,13 +35,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            SizedBox(height: 24),
+            _isLoading
+                ? Center(child: CircularProgressIndicator())
+                : Container(),
             Padding(
               padding: EdgeInsets.only(top: 60.0),
               child: Center(
                 child: Container(
                     width: 200,
                     height: 150,
-                    child: Image.asset('asset/images/flutter-logo.png')),
+                    child: Image.asset('assets/flutter-logo.png')),
               ),
             ),
             Padding(
@@ -91,8 +97,49 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: FlatButton(
-                onPressed: () {
-                  Navigation.intentReplace(MyHomePage.routeName);
+                onPressed: () async {
+                  setState(() {
+                    _isLoading = true;
+                  });
+                  try {
+                    final email = _emailFieldController.text;
+                    final password = _passwordFieldController.text;
+
+                    final newUser = await auth.createUserWithEmailAndPassword(
+                        email: email, password: password);
+
+                    if (newUser != null) {
+                      Navigator.pop(context);
+                    }
+                  } catch (e) {
+                    showDialog(
+                        context: context,
+                        barrierDismissible: true,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('AlertDialog Title'),
+                            content: SingleChildScrollView(
+                              child: ListBody(
+                                children: <Widget>[
+                                  Text(e.toString()),
+                                ],
+                              ),
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                child: Text('OK'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        });
+                  } finally {
+                    setState(() {
+                      _isLoading = false;
+                    });
+                  }
                 },
                 child: Text(
                   'Register',

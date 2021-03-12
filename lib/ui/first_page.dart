@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_flutter/common/constant.dart';
+import 'package:workout_flutter/main.dart';
 import 'package:workout_flutter/provider/hospital_data_provider.dart';
 import 'package:workout_flutter/util/result_state.dart';
 import 'package:workout_flutter/widget/build_hospital_item.dart';
@@ -47,7 +48,9 @@ class _FirstPageState extends State<FirstPage> {
                   child: Column(
                     children: [
                       Text(
-                        "Hello User!",
+                        (auth.currentUser != null)
+                            ? "Hello ${auth.currentUser.email}"
+                            : "Hello User!",
                         style: textStyle.copyWith(
                           fontSize: 18,
                         ),
@@ -115,7 +118,9 @@ class _FirstPageState extends State<FirstPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Hello User!",
+                      (auth.currentUser != null)
+                          ? "Hello ${auth.currentUser.email}"
+                          : "Hello User!",
                       style: TextStyle(fontSize: 18),
                     ),
                     SizedBox(

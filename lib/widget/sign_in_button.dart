@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:workout_flutter/common/navigation.dart';
+import 'package:workout_flutter/main.dart';
 import 'package:workout_flutter/ui/login_page.dart';
 
 Widget signInButton() {
   return OutlineButton(
     splashColor: Colors.grey,
     onPressed: () {
+      auth.signOut();
       Navigation.intentReplace(LoginPage.routeName);
     },
     shape: RoundedRectangleBorder(
@@ -29,7 +31,7 @@ Widget signInButton() {
           Padding(
             padding: const EdgeInsets.only(left: 10),
             child: Text(
-              'Sign in',
+              (auth.currentUser != null) ? 'Sign out' : 'Sign in',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey,

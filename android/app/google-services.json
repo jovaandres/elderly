@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "834995872363",
+    "firebase_url": "https://workout-app-ed12c-default-rtdb.firebaseio.com",
     "project_id": "workout-app-ed12c",
     "storage_bucket": "workout-app-ed12c.appspot.com"
   },
