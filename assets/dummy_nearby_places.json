@@ -8,7 +8,7 @@
                 "lng" : 151.199025
              }
           },
-          "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/travel_agent-71.png",
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/travel_agent-71.png",
           "id" : "21a0b251c9b8392186142c798263e289fe45b4aa",
           "name" : "Rhythmboat Cruises",
           "opening_hours" : {
@@ -34,7 +34,7 @@
                 "lng" : 151.200814
              }
           },
-          "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
           "id" : "45a27fd8d56c56dc62afc9b49e1d850440d5c403",
           "name" : "Private Charter Sydney Habour Cruise",
           "photos" : [
@@ -57,7 +57,7 @@
                 "lng" : 151.190311
              }
           },
-          "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
           "id" : "30bee58f819b6c47bd24151802f25ecf11df8943",
           "name" : "Bucks Party Cruise",
           "opening_hours" : {
@@ -83,7 +83,7 @@
                 "lng" : 151.201196
              }
           },
-          "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/travel_agent-71.png",
+          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/travel_agent-71.png",
           "id" : "a97f9fb468bcd26b68a23072a55af82d4b325e0d",
           "name" : "Australian Cruise Group",
           "opening_hours" : {

@@ -24,7 +24,7 @@ class IntroScreenState extends State<IntroScreen> {
         title: "Lorem Ipsum",
         description:
             "Allow miles wound place the leave had. To sitting subject no improve studied limited",
-        pathImage: "assets/couple-running.jpg",
+        pathImage: "assets/slide_1.jpg",
         backgroundColor: Color(0xfff5a623),
       ),
     );
@@ -33,7 +33,7 @@ class IntroScreenState extends State<IntroScreen> {
         title: "Lorem Ipsum",
         description:
             "Ye indulgence unreserved connection alteration appearance",
-        pathImage: "assets/family-sport.jpg",
+        pathImage: "assets/slide_2.jpg",
         backgroundColor: Color(0xff203152),
       ),
     );
@@ -42,7 +42,7 @@ class IntroScreenState extends State<IntroScreen> {
         title: "Lorem Ipsum",
         description:
             "Much evil soon high in hope do view. Out may few northward believing attempted. Yet timed being songs marry one defer men our. Although finished blessing do of",
-        pathImage: "images/photo_ruler.png",
+        pathImage: "assets/slide_3.jpg",
         backgroundColor: Color(0xff9932CC),
       ),
     );
