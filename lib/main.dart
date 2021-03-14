@@ -96,9 +96,7 @@ class MyApp extends StatelessWidget {
               IntroScreen.routeName: (context) => IntroScreen(),
               LoginPage.routeName: (context) => LoginPage(),
               RegistrationPage.routeName: (context) => RegistrationPage(),
-              MyHomePage.routeName: (context) => MyHomePage(
-                    title: "This Is Home Page",
-                  ),
+              MyHomePage.routeName: (context) => MyHomePage(),
               MedicineDetail.routeName: (context) => MedicineDetail(
                     medicine: ModalRoute.of(context).settings.arguments,
                   ),
@@ -106,7 +104,7 @@ class MyApp extends StatelessWidget {
               ExcercisePlayer.routeName: (context) => ExcercisePlayer(),
               DetailHospital.routeName: (context) => DetailHospital(
                     hospitalId: ModalRoute.of(context).settings.arguments,
-                  )
+                  ),
             },
           );
         },

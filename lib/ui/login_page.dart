@@ -15,6 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   final _emailFieldController = TextEditingController();
   final _passwordFieldController = TextEditingController();
   bool _isLoading = false;
+  bool _obscureText = true;
 
   @override
   void dispose() {
@@ -53,34 +54,105 @@ class _LoginPageState extends State<LoginPage> {
                 controller: _emailFieldController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    labelText: 'Email',
-                    hintText: 'Enter valid email id as abc@gmail.com'),
+                  isDense: true,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  labelText: 'Email',
+                  hintText: 'Enter valid email',
+                ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 15, bottom: 0),
+              padding: EdgeInsets.only(
+                left: 15.0,
+                right: 15.0,
+                top: 10,
+                bottom: 0,
+              ),
               child: TextField(
                 controller: _passwordFieldController,
-                obscureText: true,
+                obscureText: _obscureText,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
+                  isDense: true,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscureText ? Icons.visibility : Icons.visibility_off,
                     ),
-                    labelText: 'Password',
-                    hintText: 'Enter secure password'),
+                    onPressed: () {
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  labelText: 'Password',
+                  hintText: 'Enter your password',
+                ),
               ),
             ),
-            FlatButton(
+            TextButton(
               onPressed: () {
-                //TODO FORGOT PASSWORD SCREEN GOES HERE
+                if (_emailFieldController.text.isNotEmpty) {
+                  auth.sendPasswordResetEmail(
+                      email: _emailFieldController.text);
+                  showDialog(
+                      context: context,
+                      barrierDismissible: true,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Reset Password'),
+                          content: SingleChildScrollView(
+                            child: ListBody(
+                              children: <Widget>[
+                                Text('Reset Password Email Sent'),
+                              ],
+                            ),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text('OK'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      });
+                } else {
+                  showDialog(
+                      context: context,
+                      barrierDismissible: true,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Can\'t process'),
+                          content: SingleChildScrollView(
+                            child: ListBody(
+                              children: <Widget>[
+                                Text('Fill the email field!'),
+                              ],
+                            ),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text('OK'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      });
+                }
               },
               child: Text(
                 'Forgot Password',
-                style: TextStyle(color: Colors.blue, fontSize: 15),
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 15,
+                ),
               ),
             ),
             Container(
@@ -90,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                 color: Colors.blue,
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: FlatButton(
+              child: TextButton(
                 onPressed: () async {
                   setState(() {
                     _isLoading = true;
@@ -111,7 +183,7 @@ class _LoginPageState extends State<LoginPage> {
                         barrierDismissible: true,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text('AlertDialog Title'),
+                            title: Text('Login Failed'),
                             content: SingleChildScrollView(
                               child: ListBody(
                                 children: <Widget>[
@@ -141,9 +213,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 130,
-            ),
+            SizedBox(height: 50),
             GestureDetector(
               child: RichText(
                 text: TextSpan(

@@ -77,8 +77,7 @@ class _FifthPageState extends State<FifthPage> {
                           ),
                         ),
                         SizedBox(height: 16),
-                        RaisedButton(
-                          color: Theme.of(context).accentColor,
+                        ElevatedButton(
                           child: Text(
                             'SAVE',
                             style: textStyle.copyWith(
@@ -107,7 +106,7 @@ class _FifthPageState extends State<FifthPage> {
     _nameFieldController.clear();
     _rulesFieldController.clear();
     firestore.collection('medicine_bi13rb8').add({
-      'id': "abcdef",
+      'id': auth.currentUser.email,
       'name': name,
       'rules': rules,
     });
@@ -122,7 +121,7 @@ class _FifthPageState extends State<FifthPage> {
           child: StreamBuilder<QuerySnapshot>(
             stream: firestore
                 .collection('medicine_bi13rb8')
-                .where('id', isEqualTo: 'abcdef')
+                .where('id', isEqualTo: auth.currentUser.email)
                 .orderBy('name', descending: true)
                 .snapshots(),
             builder: (context, snapshot) {
@@ -163,7 +162,7 @@ class _FifthPageState extends State<FifthPage> {
                                     .collection("medicine_bi13rb8")
                                     .doc(medicals[index].docId)
                                     .delete();
-                                Scaffold.of(context).showSnackBar(
+                                ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                       content: Text(
                                         'Deleted from contact',

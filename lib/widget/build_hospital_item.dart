@@ -40,7 +40,10 @@ Widget buildHospitalList(BuildContext context, NearbyResult result) {
             style: textStyle,
           ),
           onTap: () {
-            Navigation.intentWithData(DetailHospital.routeName, result.placeId);
+            Navigation.intentWithData(
+              DetailHospital.routeName,
+              result.placeId,
+            );
           },
         ),
       ),

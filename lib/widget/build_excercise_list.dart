@@ -37,7 +37,7 @@ Widget buildExcercise(BuildContext context, Excercise excercise) {
               height: 80,
               image: AssetImage(excercise.image),
             ),
-            FlatButton(
+            TextButton(
               child: Text(
                 'EXERCISE',
                 style: textStyle.copyWith(

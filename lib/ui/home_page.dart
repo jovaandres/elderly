@@ -11,9 +11,6 @@ import 'package:workout_flutter/widget/platform_widget.dart';
 
 class MyHomePage extends StatefulWidget {
   static const routeName = '/home_page';
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();

@@ -78,8 +78,7 @@ class _SecondPageState extends State<SecondPage> {
                           ),
                         ),
                         SizedBox(height: 16),
-                        RaisedButton(
-                          color: Theme.of(context).accentColor,
+                        ElevatedButton(
                           child: Text(
                             'SAVE',
                             style: textStyle.copyWith(
@@ -108,7 +107,7 @@ class _SecondPageState extends State<SecondPage> {
     _nameFieldController.clear();
     _numberFieldController.clear();
     firestore.collection('family_contact_bi13rb8').add({
-      'id': "abcdef",
+      'id': auth.currentUser.email,
       'name': name,
       'phone': number,
     });
@@ -123,7 +122,7 @@ class _SecondPageState extends State<SecondPage> {
           child: StreamBuilder<QuerySnapshot>(
             stream: firestore
                 .collection('family_contact_bi13rb8')
-                .where('id', isEqualTo: 'abcdef')
+                .where('id', isEqualTo: auth.currentUser.email)
                 .orderBy('name', descending: true)
                 .snapshots(),
             builder: (context, snapshot) {
@@ -165,7 +164,7 @@ class _SecondPageState extends State<SecondPage> {
                                     .collection("family_contact_bi13rb8")
                                     .doc(familyNumbers[index].docId)
                                     .delete();
-                                Scaffold.of(context).showSnackBar(
+                                ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                       content: Text(
                                         'Deleted from contact',

@@ -84,7 +84,7 @@ class _FourthPageState extends State<FourthPage> {
                           fontSize: 18,
                         ),
                       ),
-                      FlatButton(
+                      TextButton(
                         child: Text(
                           'DETAIL',
                           style: textStyle.copyWith(
@@ -123,7 +123,7 @@ class _FourthPageState extends State<FourthPage> {
                           fontSize: 18,
                         ),
                       ),
-                      FlatButton(
+                      TextButton(
                         child: Text(
                           'DETAIL',
                           style: textStyle.copyWith(

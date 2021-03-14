@@ -4,17 +4,11 @@ import 'package:workout_flutter/main.dart';
 import 'package:workout_flutter/ui/login_page.dart';
 
 Widget signInButton() {
-  return OutlineButton(
-    splashColor: Colors.grey,
+  return OutlinedButton(
     onPressed: () {
       auth.signOut();
       Navigation.intentReplace(LoginPage.routeName);
     },
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(40),
-    ),
-    highlightElevation: 0,
-    borderSide: BorderSide(color: Colors.grey),
     child: Padding(
       padding: EdgeInsets.symmetric(
         horizontal: 0,

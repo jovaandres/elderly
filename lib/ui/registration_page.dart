@@ -13,13 +13,20 @@ class RegistrationPage extends StatefulWidget {
 
 class _RegistrationPageState extends State<RegistrationPage> {
   final _nameFieldController = TextEditingController();
+  final _ageFieldController = TextEditingController();
+  final _weightFieldController = TextEditingController();
+  final _heightFieldController = TextEditingController();
   final _emailFieldController = TextEditingController();
   final _passwordFieldController = TextEditingController();
   bool _isLoading = false;
+  bool _obscureText = true;
 
   @override
   void dispose() {
     _nameFieldController.dispose();
+    _ageFieldController.dispose();
+    _weightFieldController.dispose();
+    _heightFieldController.dispose();
     _emailFieldController.dispose();
     _passwordFieldController.dispose();
     super.dispose();
@@ -37,15 +44,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
           children: <Widget>[
             SizedBox(height: 24),
             _isLoading
-                ? Center(child: CircularProgressIndicator())
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
                 : Container(),
             Padding(
-              padding: EdgeInsets.only(top: 60.0),
+              padding: EdgeInsets.only(top: 16.0),
               child: Center(
                 child: Container(
-                    width: 200,
-                    height: 150,
-                    child: Image.asset('assets/flutter-logo.png')),
+                  width: 200,
+                  height: 150,
+                  child: Image.asset('assets/flutter-logo.png'),
+                ),
               ),
             ),
             Padding(
@@ -53,39 +63,123 @@ class _RegistrationPageState extends State<RegistrationPage> {
               child: TextField(
                 controller: _nameFieldController,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    labelText: 'Name',
-                    hintText: 'Your Name'),
+                  isDense: true,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  labelText: 'Name',
+                  hintText: 'Your Name',
+                ),
               ),
             ),
             Padding(
-              padding:
-                  EdgeInsets.only(left: 15.0, right: 15.0, top: 15, bottom: 0),
+              padding: EdgeInsets.only(
+                left: 15.0,
+                right: 15.0,
+                top: 10,
+                bottom: 0,
+              ),
+              child: TextField(
+                keyboardType: TextInputType.number,
+                controller: _ageFieldController,
+                decoration: InputDecoration(
+                  isDense: true,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  labelText: 'Age',
+                  hintText: 'Your Age',
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                left: 15.0,
+                right: 15.0,
+                top: 10,
+                bottom: 0,
+              ),
+              child: TextField(
+                keyboardType: TextInputType.number,
+                controller: _weightFieldController,
+                decoration: InputDecoration(
+                  isDense: true,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  labelText: 'Weight',
+                  hintText: 'Your Weight (kg)',
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                left: 15.0,
+                right: 15.0,
+                top: 10,
+                bottom: 0,
+              ),
+              child: TextField(
+                keyboardType: TextInputType.number,
+                controller: _heightFieldController,
+                decoration: InputDecoration(
+                  isDense: true,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  labelText: 'Height',
+                  hintText: 'Your Height (cm)',
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                left: 15.0,
+                right: 15.0,
+                top: 10,
+                bottom: 0,
+              ),
               child: TextField(
                 controller: _emailFieldController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    labelText: 'Email',
-                    hintText: 'Enter valid email id as abc@gmail.com'),
+                  isDense: true,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  labelText: 'Email',
+                  hintText: 'Enter valid email',
+                ),
               ),
             ),
             Padding(
-              padding:
-                  EdgeInsets.only(left: 15.0, right: 15.0, top: 15, bottom: 0),
+              padding: EdgeInsets.only(
+                left: 15.0,
+                right: 15.0,
+                top: 10,
+                bottom: 0,
+              ),
               child: TextField(
                 controller: _passwordFieldController,
-                obscureText: true,
+                obscureText: _obscureText,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
+                  isDense: true,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscureText ? Icons.visibility : Icons.visibility_off,
                     ),
-                    labelText: 'Password',
-                    hintText: 'Enter secure password'),
+                    onPressed: () {
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  labelText: 'Password',
+                  hintText: 'Enter secure password',
+                ),
               ),
             ),
             Container(
@@ -96,7 +190,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 color: Colors.blue,
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: FlatButton(
+              child: TextButton(
                 onPressed: () async {
                   setState(() {
                     _isLoading = true;
@@ -109,7 +203,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         email: email, password: password);
 
                     if (newUser != null) {
-                      Navigator.pop(context);
+                      firestore.collection('user_account_bi13rb8').add({
+                        "name": _nameFieldController.text,
+                        "age": _ageFieldController.text,
+                        "weight": _weightFieldController.text,
+                        "height": _heightFieldController.text,
+                        "email": _emailFieldController.text
+                      });
+                      Navigation.intentReplace(MyHomePage.routeName);
                     }
                   } catch (e) {
                     showDialog(
@@ -143,13 +244,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 },
                 child: Text(
                   'Register',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
                 ),
               ),
             ),
-            SizedBox(
-              height: 130,
-            ),
+            SizedBox(height: 10),
             GestureDetector(
               child: RichText(
                 text: TextSpan(

@@ -68,7 +68,7 @@ class _DetailHospitalState extends State<DetailHospital> {
                         ),
                         SizedBox(height: 8),
                         Image.network(_hospital.icon),
-                        FlatButton(
+                        TextButton(
                           child: Text(
                             _hospital.internationalPhoneNumber,
                             style: textStyle.copyWith(

@@ -13,7 +13,7 @@ class IntroScreen extends StatefulWidget {
 }
 
 class IntroScreenState extends State<IntroScreen> {
-  List<Slide> slides = List();
+  List<Slide> slides = [];
 
   @override
   void initState() {
