@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/main.dart';
 import 'package:workout_flutter/ui/home_page.dart';
@@ -168,6 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                     _isLoading = true;
                   });
                   try {
+                    FocusScope.of(context).unfocus();
                     final email = _emailFieldController.text;
                     final password = _passwordFieldController.text;
 

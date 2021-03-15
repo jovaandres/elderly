@@ -196,6 +196,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     _isLoading = true;
                   });
                   try {
+                    FocusScope.of(context).unfocus();
                     final email = _emailFieldController.text;
                     final password = _passwordFieldController.text;
 
