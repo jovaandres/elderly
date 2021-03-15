@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/data/model/medical.dart';
 import 'package:workout_flutter/main.dart';
+import 'package:workout_flutter/util/encrypt_decrypt_file.dart';
 
 class MedicineDetail extends StatefulWidget {
   static const routeName = '/medicine_detail_page';
@@ -26,7 +27,7 @@ class _MedicineDetailState extends State<MedicineDetail> {
 
   void initState() {
     medical = widget.medicine;
-    medicalImage = File('$path/${auth.currentUser.email}-${medical.name}.jpg');
+    medicalImage = File('$path/${medical.name}.jpg');
     if (!medicalImage.existsSync()) {
       downloadImageFromFirebase();
     }
@@ -107,8 +108,7 @@ class _MedicineDetailState extends State<MedicineDetail> {
   Future getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.camera);
     if (pickedFile != null) {
-      await File(pickedFile.path)
-          .copy('$path/${auth.currentUser.email}-${medical.name}.jpg');
+      await File(pickedFile.path).copy('$path/${medical.name}.jpg');
     }
 
     setState(() {
@@ -122,18 +122,20 @@ class _MedicineDetailState extends State<MedicineDetail> {
   }
 
   Future uploadImageToFirebase() async {
-    Reference firebaseStorageRef = storage
-        .ref()
-        .child('uploads/${auth.currentUser.email}-${medical.name}.jpg');
-    await firebaseStorageRef.putFile(medicalImage);
+    final encryptedImage = EncryptData.encryptFile(medicalImage.path);
+    Reference firebaseStorageRef =
+        storage.ref().child('${auth.currentUser.email}/${medical.name}.jpg');
+    await firebaseStorageRef.putFile(File(encryptedImage));
   }
 
   Future downloadImageFromFirebase() async {
-    Reference firebaseStorageRef = storage
-        .ref()
-        .child('uploads/${auth.currentUser.email}-${medical.name}.jpg');
-    DownloadTask downloadTask = firebaseStorageRef.writeToFile(medicalImage);
+    Reference firebaseStorageRef =
+        storage.ref().child('${auth.currentUser.email}/${medical.name}.jpg');
+    DownloadTask downloadTask =
+        firebaseStorageRef.writeToFile(File('$path/${medical.name}.jpg.aes'));
     await downloadTask.whenComplete(() {
+      medicalImage =
+          File(EncryptData.decryptFile('$path/${medical.name}.jpg.aes'));
       setState(() {});
     });
   }

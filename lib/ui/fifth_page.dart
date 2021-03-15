@@ -86,7 +86,7 @@ class _FifthPageState extends State<FifthPage> {
                                 color: Colors.white),
                           ),
                           onPressed: () {
-                            saveContact(_nameFieldController.text,
+                            saveMedicine(_nameFieldController.text,
                                 _rulesFieldController.text);
                             Navigation.back();
                           },
@@ -103,7 +103,7 @@ class _FifthPageState extends State<FifthPage> {
     );
   }
 
-  void saveContact(String name, String rules) {
+  void saveMedicine(String name, String rules) {
     _nameFieldController.clear();
     _rulesFieldController.clear();
     final encryptedName = encryptAESCryptoJS(name, passwordEncrypt);
