@@ -1,7 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:workout_flutter/common/constant.dart';
-import 'package:workout_flutter/data/model/excercise.dart';
+import 'package:workout_flutter/main.dart';
 import 'package:workout_flutter/widget/build_excercise_list.dart';
 
 class ThirdPage extends StatefulWidget {
@@ -12,13 +13,6 @@ class ThirdPage extends StatefulWidget {
 }
 
 class _ThirdPageState extends State<ThirdPage> {
-  List<Excercise> excersiceList = [
-    Excercise(name: 'Yoga', image: 'assets/yoga.jpg'),
-    Excercise(name: 'Taichi', image: 'assets/taichi.jpg'),
-    Excercise(name: 'Arm', image: 'assets/yoga.jpg'),
-    Excercise(name: 'Leg', image: 'assets/taichi.jpg'),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,22 +63,42 @@ class _ThirdPageState extends State<ThirdPage> {
           ),
           Expanded(
             flex: 8,
-            child: AnimationLimiter(
-              child: ListView.builder(
-                shrinkWrap: true,
-                padding: const EdgeInsets.all(8),
-                itemCount: excersiceList.length,
-                itemBuilder: (context, index) {
-                  return AnimationConfiguration.staggeredList(
-                    position: index,
-                    duration: const Duration(milliseconds: 375),
-                    child: SlideAnimation(
-                      verticalOffset: 50.0,
-                      child: buildExcercise(context, excersiceList[index]),
-                    ),
+            child: StreamBuilder<QuerySnapshot>(
+              stream: firestore
+                  .collection('exercise_bi13rb8')
+                  .orderBy('name')
+                  .snapshots(),
+              builder: (context, snapshot) {
+                List<String> exerciseList = [];
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(),
                   );
-                },
-              ),
+                } else if (snapshot.hasData) {
+                  final exercises = snapshot.data.docs;
+                  for (var exercise in exercises) {
+                    final name = exercise.data()['name'];
+                    exerciseList.add(name);
+                  }
+                }
+                return AnimationLimiter(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.all(8),
+                    itemCount: exerciseList.length,
+                    itemBuilder: (context, index) {
+                      return AnimationConfiguration.staggeredList(
+                        position: index,
+                        duration: const Duration(milliseconds: 375),
+                        child: SlideAnimation(
+                          verticalOffset: 50.0,
+                          child: buildExcercise(context, exerciseList[index]),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
             ),
           ),
         ],

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:full_screen_image/full_screen_image.dart';
@@ -25,7 +26,10 @@ class _MedicineDetailState extends State<MedicineDetail> {
 
   void initState() {
     medical = widget.medicine;
-    medicalImage = File('$path/${medical.name}.png');
+    medicalImage = File('$path/${auth.currentUser.email}-${medical.name}.jpg');
+    if (!medicalImage.existsSync()) {
+      downloadImageFromFirebase();
+    }
     super.initState();
   }
 
@@ -103,15 +107,34 @@ class _MedicineDetailState extends State<MedicineDetail> {
   Future getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.camera);
     if (pickedFile != null) {
-      await File(pickedFile.path).copy('$path/${medical.name}.png');
+      await File(pickedFile.path)
+          .copy('$path/${auth.currentUser.email}-${medical.name}.jpg');
     }
 
     setState(() {
       if (pickedFile != null) {
         medicalImage = File(pickedFile.path);
+        uploadImageToFirebase();
       } else {
         print('No image selected.');
       }
+    });
+  }
+
+  Future uploadImageToFirebase() async {
+    Reference firebaseStorageRef = storage
+        .ref()
+        .child('uploads/${auth.currentUser.email}-${medical.name}.jpg');
+    await firebaseStorageRef.putFile(medicalImage);
+  }
+
+  Future downloadImageFromFirebase() async {
+    Reference firebaseStorageRef = storage
+        .ref()
+        .child('uploads/${auth.currentUser.email}-${medical.name}.jpg');
+    DownloadTask downloadTask = firebaseStorageRef.writeToFile(medicalImage);
+    await downloadTask.whenComplete(() {
+      setState(() {});
     });
   }
 }

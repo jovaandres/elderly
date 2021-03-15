@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/common/navigation.dart';
-import 'package:workout_flutter/data/model/excercise.dart';
 import 'package:workout_flutter/ui/excercise_detail.dart';
 
-Widget buildExcercise(BuildContext context, Excercise excercise) {
+Widget buildExcercise(BuildContext context, String excercise) {
   return Padding(
     padding: const EdgeInsets.fromLTRB(8, 8, 8, 4),
     child: Container(
@@ -27,7 +26,7 @@ Widget buildExcercise(BuildContext context, Excercise excercise) {
         child: Column(
           children: [
             Text(
-              excercise.name,
+              excercise,
               style: textStyle.copyWith(
                 fontSize: 18,
               ),
@@ -35,7 +34,7 @@ Widget buildExcercise(BuildContext context, Excercise excercise) {
             SizedBox(height: 8),
             Image(
               height: 80,
-              image: AssetImage(excercise.image),
+              image: AssetImage('assets/yoga.jpg'),
             ),
             TextButton(
               child: Text(

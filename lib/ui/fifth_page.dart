@@ -122,7 +122,7 @@ class _FifthPageState extends State<FifthPage> {
             stream: firestore
                 .collection('medicine_bi13rb8')
                 .where('id', isEqualTo: auth.currentUser.email)
-                .orderBy('name', descending: true)
+                .orderBy('name')
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -162,7 +162,7 @@ class _FifthPageState extends State<FifthPage> {
                                     .collection("medicine_bi13rb8")
                                     .doc(medicals[index].docId)
                                     .delete();
-                                ScaffoldMessenger.of(context).showSnackBar(
+                                Scaffold.of(context).showSnackBar(
                                   SnackBar(
                                       content: Text(
                                         'Deleted from contact',

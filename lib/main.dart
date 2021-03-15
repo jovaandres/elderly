@@ -4,6 +4,7 @@ import 'package:android_alarm_manager/android_alarm_manager.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:path_provider/path_provider.dart';
@@ -34,6 +35,7 @@ final firestore = FirebaseFirestore.instance;
 String path;
 final ApiService apiService = ApiService();
 final auth = FirebaseAuth.instance;
+final storage = FirebaseStorage.instance;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -123,7 +123,7 @@ class _SecondPageState extends State<SecondPage> {
             stream: firestore
                 .collection('family_contact_bi13rb8')
                 .where('id', isEqualTo: auth.currentUser.email)
-                .orderBy('name', descending: true)
+                .orderBy('name')
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -164,7 +164,7 @@ class _SecondPageState extends State<SecondPage> {
                                     .collection("family_contact_bi13rb8")
                                     .doc(familyNumbers[index].docId)
                                     .delete();
-                                ScaffoldMessenger.of(context).showSnackBar(
+                                Scaffold.of(context).showSnackBar(
                                   SnackBar(
                                       content: Text(
                                         'Deleted from contact',
