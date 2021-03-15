@@ -1,23 +1,39 @@
-class Excercise {
-  Excercise({
-    this.id,
+class Exercise {
+  Exercise({
     this.name,
-    this.image,
+    this.video,
   });
 
-  int id;
   String name;
-  String image;
+  Video video;
 
-  factory Excercise.fromJson(Map<String, dynamic> json) => Excercise(
-        id: json["id"],
+  factory Exercise.fromJson(Map<String, dynamic> json) => Exercise(
         name: json["name"],
-        image: json["image"],
+        video: Video.fromJson(json["video"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
         "name": name,
-        "image": image,
+        "video": video.toJson(),
+      };
+}
+
+class Video {
+  Video({
+    this.description,
+    this.link,
+  });
+
+  List<String> description;
+  List<String> link;
+
+  factory Video.fromJson(Map<String, dynamic> json) => Video(
+        description: List<String>.from(json["description"].map((x) => x)),
+        link: List<String>.from(json["link"].map((x) => x)),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "description": List<dynamic>.from(description.map((x) => x)),
+        "link": List<dynamic>.from(link.map((x) => x)),
       };
 }

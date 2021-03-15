@@ -5,6 +5,7 @@ import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/data/model/medical.dart';
 import 'package:workout_flutter/main.dart';
+import 'package:workout_flutter/util/cryptojs_aes_encryption_helper.dart';
 import 'package:workout_flutter/widget/build_medicine_list.dart';
 
 class FifthPage extends StatefulWidget {
@@ -105,10 +106,13 @@ class _FifthPageState extends State<FifthPage> {
   void saveContact(String name, String rules) {
     _nameFieldController.clear();
     _rulesFieldController.clear();
+    final encryptedName = encryptAESCryptoJS(name, passwordEncrypt);
+    final encryptedRules = encryptAESCryptoJS(rules, passwordEncrypt);
+
     firestore.collection('medicine_bi13rb8').add({
       'id': auth.currentUser.email,
-      'name': name,
-      'rules': rules,
+      'name': encryptedName,
+      'rules': encryptedRules,
     });
   }
 
@@ -133,8 +137,10 @@ class _FifthPageState extends State<FifthPage> {
                 final medicines = snapshot.data.docs;
                 List<Medical> medicals = [];
                 for (var medicine in medicines) {
-                  final name = medicine.data()['name'];
-                  final rules = medicine.data()['rules'];
+                  final name = decryptAESCryptoJS(
+                      medicine.data()['name'], passwordEncrypt);
+                  final rules = decryptAESCryptoJS(
+                      medicine.data()['rules'], passwordEncrypt);
                   final docId = medicine.id;
 
                   final medical =

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/common/navigation.dart';
+import 'package:workout_flutter/data/model/excercise.dart';
 import 'package:workout_flutter/ui/excercise_detail.dart';
 
-Widget buildExcercise(BuildContext context, String excercise) {
+Widget buildExcercise(BuildContext context, Exercise exercise) {
   return Padding(
     padding: const EdgeInsets.fromLTRB(8, 8, 8, 4),
     child: Container(
@@ -26,7 +27,7 @@ Widget buildExcercise(BuildContext context, String excercise) {
         child: Column(
           children: [
             Text(
-              excercise,
+              exercise.name,
               style: textStyle.copyWith(
                 fontSize: 18,
               ),
@@ -44,7 +45,7 @@ Widget buildExcercise(BuildContext context, String excercise) {
                 ),
               ),
               onPressed: () {
-                Navigation.intentNamed(ExcerciseDetail.routeName);
+                Navigation.intentWithData(ExcerciseDetail.routeName, exercise);
               },
             )
           ],

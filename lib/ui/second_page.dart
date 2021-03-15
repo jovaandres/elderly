@@ -5,6 +5,7 @@ import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/data/model/family_number.dart';
 import 'package:workout_flutter/main.dart';
+import 'package:workout_flutter/util/cryptojs_aes_encryption_helper.dart';
 import 'package:workout_flutter/widget/build_contact_list.dart';
 
 class SecondPage extends StatefulWidget {
@@ -106,10 +107,12 @@ class _SecondPageState extends State<SecondPage> {
   void saveContact(String name, String number) {
     _nameFieldController.clear();
     _numberFieldController.clear();
+    final encryptedName = encryptAESCryptoJS(name, passwordEncrypt);
+    final encryptedPhone = encryptAESCryptoJS(number, passwordEncrypt);
     firestore.collection('family_contact_bi13rb8').add({
       'id': auth.currentUser.email,
-      'name': name,
-      'phone': number,
+      'name': encryptedName,
+      'phone': encryptedPhone,
     });
   }
 
@@ -134,8 +137,10 @@ class _SecondPageState extends State<SecondPage> {
                 final contacts = snapshot.data.docs;
                 List<FamilyNumber> familyNumbers = [];
                 for (var contact in contacts) {
-                  final name = contact.data()['name'];
-                  final phone = contact.data()['phone'];
+                  final name = decryptAESCryptoJS(
+                      contact.data()['name'], passwordEncrypt);
+                  final phone = decryptAESCryptoJS(
+                      contact.data()['phone'], passwordEncrypt);
                   final docId = contact.id;
 
                   final familyNumber =

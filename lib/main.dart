@@ -102,8 +102,12 @@ class MyApp extends StatelessWidget {
               MedicineDetail.routeName: (context) => MedicineDetail(
                     medicine: ModalRoute.of(context).settings.arguments,
                   ),
-              ExcerciseDetail.routeName: (context) => ExcerciseDetail(),
-              ExcercisePlayer.routeName: (context) => ExcercisePlayer(),
+              ExcerciseDetail.routeName: (context) => ExcerciseDetail(
+                    exercise: ModalRoute.of(context).settings.arguments,
+                  ),
+              ExcercisePlayer.routeName: (context) => ExcercisePlayer(
+                    link: ModalRoute.of(context).settings.arguments,
+                  ),
               DetailHospital.routeName: (context) => DetailHospital(
                     hospitalId: ModalRoute.of(context).settings.arguments,
                   ),

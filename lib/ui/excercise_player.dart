@@ -6,19 +6,21 @@ import 'package:workout_flutter/common/constant.dart';
 
 class ExcercisePlayer extends StatefulWidget {
   static const routeName = '/excercise_player_page';
+  final String link;
+
+  ExcercisePlayer({@required this.link});
 
   @override
   _ExcercisePlayerState createState() => _ExcercisePlayerState();
 }
 
 class _ExcercisePlayerState extends State<ExcercisePlayer> {
-  final VideoPlayerController videoPlayerController =
-      VideoPlayerController.network(
-          'https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4');
+  VideoPlayerController videoPlayerController;
   ChewieController _chewieController;
 
   @override
   void initState() {
+    videoPlayerController = VideoPlayerController.network(widget.link);
     super.initState();
     _chewieController = ChewieController(
       videoPlayerController: videoPlayerController,

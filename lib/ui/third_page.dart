@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:workout_flutter/common/constant.dart';
+import 'package:workout_flutter/data/model/excercise.dart';
 import 'package:workout_flutter/main.dart';
 import 'package:workout_flutter/widget/build_excercise_list.dart';
 
@@ -69,7 +72,7 @@ class _ThirdPageState extends State<ThirdPage> {
                   .orderBy('name')
                   .snapshots(),
               builder: (context, snapshot) {
-                List<String> exerciseList = [];
+                List<Exercise> exerciseList = [];
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(
                     child: CircularProgressIndicator(),
@@ -78,7 +81,11 @@ class _ThirdPageState extends State<ThirdPage> {
                   final exercises = snapshot.data.docs;
                   for (var exercise in exercises) {
                     final name = exercise.data()['name'];
-                    exerciseList.add(name);
+                    final Video video =
+                        Video.fromJson(exercise.data()['video']);
+                    exerciseList.add(
+                      Exercise(name: name, video: video),
+                    );
                   }
                 }
                 return AnimationLimiter(
