@@ -15,6 +15,10 @@ class Navigation {
     navigatorKey.currentState.pushReplacementNamed(route);
   }
 
+  static intentReplaceWithData(String route, Object arguments) {
+    navigatorKey.currentState.pushReplacementNamed(route, arguments: arguments);
+  }
+
   static intentWithData(String routeName, Object arguments) {
     navigatorKey.currentState.pushNamed(routeName, arguments: arguments);
   }

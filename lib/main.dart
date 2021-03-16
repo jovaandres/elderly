@@ -12,6 +12,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/data/api/api_service.dart';
+import 'package:workout_flutter/data/db/database_helper.dart';
+import 'package:workout_flutter/data/model/user_data.dart';
 import 'package:workout_flutter/data/preferences/preferences_helper.dart';
 import 'package:workout_flutter/provider/detail_hospital_provider.dart';
 import 'package:workout_flutter/provider/hospital_data_provider.dart';
@@ -25,6 +27,8 @@ import 'package:workout_flutter/ui/intro_screen.dart';
 import 'package:workout_flutter/ui/login_page.dart';
 import 'package:workout_flutter/ui/medicine_detail.dart';
 import 'package:workout_flutter/ui/registration_page.dart';
+import 'package:workout_flutter/ui/role_page.dart';
+import 'package:workout_flutter/ui/user_activity.dart';
 import 'package:workout_flutter/util/background_service.dart';
 import 'package:workout_flutter/util/notification_helper.dart';
 
@@ -36,6 +40,8 @@ String path;
 final ApiService apiService = ApiService();
 final auth = FirebaseAuth.instance;
 final storage = FirebaseStorage.instance;
+final databaseHelper = DatabaseHelper();
+UserData userData;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,8 +57,12 @@ void main() async {
   if (Platform.isAndroid) {
     await AndroidAlarmManager.initialize();
   }
-  await _notificationHelper.initNotification(flutterLocalNotificationsPlugin);
 
+  if (auth.currentUser != null) {
+    userData = await databaseHelper.getUserData(auth.currentUser.email);
+  }
+
+  await _notificationHelper.initNotification(flutterLocalNotificationsPlugin);
   runApp(MyApp());
 }
 
@@ -92,13 +102,19 @@ class MyApp extends StatelessWidget {
               visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
             initialRoute: (auth.currentUser != null)
-                ? MyHomePage.routeName
+                ? (userData.role == 'elderly')
+                    ? MyHomePage.routeName
+                    : UserActivity.routeName
                 : IntroScreen.routeName,
             routes: {
+              RolePage.routeName: (context) => RolePage(),
               IntroScreen.routeName: (context) => IntroScreen(),
               LoginPage.routeName: (context) => LoginPage(),
-              RegistrationPage.routeName: (context) => RegistrationPage(),
+              RegistrationPage.routeName: (context) => RegistrationPage(
+                    role: ModalRoute.of(context).settings.arguments,
+                  ),
               MyHomePage.routeName: (context) => MyHomePage(),
+              UserActivity.routeName: (context) => UserActivity(),
               MedicineDetail.routeName: (context) => MedicineDetail(
                     medicine: ModalRoute.of(context).settings.arguments,
                   ),

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:workout_flutter/common/navigation.dart';
+import 'package:workout_flutter/data/model/user_data.dart';
 import 'package:workout_flutter/main.dart';
 import 'package:workout_flutter/ui/home_page.dart';
-import 'package:workout_flutter/ui/registration_page.dart';
+import 'package:workout_flutter/ui/role_page.dart';
+import 'package:workout_flutter/ui/user_activity.dart';
 
 class LoginPage extends StatefulWidget {
   static const routeName = '/login_page';
@@ -177,7 +179,31 @@ class _LoginPageState extends State<LoginPage> {
                         email: email, password: password);
 
                     if (user != null) {
-                      Navigation.intentReplace(MyHomePage.routeName);
+                      final data = await firestore
+                          .collection('user_account_bi13rb8')
+                          .where('email', isEqualTo: auth.currentUser.email)
+                          .limit(1)
+                          .get();
+                      final userDocs = data.docs.first;
+                      final email = userDocs.data()['email'];
+                      final age = userDocs.data()['age'];
+                      final name = userDocs.data()['name'];
+                      final role = userDocs.data()['role'];
+                      final height = userDocs.data()['height'];
+                      final weight = userDocs.data()['weight'];
+                      final userData = UserData(
+                          age: age,
+                          email: email,
+                          height: height,
+                          name: name,
+                          weight: weight,
+                          role: role);
+                      databaseHelper.insertUserData(userData);
+                      if (role == 'elderly') {
+                        Navigation.intentReplace(MyHomePage.routeName);
+                      } else {
+                        Navigation.intentReplace(UserActivity.routeName);
+                      }
                     }
                   } catch (e) {
                     showDialog(
@@ -233,7 +259,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               onTap: () {
-                Navigation.intentReplace(RegistrationPage.routeName);
+                Navigation.intentReplace(RolePage.routeName);
               },
             ),
           ],

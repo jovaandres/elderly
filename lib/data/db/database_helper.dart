@@ -1,10 +1,10 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:workout_flutter/data/model/family_number.dart';
+import 'package:workout_flutter/data/model/user_data.dart';
 
 class DatabaseHelper {
   static DatabaseHelper _databaseHelper;
   static Database _database;
-  static String tblFamilyNumber = "tbl_family_number";
+  static String tblUserData = "tbl_user_data";
 
   DatabaseHelper._createObject();
 
@@ -19,12 +19,15 @@ class DatabaseHelper {
   Future<Database> _initializeDb() async {
     var path = getDatabasesPath();
     var db = openDatabase(
-      '$path/restaurant.db',
+      '$path/elderly.db',
       onCreate: (db, version) async {
-        await db.execute('''CREATE TABLE $tblFamilyNumber (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
+        await db.execute('''CREATE TABLE $tblUserData (
+          email TEXT PRIMARY KEY,
           name TEXT,
-          number TEXT
+          role TEXT,
+          age TEXT,
+          weight TEXT,
+          height TEXT
         )''');
       },
       version: 1,
@@ -41,44 +44,26 @@ class DatabaseHelper {
     return _database;
   }
 
-  Future<void> insertContact(FamilyNumber familyNumber) async {
+  Future<void> insertUserData(UserData userData) async {
     final db = await database;
-    await db.insert(tblFamilyNumber, familyNumber.toJson());
+    await db.insert(tblUserData, userData.toJson());
   }
 
-  Future<List<FamilyNumber>> getContact() async {
+  Future<UserData> getUserData(String email) async {
     final db = await database;
 
-    List<Map<String, dynamic>> results = await db.query(tblFamilyNumber);
+    List<Map<String, dynamic>> results =
+        await db.query(tblUserData, where: 'email = ?', whereArgs: [email]);
 
-    return results
-        .map((res) => FamilyNumber.fromJson(res))
-        .toList()
-        .reversed
-        .toList();
+    return results.map((res) => UserData.fromJson(res)).first;
   }
 
-  Future<Map> getContactByName(String name) async {
-    final db = await database;
-    List<Map<String, dynamic>> result = await db.query(
-      tblFamilyNumber,
-      where: 'name = ?',
-      whereArgs: [name],
-    );
-
-    if (result.isNotEmpty) {
-      return result.first;
-    } else {
-      return {};
-    }
-  }
-
-  Future<void> removeContact(int id) async {
+  Future<void> removeData(String email) async {
     final db = await database;
     await db.delete(
-      tblFamilyNumber,
-      where: 'id = ?',
-      whereArgs: [id],
+      tblUserData,
+      where: 'email = ?',
+      whereArgs: [email],
     );
   }
 }
