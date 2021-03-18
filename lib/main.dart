@@ -12,9 +12,11 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/data/api/api_service.dart';
+import 'package:workout_flutter/data/db/alarm_database.dart';
 import 'package:workout_flutter/data/db/database_helper.dart';
 import 'package:workout_flutter/data/model/user_data.dart';
 import 'package:workout_flutter/data/preferences/preferences_helper.dart';
+import 'package:workout_flutter/provider/alarm_data_provider.dart';
 import 'package:workout_flutter/provider/detail_hospital_provider.dart';
 import 'package:workout_flutter/provider/hospital_data_provider.dart';
 import 'package:workout_flutter/provider/preferences_provider.dart';
@@ -90,6 +92,11 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<SchedulingProvider>(
           create: (_) => SchedulingProvider(),
+        ),
+        ChangeNotifierProvider<AlarmDataProvider>(
+          create: (_) => AlarmDataProvider(
+            alarmDatabase: AlarmDatabase(),
+          ),
         )
       ],
       child: Consumer<PreferencesProvider>(

@@ -57,13 +57,4 @@ class DatabaseHelper {
 
     return results.map((res) => UserData.fromJson(res)).first;
   }
-
-  Future<void> removeData(String email) async {
-    final db = await database;
-    await db.delete(
-      tblUserData,
-      where: 'email = ?',
-      whereArgs: [email],
-    );
-  }
 }

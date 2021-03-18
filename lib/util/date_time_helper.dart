@@ -1,10 +1,10 @@
 import 'package:intl/intl.dart';
 
 class DateTimeHelper {
-  static DateTime format() {
+  static DateTime format(String time) {
     final now = DateTime.now();
     final dateFormat = DateFormat('y/M/d');
-    final timeSpecific = "11:00:00";
+    final timeSpecific = time;
     final completeFormat = DateFormat('y/M/d H:m:s');
 
     final todayDate = dateFormat.format(now);
