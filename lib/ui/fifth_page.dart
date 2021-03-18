@@ -169,6 +169,11 @@ class _FifthPageState extends State<FifthPage> {
                                     .collection("medicine_bi13rb8")
                                     .doc(medicals[index].docId)
                                     .delete();
+                                storage
+                                    .ref()
+                                    .child(
+                                        '${auth.currentUser?.email}/${medicals[index].name}.jpg')
+                                    .delete();
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                       content: Text(

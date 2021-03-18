@@ -22,60 +22,56 @@ class _UserActivityState extends State<UserActivity> {
         title: Text('User Activity'),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Expanded(
-              child: StreamBuilder<QuerySnapshot>(
-                stream: firestore
-                    .collection('user_activity_bi13rb8')
-                    .where('id', isEqualTo: 'jovaandrea8721@gmail.com')
-                    .orderBy('time')
-                    .snapshots(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (snapshot.hasData) {
-                    final datas =
-                        snapshot.data?.docs as List<QueryDocumentSnapshot>;
-                    List<Activity> listActivity = [];
-                    for (var data in datas) {
-                      final id = data.data()?['id'];
-                      final activity = data.data()?['activity'];
+        child: Expanded(
+          child: StreamBuilder<QuerySnapshot>(
+            stream: firestore
+                .collection('user_activity_bi13rb8')
+                .where('id', isEqualTo: 'jovaandrea8721@gmail.com')
+                .orderBy('time')
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (snapshot.hasData) {
+                final datas =
+                    snapshot.data?.docs as List<QueryDocumentSnapshot>;
+                List<Activity> listActivity = [];
+                for (var data in datas) {
+                  final id = data.data()?['id'];
+                  final activity = data.data()?['activity'];
 
-                      final activityData = Activity(id: id, activity: activity);
-                      listActivity.add(activityData);
-                    }
-                    return AnimationLimiter(
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.all(8),
-                        itemCount: listActivity.length,
-                        itemBuilder: (context, index) {
-                          return AnimationConfiguration.staggeredList(
-                            position: index,
-                            duration: const Duration(milliseconds: 375),
-                            child: SlideAnimation(
-                              verticalOffset: 50.0,
-                              child: FadeInAnimation(
-                                child: buildActivityList(
-                                    context, listActivity[index]),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    );
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text(''));
-                  } else {
-                    return Center(child: Text(''));
-                  }
-                },
-              ),
-            )
-          ],
+                  final activityData = Activity(id: id, activity: activity);
+                  listActivity.add(activityData);
+                }
+                return AnimationLimiter(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.all(8),
+                    itemCount: listActivity.length,
+                    itemBuilder: (context, index) {
+                      return AnimationConfiguration.staggeredList(
+                        position: index,
+                        duration: const Duration(milliseconds: 375),
+                        child: SlideAnimation(
+                          verticalOffset: 50.0,
+                          child: FadeInAnimation(
+                            child:
+                                buildActivityList(context, listActivity[index]),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              } else if (snapshot.hasError) {
+                return Center(child: Text(''));
+              } else {
+                return Center(child: Text(''));
+              }
+            },
+          ),
         ),
       ),
       drawer: Drawer(
