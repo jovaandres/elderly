@@ -18,12 +18,12 @@ class DetailHospitalProvider extends ChangeNotifier {
 
   ResultState get state => _state;
 
-  Future<dynamic> fetchHospitalDetail(String placeId, String apiKey) async {
+  Future<dynamic> fetchHospitalDetail(String placeId) async {
     try {
       _state = ResultState.Loading;
       notifyListeners();
-      final hospital = await apiService.getHostpitalDetail(placeId, apiKey);
-      if (hospital.result.id == null) {
+      final hospital = await apiService.getHostpitalDetail(placeId);
+      if (hospital.result.placeId == null) {
         _state = ResultState.NoData;
         notifyListeners();
         _message = 'Empty Data';

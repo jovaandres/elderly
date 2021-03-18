@@ -21,7 +21,7 @@ Widget buildHospitalList(BuildContext context, NearbyResult result) {
           Radius.circular(8),
         ),
       ),
-      height: 75,
+      height: 80,
       width: MediaQuery.of(context).size.width * 0.9,
       child: Padding(
         padding: const EdgeInsets.all(4),
@@ -33,11 +33,13 @@ Widget buildHospitalList(BuildContext context, NearbyResult result) {
           ),
           title: Text(
             result.name,
-            style: textStyle,
+            style: textStyle.copyWith(fontSize: 14),
           ),
           subtitle: Text(
             result.vicinity,
             style: textStyle,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
           onTap: () {
             Navigation.intentWithData(

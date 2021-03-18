@@ -1,5 +1,3 @@
-// https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=hospital&key=YOUR_API_KEY
-
 class NearbySearch {
   NearbySearch({
     this.htmlAttributions,
@@ -33,7 +31,7 @@ class NearbyResult {
     this.id,
     this.name,
     this.openingHours,
-    this.photos,
+    // this.photos,
     this.placeId,
     this.reference,
     this.types,
@@ -45,7 +43,7 @@ class NearbyResult {
   String id;
   String name;
   OpeningHours openingHours;
-  List<Photo> photos;
+  // List<Photo> photos;
   String placeId;
   String reference;
   List<String> types;
@@ -59,7 +57,7 @@ class NearbyResult {
         openingHours: json["opening_hours"] == null
             ? null
             : OpeningHours.fromJson(json["opening_hours"]),
-        photos: List<Photo>.from(json["photos"].map((x) => Photo.fromJson(x))),
+        // photos: List<Photo>.from(json["photos"].map((x) => Photo.fromJson(x))),
         placeId: json["place_id"],
         reference: json["reference"],
         types: List<String>.from(json["types"].map((x) => x)),
@@ -72,7 +70,7 @@ class NearbyResult {
         "id": id,
         "name": name,
         "opening_hours": openingHours == null ? null : openingHours.toJson(),
-        "photos": List<dynamic>.from(photos.map((x) => x.toJson())),
+        // "photos": List<dynamic>.from(photos.map((x) => x.toJson())),
         "place_id": placeId,
         "reference": reference,
         "types": List<dynamic>.from(types.map((x) => x)),

@@ -24,8 +24,8 @@ class NearbyHostpitalProvider extends ChangeNotifier {
     try {
       _state = ResultState.Loading;
       notifyListeners();
-      final hostpitalList = await apiService.getNearbyHospitalList(
-          -6.917464, 107.619125, 5000, "YOUR_API_KEY");
+      final hostpitalList =
+          await apiService.getNearbyHospitalList(-6.917464, 107.619125, 5000);
       if (hostpitalList.results.isEmpty) {
         _state = ResultState.NoData;
         notifyListeners();

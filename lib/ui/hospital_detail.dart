@@ -20,7 +20,7 @@ class _DetailHospitalState extends State<DetailHospital> {
   @override
   void initState() {
     Provider.of<DetailHospitalProvider>(context, listen: false)
-        .fetchHospitalDetail(widget.hospitalId, "YOUR_API_KEY");
+        .fetchHospitalDetail(widget.hospitalId);
     super.initState();
   }
 
@@ -67,7 +67,9 @@ class _DetailHospitalState extends State<DetailHospital> {
                           ),
                         ),
                         SizedBox(height: 8),
-                        Image.network(_hospital.icon),
+                        Image.network('adawda'
+                            // _hospital.icon
+                            ),
                         TextButton(
                           child: Text(
                             _hospital.internationalPhoneNumber,
@@ -87,11 +89,11 @@ class _DetailHospitalState extends State<DetailHospital> {
             );
           } else if (state.state == ResultState.NoData) {
             return Center(
-              child: Text('Data not displayed successfully'),
+              child: Text('Data not displayed successfully ${state.message}'),
             );
           } else if (state.state == ResultState.Error) {
             return Center(
-              child: Text('Data not displayed successfully'),
+              child: Text('Data not displayed successfully ${state.message}'),
             );
           } else {
             return Center(child: Text(''));

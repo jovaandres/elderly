@@ -1,36 +1,29 @@
 import 'dart:convert';
 
-import 'package:flutter/services.dart';
-// import 'package:workout_flutter/common/constant.dart';
+import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/data/model/detail_places.dart';
 import 'package:workout_flutter/data/model/nearby_search.dart';
-// import 'package:http/http.dart' as http;
+import 'package:http/http.dart' as http;
 
 class ApiService {
   Future<NearbySearch> getNearbyHospitalList(
-      double lat, double lng, int radius, String apiKey) async {
-    // final response = await http.get(baseUrl +
-    //     'nearbysearch/json?location=$lat,$lng&radius=$radius&type=hospital&key=$apiKey');
-    // if (response.statusCode == 200) {
-    //   return NearbySearch.fromJson(jsonDecode(response.body));
-    // } else {
-    //   throw Exception('Failed to load nearby places list');
-    // }
-    final String jsonString =
-        await rootBundle.loadString('assets/dummy_nearby_places.json');
-    return NearbySearch.fromJson(jsonDecode(jsonString));
+      double lat, double lng, int radius) async {
+    final response = await http.get(baseUrl +
+        'nearbysearch/json?location=$lat,$lng&radius=$radius&type=hospital&key=$apiKey');
+    if (response.statusCode == 200) {
+      return NearbySearch.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to load nearby places list');
+    }
   }
 
-  Future<DetailPlaces> getHostpitalDetail(String placeId, String apiKey) async {
-    // final response = await http.get(baseUrl +
-    //     'details/json?place_id=$placeId&fields=name,rating,formatted_phone_number&key=$apiKey');
-    // if (response.statusCode == 200) {
-    //   return DetailPlaces.fromJson(jsonDecode(response.body));
-    // } else {
-    //   throw Exception('Failed to load hospital\'s detail');
-    // }
-    final String jsonString =
-        await rootBundle.loadString('assets/dummy_detail_places.json');
-    return DetailPlaces.fromJson(jsonDecode(jsonString));
+  Future<DetailPlaces> getHostpitalDetail(String placeId) async {
+    final response =
+        await http.get(baseUrl + 'details/json?place_id=$placeId&key=$apiKey');
+    if (response.statusCode == 200) {
+      return DetailPlaces.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to load hospital\'s detail');
+    }
   }
 }

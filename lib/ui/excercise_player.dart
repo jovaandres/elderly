@@ -1,8 +1,8 @@
-import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:video_player/video_player.dart';
+import 'package:flutter/services.dart';
 import 'package:workout_flutter/common/constant.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class ExcercisePlayer extends StatefulWidget {
   static const routeName = '/excercise_player_page';
@@ -15,71 +15,84 @@ class ExcercisePlayer extends StatefulWidget {
 }
 
 class _ExcercisePlayerState extends State<ExcercisePlayer> {
-  VideoPlayerController videoPlayerController;
-  ChewieController _chewieController;
+  YoutubePlayerController _controller;
 
   @override
   void initState() {
-    videoPlayerController = VideoPlayerController.network(widget.link);
     super.initState();
-    _chewieController = ChewieController(
-      videoPlayerController: videoPlayerController,
-      aspectRatio: videoPlayerController.value.aspectRatio,
-      autoInitialize: true,
-      autoPlay: true,
-      looping: false,
-      errorBuilder: (context, errorMessage) {
-        return Center(
-          child: Text(
-            errorMessage,
-            style: TextStyle(color: Colors.white),
-          ),
-        );
-      },
+    _controller = YoutubePlayerController(
+      initialVideoId: YoutubePlayer.convertUrlToId(widget.link),
+      flags: const YoutubePlayerFlags(
+        hideControls: false,
+        controlsVisibleAtStart: true,
+        mute: false,
+        autoPlay: true,
+        disableDragSeek: false,
+        loop: true,
+        isLive: false,
+        forceHD: false,
+        enableCaption: true,
+      ),
     );
   }
 
   @override
+  void deactivate() {
+    _controller.pause();
+    super.deactivate();
+  }
+
+  @override
   void dispose() {
+    _controller.dispose();
     super.dispose();
-    _chewieController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () {
-        if (videoPlayerController.value.isPlaying) {
-          videoPlayerController.pause();
-        }
-        return new Future.value(true);
+    return YoutubePlayerBuilder(
+      onExitFullScreen: () {
+        SystemChrome.setPreferredOrientations(DeviceOrientation.values);
       },
-      child: Scaffold(
+      player: YoutubePlayer(
+        controller: _controller,
+        showVideoProgressIndicator: true,
+        progressIndicatorColor: Colors.blueAccent,
+        topActions: [
+          SizedBox(height: 8.0),
+          Expanded(
+            child: Text(
+              _controller.metadata.title,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+            ),
+          ),
+        ],
+      ),
+      builder: (context, player) => Scaffold(
         appBar: AppBar(
           title: Text("Medicine Detail"),
         ),
         body: Center(
           child: Padding(
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.all(8),
             child: Column(
               children: [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 400,
-                  child: Chewie(
-                    controller: _chewieController,
-                  ),
-                ),
+                player,
                 SizedBox(height: 16),
                 Text(
-                  'This is title',
+                  _controller.metadata.title,
                   style: textStyle.copyWith(
                     fontSize: 18,
                   ),
                 ),
                 SizedBox(height: 8),
                 Text(
-                  'This is description',
+                  _controller.metadata.author,
                   style: textStyle.copyWith(
                     fontSize: 14,
                   ),
@@ -90,7 +103,9 @@ class _ExcercisePlayerState extends State<ExcercisePlayer> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
-          child: Icon(Icons.keyboard_arrow_right),
+          child: Icon(
+            Icons.keyboard_arrow_right,
+          ),
         ),
       ),
     );
