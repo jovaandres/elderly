@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,6 @@ import 'package:workout_flutter/data/model/alarm.dart';
 import 'package:workout_flutter/data/model/medical.dart';
 import 'package:workout_flutter/main.dart';
 import 'package:workout_flutter/provider/alarm_data_provider.dart';
-import 'package:workout_flutter/provider/scheduling_provider.dart';
 import 'package:workout_flutter/util/encrypt_decrypt_file.dart';
 
 class MedicineDetail extends StatefulWidget {
@@ -99,58 +99,40 @@ class _MedicineDetailState extends State<MedicineDetail> {
                           fontSize: 14,
                         ),
                       ),
-                      ListTile(
-                        title: Text(
-                          'Time 1',
-                          style: textStyle,
-                        ),
-                        trailing: Consumer<SchedulingProvider>(
-                          builder: (context, provider, _) {
-                            alarm.isAlarmScheduled("Time 1");
-                            return Switch.adaptive(
-                              value: alarm.isReminderActive,
-                              onChanged: (value) async {
-                                alarm.isAlarmScheduled("Time 1");
-                                if (value) {
-                                  alarm.updateAlarm(1, 1);
-                                  await alarm.getAlarmByName('Time 1');
-                                  setState(() {
-                                    provider.scheduleNotification(1,
-                                        alarm.getAlrm.time as String, medical);
-                                  });
-                                } else {
-                                  alarm.updateAlarm(0, 1);
-                                  await alarm.getAlarmByName('Time 1');
-                                  setState(() {
-                                    provider.cancelNotification(1);
-                                  });
-                                }
-                              },
-                            );
-                          },
-                        ),
-                        onTap: () {
-                          DatePicker.showTimePicker(
-                            context,
-                            showTitleActions: true,
-                            currentTime: DateTime.now(),
-                            locale: LocaleType.id,
-                            onConfirm: (date) {
-                              setState(() {
-                                alarm.addAlarm(
-                                  AlarmData(
-                                    id: 1,
-                                    name: 'Time 1',
-                                    isScheduled: 1,
-                                    time:
-                                        "${date.hour}:${date.minute}:${date.second}",
-                                  ),
-                                );
-                              });
+                      SizedBox(height: 16),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: 3,
+                        itemBuilder: (context, index) {
+                          alarm.isAlarmScheduled('${medical.name}-$index');
+                          return ListTile(
+                            title: Text(
+                              'Time-${index + 1}',
+                              style: textStyle,
+                            ),
+                            onTap: () {
+                              DatePicker.showTimePicker(
+                                context,
+                                showTitleActions: true,
+                                currentTime: DateTime.now(),
+                                locale: LocaleType.id,
+                                onConfirm: (date) {
+                                  alarm.addAlarm(
+                                    AlarmData(
+                                      id: Random()
+                                          .nextInt(pow(2, 31).toInt() - 1),
+                                      name: '${medical.name}-$index',
+                                      isScheduled: 1,
+                                      time:
+                                          "${date.hour}:${date.minute}:${date.second}",
+                                    ),
+                                  );
+                                },
+                              );
                             },
                           );
                         },
-                      )
+                      ),
                     ],
                   ),
                 ),

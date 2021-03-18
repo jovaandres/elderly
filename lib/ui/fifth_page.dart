@@ -172,7 +172,7 @@ class _FifthPageState extends State<FifthPage> {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                       content: Text(
-                                        'Deleted from contact',
+                                        'Deleted from medicine',
                                         style: textStyle.copyWith(
                                             color: Colors.white),
                                       ),

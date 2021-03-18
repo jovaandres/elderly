@@ -65,6 +65,13 @@ class AlarmDatabase {
     return results?.map((res) => AlarmData.fromJson(res)).first;
   }
 
+  Future<bool> isAlarmExists(String name) async {
+    final db = await database;
+    final alarm =
+        await db?.query(tblAlarm, where: 'name = ?', whereArgs: [name]);
+    return alarm?.isNotEmpty == true;
+  }
+
   Future<void> updateAlarm(int value, int id) async {
     final db = await database;
     await db?.rawUpdate('''

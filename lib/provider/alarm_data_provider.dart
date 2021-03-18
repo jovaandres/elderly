@@ -54,10 +54,15 @@ class AlarmDataProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<bool> isAlarmExists(String name) async {
+    return await alarmDatabase.isAlarmExists(name);
+  }
+
   void addAlarm(AlarmData alarmData) async {
     try {
       await alarmDatabase.insertAlarm(alarmData);
       _getAlarmData();
+      notifyListeners();
     } catch (e) {
       _state = ResultState.Error;
       _message = 'Error $e';

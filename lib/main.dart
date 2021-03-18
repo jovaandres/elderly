@@ -19,10 +19,12 @@ import 'package:workout_flutter/data/model/medical.dart';
 import 'package:workout_flutter/data/model/user_data.dart';
 import 'package:workout_flutter/data/preferences/preferences_helper.dart';
 import 'package:workout_flutter/provider/alarm_data_provider.dart';
+import 'package:workout_flutter/provider/contact_provider.dart';
 import 'package:workout_flutter/provider/detail_hospital_provider.dart';
 import 'package:workout_flutter/provider/hospital_data_provider.dart';
 import 'package:workout_flutter/provider/preferences_provider.dart';
 import 'package:workout_flutter/provider/scheduling_provider.dart';
+import 'package:workout_flutter/ui/contact_picker.dart';
 import 'package:workout_flutter/ui/excercise_detail.dart';
 import 'package:workout_flutter/ui/excercise_player.dart';
 import 'package:workout_flutter/ui/home_page.dart';
@@ -63,7 +65,8 @@ void main() async {
   }
 
   if (auth.currentUser != null) {
-    userData = await databaseHelper.getUserData(auth.currentUser?.email as String);
+    userData =
+        await databaseHelper.getUserData(auth.currentUser?.email as String);
   }
 
   await _notificationHelper.initNotification(flutterLocalNotificationsPlugin);
@@ -75,6 +78,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<ContactProvider>(
+          create: (_) => ContactProvider(),
+        ),
         ChangeNotifierProvider<NearbyHostpitalProvider>(
           create: (_) => NearbyHostpitalProvider(
             apiService: apiService,
@@ -124,6 +130,7 @@ class MyApp extends StatelessWidget {
                   ),
               MyHomePage.routeName: (context) => MyHomePage(),
               UserActivity.routeName: (context) => UserActivity(),
+              ContactPciker.routeName: (context) => ContactPciker(),
               MedicineDetail.routeName: (context) => MedicineDetail(
                     medicine:
                         ModalRoute.of(context)?.settings.arguments as Medical,
