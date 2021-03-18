@@ -66,7 +66,7 @@ class _FifthPageState extends State<FifthPage> {
                           key: _formKey,
                           child: TextFormField(
                             validator: (value) {
-                              if (value.isEmpty) {
+                              if (value?.isEmpty == true) {
                                 return 'Rules must not be null';
                               }
                               return null;
@@ -110,7 +110,7 @@ class _FifthPageState extends State<FifthPage> {
     final encryptedRules = encryptAESCryptoJS(rules, passwordEncrypt);
 
     firestore.collection('medicine_bi13rb8').add({
-      'id': auth.currentUser.email,
+      'id': auth.currentUser?.email,
       'name': encryptedName,
       'rules': encryptedRules,
     });
@@ -125,7 +125,7 @@ class _FifthPageState extends State<FifthPage> {
           child: StreamBuilder<QuerySnapshot>(
             stream: firestore
                 .collection('medicine_bi13rb8')
-                .where('id', isEqualTo: auth.currentUser.email)
+                .where('id', isEqualTo: auth.currentUser?.email)
                 .orderBy('name')
                 .snapshots(),
             builder: (context, snapshot) {
@@ -134,13 +134,14 @@ class _FifthPageState extends State<FifthPage> {
                   child: CircularProgressIndicator(),
                 );
               } else if (snapshot.hasData) {
-                final medicines = snapshot.data.docs;
+                final medicines =
+                    snapshot.data?.docs as List<QueryDocumentSnapshot>;
                 List<Medical> medicals = [];
                 for (var medicine in medicines) {
                   final name = decryptAESCryptoJS(
-                      medicine.data()['name'], passwordEncrypt);
+                      medicine.data()?['name'], passwordEncrypt);
                   final rules = decryptAESCryptoJS(
-                      medicine.data()['rules'], passwordEncrypt);
+                      medicine.data()?['rules'], passwordEncrypt);
                   final docId = medicine.id;
 
                   final medical =
@@ -160,7 +161,7 @@ class _FifthPageState extends State<FifthPage> {
                           verticalOffset: 50.0,
                           child: FadeInAnimation(
                             child: Dismissible(
-                              key: Key(medicals[index].name),
+                              key: Key(medicals[index].name as String),
                               child: buildMedicine(context, medicals[index]),
                               direction: DismissDirection.endToStart,
                               onDismissed: (direction) {
@@ -168,7 +169,7 @@ class _FifthPageState extends State<FifthPage> {
                                     .collection("medicine_bi13rb8")
                                     .doc(medicals[index].docId)
                                     .delete();
-                                Scaffold.of(context).showSnackBar(
+                                ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                       content: Text(
                                         'Deleted from contact',

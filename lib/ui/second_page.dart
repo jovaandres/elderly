@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/common/navigation.dart';
@@ -7,6 +9,7 @@ import 'package:workout_flutter/data/model/family_number.dart';
 import 'package:workout_flutter/main.dart';
 import 'package:workout_flutter/util/cryptojs_aes_encryption_helper.dart';
 import 'package:workout_flutter/widget/build_contact_list.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class SecondPage extends StatefulWidget {
   static const routeName = '/second_page';
@@ -19,6 +22,14 @@ class _SecondPageState extends State<SecondPage> {
   final _nameFieldController = TextEditingController();
   final _numberFieldController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  Iterable<Contact> contacts = [];
+
+  @override
+  void initState() {
+    _askPermissions();
+    getContact();
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -27,13 +38,68 @@ class _SecondPageState extends State<SecondPage> {
     super.dispose();
   }
 
+  Future<void> getContact() async {
+    if (await Permission.contacts.status == PermissionStatus.granted) {
+      contacts = await ContactsService.getContacts();
+    } else {
+      contacts = [];
+    }
+  }
+
+  Future<void> _askPermissions() async {
+    PermissionStatus permissionStatus = await _getContactPermission();
+    if (permissionStatus != PermissionStatus.granted) {
+      _handleInvalidPermissions(permissionStatus);
+    }
+  }
+
+  Future<PermissionStatus> _getContactPermission() async {
+    PermissionStatus permission = await Permission.contacts.status;
+    if (permission != PermissionStatus.granted ||
+        permission != PermissionStatus.denied) {
+      Map<Permission, PermissionStatus> permissionStatus =
+          await [Permission.contacts].request();
+      return permissionStatus[Permission.contacts] ?? PermissionStatus.denied;
+    } else {
+      setState(() {
+        getContact();
+      });
+      return permission;
+    }
+  }
+
+  void _handleInvalidPermissions(PermissionStatus permissionStatus) {
+    if (permissionStatus == PermissionStatus.denied) {
+      throw PlatformException(
+        code: "PERMISSION_DENIED",
+        message: "Access to contact data denied",
+        details: null,
+      );
+    } else if (permissionStatus == PermissionStatus.restricted) {
+      throw PlatformException(
+        code: "PERMISSION_RESTRICTED",
+        message: "Contact data restricted",
+        details: null,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Second"),
       ),
-      body: _buildList(),
+      body: ListView.builder(
+          itemCount: contacts.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              leading: Icon(Icons.people),
+              title: Text(contacts.elementAt(index).displayName ?? ''),
+              subtitle:
+                  Text((contacts.elementAt(index).phones?.isNotEmpty == true) ? contacts.elementAt(index).phones?.first.value as String : '-'),
+            );
+          }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(
@@ -66,7 +132,7 @@ class _SecondPageState extends State<SecondPage> {
                           key: _formKey,
                           child: TextFormField(
                             validator: (value) {
-                              if (value.isEmpty) {
+                              if (value?.isEmpty == true) {
                                 return 'Phone must not be null';
                               }
                               return null;
@@ -110,7 +176,7 @@ class _SecondPageState extends State<SecondPage> {
     final encryptedName = encryptAESCryptoJS(name, passwordEncrypt);
     final encryptedPhone = encryptAESCryptoJS(number, passwordEncrypt);
     firestore.collection('family_contact_bi13rb8').add({
-      'id': auth.currentUser.email,
+      'id': auth.currentUser?.email,
       'name': encryptedName,
       'phone': encryptedPhone,
     });
@@ -125,7 +191,7 @@ class _SecondPageState extends State<SecondPage> {
           child: StreamBuilder<QuerySnapshot>(
             stream: firestore
                 .collection('family_contact_bi13rb8')
-                .where('id', isEqualTo: auth.currentUser.email)
+                .where('id', isEqualTo: auth.currentUser?.email)
                 .orderBy('name')
                 .snapshots(),
             builder: (context, snapshot) {
@@ -134,13 +200,18 @@ class _SecondPageState extends State<SecondPage> {
                   child: CircularProgressIndicator(),
                 );
               } else if (snapshot.hasData) {
-                final contacts = snapshot.data.docs;
+                final contacts =
+                    snapshot.data?.docs as List<QueryDocumentSnapshot>;
                 List<FamilyNumber> familyNumbers = [];
                 for (var contact in contacts) {
                   final name = decryptAESCryptoJS(
-                      contact.data()['name'], passwordEncrypt);
+                    contact.data()?['name'],
+                    passwordEncrypt,
+                  );
                   final phone = decryptAESCryptoJS(
-                      contact.data()['phone'], passwordEncrypt);
+                    contact.data()?['phone'],
+                    passwordEncrypt,
+                  );
                   final docId = contact.id;
 
                   final familyNumber =
@@ -160,7 +231,7 @@ class _SecondPageState extends State<SecondPage> {
                           verticalOffset: 50.0,
                           child: FadeInAnimation(
                             child: Dismissible(
-                              key: Key(familyNumbers[index].name),
+                              key: Key(familyNumbers[index].name as String),
                               child: buildContactList(
                                   context, familyNumbers[index]),
                               direction: DismissDirection.endToStart,
@@ -169,7 +240,7 @@ class _SecondPageState extends State<SecondPage> {
                                     .collection("family_contact_bi13rb8")
                                     .doc(familyNumbers[index].docId)
                                     .delete();
-                                Scaffold.of(context).showSnackBar(
+                                ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                       content: Text(
                                         'Deleted from contact',

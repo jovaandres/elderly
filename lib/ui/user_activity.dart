@@ -37,11 +37,12 @@ class _UserActivityState extends State<UserActivity> {
                       child: CircularProgressIndicator(),
                     );
                   } else if (snapshot.hasData) {
-                    final datas = snapshot.data.docs;
+                    final datas =
+                        snapshot.data?.docs as List<QueryDocumentSnapshot>;
                     List<Activity> listActivity = [];
                     for (var data in datas) {
-                      final id = data.data()['id'];
-                      final activity = data.data()['activity'];
+                      final id = data.data()?['id'];
+                      final activity = data.data()?['activity'];
 
                       final activityData = Activity(id: id, activity: activity);
                       listActivity.add(activityData);
@@ -87,7 +88,7 @@ class _UserActivityState extends State<UserActivity> {
                   children: [
                     Text(
                       (auth.currentUser != null)
-                          ? "Hello ${auth.currentUser.email}"
+                          ? "Hello ${auth.currentUser?.email}"
                           : "Hello User!",
                       style: TextStyle(fontSize: 18),
                     ),

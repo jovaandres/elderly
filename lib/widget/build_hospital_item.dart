@@ -27,16 +27,16 @@ Widget buildHospitalList(BuildContext context, NearbyResult result) {
         padding: const EdgeInsets.all(4),
         child: ListTile(
           leading: Image.network(
-            result.icon,
+            result.icon as String,
             width: 75,
             height: 75,
           ),
           title: Text(
-            result.name,
+            result.name as String,
             style: textStyle.copyWith(fontSize: 14),
           ),
           subtitle: Text(
-            result.vicinity,
+            result.vicinity as String,
             style: textStyle,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -44,7 +44,7 @@ Widget buildHospitalList(BuildContext context, NearbyResult result) {
           onTap: () {
             Navigation.intentWithData(
               DetailHospital.routeName,
-              result.placeId,
+              result.placeId as String,
             );
           },
         ),

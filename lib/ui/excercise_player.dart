@@ -8,14 +8,14 @@ class ExcercisePlayer extends StatefulWidget {
   static const routeName = '/excercise_player_page';
   final String link;
 
-  ExcercisePlayer({@required this.link});
+  ExcercisePlayer({required this.link});
 
   @override
   _ExcercisePlayerState createState() => _ExcercisePlayerState();
 }
 
 class _ExcercisePlayerState extends State<ExcercisePlayer> {
-  YoutubePlayerController _controller;
+  late YoutubePlayerController _controller;
 
   @override
   void initState() {

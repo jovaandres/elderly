@@ -10,7 +10,7 @@ class DetailHospital extends StatefulWidget {
   static const routeName = '/detail_hospital_page';
   final String hospitalId;
 
-  DetailHospital({@required this.hospitalId});
+  DetailHospital({required this.hospitalId});
 
   @override
   _DetailHospitalState createState() => _DetailHospitalState();
@@ -32,7 +32,7 @@ class _DetailHospitalState extends State<DetailHospital> {
       ),
       body: Consumer<DetailHospitalProvider>(
         builder: (context, state, _) {
-          final DetailResult _hospital = state.result.result;
+          final DetailResult _hospital = state.result?.result as DetailResult;
           if (state.state == ResultState.Loading) {
             return Center(
               child: CircularProgressIndicator(),
@@ -61,24 +61,31 @@ class _DetailHospitalState extends State<DetailHospital> {
                     child: Column(
                       children: [
                         Text(
-                          _hospital.name,
+                          _hospital.name as String,
                           style: textStyle.copyWith(
                             fontSize: 18,
                           ),
                         ),
                         SizedBox(height: 8),
-                        Image.network('adawda'
-                            // _hospital.icon
-                            ),
+                        (_hospital.photos?.isNotEmpty == true)
+                            ? Image.network(baseUrl +
+                                'photo?maxwidth=400&photoreference=' +
+                                ((_hospital.photos as List<Photo>)..shuffle())
+                                    .first
+                                    .photoReference
+                                    .toString() +
+                                '&key=$apiKey')
+                            : Image.network(_hospital.icon as String),
                         TextButton(
                           child: Text(
-                            _hospital.internationalPhoneNumber,
+                            _hospital.internationalPhoneNumber ?? '-',
                             style: textStyle.copyWith(
                               color: Colors.blue,
                             ),
                           ),
                           onPressed: () {
-                            makingPhoneCall(_hospital.internationalPhoneNumber);
+                            makingPhoneCall(
+                                _hospital.internationalPhoneNumber as String);
                           },
                         )
                       ],

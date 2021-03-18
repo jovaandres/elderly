@@ -6,17 +6,17 @@ import 'package:workout_flutter/util/result_state.dart';
 class AlarmDataProvider extends ChangeNotifier {
   final AlarmDatabase alarmDatabase;
 
-  AlarmDataProvider({@required this.alarmDatabase}) {
+  AlarmDataProvider({required this.alarmDatabase}) {
     _getAlarmData();
   }
 
-  ResultState _state;
+  ResultState? _state;
 
-  ResultState get state => _state;
+  ResultState? get state => _state;
 
-  String _message;
+  String? _message;
 
-  String get message => _message;
+  String? get message => _message;
 
   List<AlarmData> _alarmData = [];
 
@@ -26,13 +26,13 @@ class AlarmDataProvider extends ChangeNotifier {
 
   bool get isReminderActive => _isReminderActive;
 
-  AlarmData _getAlrm;
+  late AlarmData _getAlrm;
 
   AlarmData get getAlrm => _getAlrm;
 
   void _getAlarmData() async {
     _state = ResultState.Loading;
-    _alarmData = await alarmDatabase.getAllAlarmData();
+    _alarmData = await alarmDatabase.getAllAlarmData() as List<AlarmData>;
     if (_alarmData.length > 0) {
       _state = ResultState.HasData;
     } else {
@@ -44,7 +44,7 @@ class AlarmDataProvider extends ChangeNotifier {
 
   Future<void> getAlarmByName(String name) async {
     _state = ResultState.Loading;
-    _getAlrm = await alarmDatabase.getAlarmDataByName(name);
+    _getAlrm = await alarmDatabase.getAlarmDataByName(name) as AlarmData;
     if (_alarmData.length > 0) {
       _state = ResultState.HasData;
     } else {
@@ -67,7 +67,7 @@ class AlarmDataProvider extends ChangeNotifier {
 
   void isAlarmScheduled(String name) async {
     final alarmData = await alarmDatabase.getAlarmDataByName(name);
-    _isReminderActive = alarmData.isScheduled == 1;
+    _isReminderActive = alarmData?.isScheduled == 1;
   }
 
   void updateAlarm(int value, int id) async {

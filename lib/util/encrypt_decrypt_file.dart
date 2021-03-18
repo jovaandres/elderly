@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:aes_crypt/aes_crypt.dart';
 
 class EncryptData {
@@ -7,18 +6,7 @@ class EncryptData {
     crypt.setOverwriteMode(AesCryptOwMode.on);
     crypt.setPassword('my cool password');
     String encFilepath;
-    try {
-      encFilepath = crypt.encryptFileSync(path);
-      print('The encryption has been completed successfully.');
-      print('Encrypted file: $encFilepath');
-    } catch (e) {
-      if (e.type == AesCryptExceptionType.destFileExists) {
-        print('The encryption has been completed unsuccessfully.');
-        print(e.message);
-      } else {
-        return 'ERROR';
-      }
-    }
+    encFilepath = crypt.encryptFileSync(path);
     return encFilepath;
   }
 
@@ -27,19 +15,7 @@ class EncryptData {
     crypt.setOverwriteMode(AesCryptOwMode.on);
     crypt.setPassword('my cool password');
     String decFilepath;
-    try {
-      decFilepath = crypt.decryptFileSync(path);
-      print('The decryption has been completed successfully.');
-      print('Decrypted file 1: $decFilepath');
-      print('File content: ' + File(decFilepath).path);
-    } catch (e) {
-      if (e.type == AesCryptExceptionType.destFileExists) {
-        print('The decryption has been completed unsuccessfully.');
-        print(e.message);
-      } else {
-        return 'ERROR';
-      }
-    }
+    decFilepath = crypt.decryptFileSync(path);
     return decFilepath;
   }
 }

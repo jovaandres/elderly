@@ -10,7 +10,7 @@ class RegistrationPage extends StatefulWidget {
   static const routeName = '/registration_page';
   final String role;
 
-  RegistrationPage({@required this.role});
+  RegistrationPage({required this.role});
 
   @override
   _RegistrationPageState createState() => _RegistrationPageState();
@@ -25,7 +25,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final _passwordFieldController = TextEditingController();
   bool _isLoading = false;
   bool _obscureText = true;
-  String _role;
+  late String _role;
 
   @override
   void initState() {
@@ -212,31 +212,30 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     final email = _emailFieldController.text;
                     final password = _passwordFieldController.text;
 
-                    final newUser = await auth.createUserWithEmailAndPassword(
+                    await auth.createUserWithEmailAndPassword(
                         email: email, password: password);
 
-                    if (newUser != null) {
-                      firestore.collection('user_account_bi13rb8').add({
-                        "name": _nameFieldController.text,
-                        "age": _ageFieldController.text,
-                        "weight": _weightFieldController.text,
-                        "height": _heightFieldController.text,
-                        "email": _emailFieldController.text,
-                        "role": _role
-                      });
-                      final userData = UserData(
-                          age: _ageFieldController.text,
-                          email: _emailFieldController.text,
-                          weight: _weightFieldController.text,
-                          height: _heightFieldController.text,
-                          name: _nameFieldController.text,
-                          role: _role);
-                      databaseHelper.insertUserData(userData);
-                      if (_role == 'elderly') {
-                        Navigation.intentReplace(MyHomePage.routeName);
-                      } else {
-                        Navigation.intentReplace(UserActivity.routeName);
-                      }
+                    firestore.collection('user_account_bi13rb8').add({
+                      "name": _nameFieldController.text,
+                      "age": _ageFieldController.text,
+                      "weight": _weightFieldController.text,
+                      "height": _heightFieldController.text,
+                      "email": _emailFieldController.text,
+                      "role": _role
+                    });
+                    final userData = UserData(
+                      age: _ageFieldController.text,
+                      email: _emailFieldController.text,
+                      weight: _weightFieldController.text,
+                      height: _heightFieldController.text,
+                      name: _nameFieldController.text,
+                      role: _role,
+                    );
+                    databaseHelper.insertUserData(userData);
+                    if (_role == 'elderly') {
+                      Navigation.intentReplace(MyHomePage.routeName);
+                    } else {
+                      Navigation.intentReplace(UserActivity.routeName);
                     }
                   } catch (e) {
                     showDialog(

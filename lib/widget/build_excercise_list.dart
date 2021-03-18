@@ -27,7 +27,7 @@ Widget buildExcercise(BuildContext context, Exercise exercise) {
         child: Column(
           children: [
             Text(
-              exercise.name,
+              exercise.name as String,
               style: textStyle.copyWith(
                 fontSize: 18,
               ),

@@ -27,15 +27,15 @@ Widget buildContactList(BuildContext context, FamilyNumber familyNumber) {
         child: ListTile(
           leading: Icon(Icons.people),
           title: Text(
-            familyNumber.name,
+            familyNumber.name as String,
             style: textStyle,
           ),
           subtitle: Text(
-            familyNumber.number,
+            familyNumber.number as String,
             style: textStyle,
           ),
           onTap: () {
-            makingPhoneCall(familyNumber.number);
+            makingPhoneCall(familyNumber.number as String);
           },
         ),
       ),

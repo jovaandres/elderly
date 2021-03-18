@@ -19,15 +19,15 @@ class MedicineDetail extends StatefulWidget {
   static const routeName = '/medicine_detail_page';
   final Medical medicine;
 
-  MedicineDetail({@required this.medicine});
+  MedicineDetail({required this.medicine});
 
   @override
   _MedicineDetailState createState() => _MedicineDetailState();
 }
 
 class _MedicineDetailState extends State<MedicineDetail> {
-  Medical medical;
-  File medicalImage;
+  late Medical medical;
+  late File medicalImage;
   final picker = ImagePicker();
 
   void initState() {
@@ -73,7 +73,7 @@ class _MedicineDetailState extends State<MedicineDetail> {
                           ? Text('No image selected')
                           : FullScreenWidget(
                               child: Hero(
-                                tag: medical.name,
+                                tag: medical.name as String,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(16),
                                   child: Image.file(
@@ -87,14 +87,14 @@ class _MedicineDetailState extends State<MedicineDetail> {
                             ),
                       SizedBox(height: 16),
                       Text(
-                        medical.name,
+                        medical.name as String,
                         style: textStyle.copyWith(
                           fontSize: 18,
                         ),
                       ),
                       SizedBox(height: 8),
                       Text(
-                        medical.rules,
+                        medical.rules as String,
                         style: textStyle.copyWith(
                           fontSize: 14,
                         ),
@@ -115,8 +115,8 @@ class _MedicineDetailState extends State<MedicineDetail> {
                                   alarm.updateAlarm(1, 1);
                                   await alarm.getAlarmByName('Time 1');
                                   setState(() {
-                                    provider.scheduleNotification(
-                                        1, alarm.getAlrm.time, medical);
+                                    provider.scheduleNotification(1,
+                                        alarm.getAlrm.time as String, medical);
                                   });
                                 } else {
                                   alarm.updateAlarm(0, 1);
@@ -187,13 +187,13 @@ class _MedicineDetailState extends State<MedicineDetail> {
   Future uploadImageToFirebase() async {
     final encryptedImage = EncryptData.encryptFile(medicalImage.path);
     Reference firebaseStorageRef =
-        storage.ref().child('${auth.currentUser.email}/${medical.name}.jpg');
+        storage.ref().child('${auth.currentUser?.email}/${medical.name}.jpg');
     await firebaseStorageRef.putFile(File(encryptedImage));
   }
 
   Future downloadImageFromFirebase() async {
     Reference firebaseStorageRef =
-        storage.ref().child('${auth.currentUser.email}/${medical.name}.jpg');
+        storage.ref().child('${auth.currentUser?.email}/${medical.name}.jpg');
     DownloadTask downloadTask =
         firebaseStorageRef.writeToFile(File('$path/${medical.name}.jpg.aes'));
     await downloadTask.whenComplete(() {

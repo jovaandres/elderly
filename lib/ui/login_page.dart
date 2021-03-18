@@ -172,38 +172,36 @@ class _LoginPageState extends State<LoginPage> {
                   });
                   try {
                     FocusScope.of(context).unfocus();
-                    final email = _emailFieldController.text;
-                    final password = _passwordFieldController.text;
+                    final inputEmail = _emailFieldController.text;
+                    final inputPassword = _passwordFieldController.text;
 
-                    final user = await auth.signInWithEmailAndPassword(
-                        email: email, password: password);
+                    await auth.signInWithEmailAndPassword(
+                        email: inputEmail, password: inputPassword);
 
-                    if (user != null) {
-                      final data = await firestore
-                          .collection('user_account_bi13rb8')
-                          .where('email', isEqualTo: auth.currentUser.email)
-                          .limit(1)
-                          .get();
-                      final userDocs = data.docs.first;
-                      final email = userDocs.data()['email'];
-                      final age = userDocs.data()['age'];
-                      final name = userDocs.data()['name'];
-                      final role = userDocs.data()['role'];
-                      final height = userDocs.data()['height'];
-                      final weight = userDocs.data()['weight'];
-                      final userData = UserData(
-                          age: age,
-                          email: email,
-                          height: height,
-                          name: name,
-                          weight: weight,
-                          role: role);
-                      databaseHelper.insertUserData(userData);
-                      if (role == 'elderly') {
-                        Navigation.intentReplace(MyHomePage.routeName);
-                      } else {
-                        Navigation.intentReplace(UserActivity.routeName);
-                      }
+                    final data = await firestore
+                        .collection('user_account_bi13rb8')
+                        .where('email', isEqualTo: auth.currentUser?.email)
+                        .limit(1)
+                        .get();
+                    final userDocs = data.docs.first;
+                    final email = userDocs.data()?['email'];
+                    final age = userDocs.data()?['age'];
+                    final name = userDocs.data()?['name'];
+                    final role = userDocs.data()?['role'];
+                    final height = userDocs.data()?['height'];
+                    final weight = userDocs.data()?['weight'];
+                    final userData = UserData(
+                        age: age,
+                        email: email,
+                        height: height,
+                        name: name,
+                        weight: weight,
+                        role: role);
+                    databaseHelper.insertUserData(userData);
+                    if (role == 'elderly') {
+                      Navigation.intentReplace(MyHomePage.routeName);
+                    } else {
+                      Navigation.intentReplace(UserActivity.routeName);
                     }
                   } catch (e) {
                     showDialog(

@@ -5,21 +5,27 @@ class DetailPlaces {
     this.status,
   });
 
-  List<dynamic> htmlAttributions;
-  DetailResult result;
-  String status;
+  List<dynamic>? htmlAttributions;
+  DetailResult? result;
+  String? status;
 
   factory DetailPlaces.fromJson(Map<String, dynamic> json) => DetailPlaces(
-        htmlAttributions:
-            List<dynamic>.from(json["html_attributions"].map((x) => x)),
-        result: DetailResult.fromJson(json["result"]),
-        status: json["status"],
+        htmlAttributions: json["html_attributions"] == null
+            ? null
+            : List<dynamic>.from(json["html_attributions"].map((x) => x)),
+        result: json["result"] == null
+            ? null
+            : DetailResult.fromJson(json["result"]),
+        status: json["status"] == null ? null : json["status"],
       );
 
   Map<String, dynamic> toJson() => {
-        "html_attributions": List<dynamic>.from(htmlAttributions.map((x) => x)),
-        "result": result.toJson(),
-        "status": status,
+        "html_attributions": htmlAttributions == null
+            ? null
+            : List<dynamic>.from(
+                (htmlAttributions as List<dynamic>).map((x) => x)),
+        "result": result == null ? null : result?.toJson(),
+        "status": status == null ? null : status,
       };
 }
 
@@ -27,87 +33,116 @@ class DetailResult {
   DetailResult({
     this.addressComponents,
     this.adrAddress,
+    this.businessStatus,
     this.formattedAddress,
     this.formattedPhoneNumber,
-    this.geometry,
     this.icon,
-    this.id,
     this.internationalPhoneNumber,
     this.name,
+    this.openingHours,
+    this.photos,
     this.placeId,
     this.rating,
     this.reference,
-    this.reviews,
     this.types,
     this.url,
+    this.userRatingsTotal,
     this.utcOffset,
     this.vicinity,
     this.website,
   });
 
-  List<AddressComponent> addressComponents;
-  String adrAddress;
-  String formattedAddress;
-  String formattedPhoneNumber;
-  DetailGeometry geometry;
-  String icon;
-  String id;
-  String internationalPhoneNumber;
-  String name;
-  String placeId;
-  double rating;
-  String reference;
-  List<Review> reviews;
-  List<String> types;
-  String url;
-  int utcOffset;
-  String vicinity;
-  String website;
+  List<AddressComponent>? addressComponents;
+  String? adrAddress;
+  String? businessStatus;
+  String? formattedAddress;
+  String? formattedPhoneNumber;
+  String? icon;
+  String? internationalPhoneNumber;
+  String? name;
+  OpeningHours? openingHours;
+  List<Photo>? photos;
+  String? placeId;
+  double? rating;
+  String? reference;
+  List<String>? types;
+  String? url;
+  int? userRatingsTotal;
+  int? utcOffset;
+  String? vicinity;
+  String? website;
 
   factory DetailResult.fromJson(Map<String, dynamic> json) => DetailResult(
-        addressComponents: List<AddressComponent>.from(
-            json["address_components"]
+        addressComponents: json["address_components"] == null
+            ? null
+            : List<AddressComponent>.from(json["address_components"]
                 .map((x) => AddressComponent.fromJson(x))),
-        adrAddress: json["adr_address"],
-        formattedAddress: json["formatted_address"],
-        formattedPhoneNumber: json["formatted_phone_number"],
-        geometry: DetailGeometry.fromJson(json["geometry"]),
-        icon: json["icon"],
-        id: json["id"],
-        internationalPhoneNumber: json["international_phone_number"],
-        name: json["name"],
-        placeId: json["place_id"],
-        rating: json["rating"].toDouble(),
-        reference: json["reference"],
-        reviews:
-            List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
-        types: List<String>.from(json["types"].map((x) => x)),
-        url: json["url"],
-        utcOffset: json["utc_offset"],
-        vicinity: json["vicinity"],
-        website: json["website"],
+        adrAddress: json["adr_address"] == null ? null : json["adr_address"],
+        businessStatus:
+            json["business_status"] == null ? null : json["business_status"],
+        formattedAddress: json["formatted_address"] == null
+            ? null
+            : json["formatted_address"],
+        formattedPhoneNumber: json["formatted_phone_number"] == null
+            ? null
+            : json["formatted_phone_number"],
+        icon: json["icon"] == null ? null : json["icon"],
+        internationalPhoneNumber: json["international_phone_number"] == null
+            ? null
+            : json["international_phone_number"],
+        name: json["name"] == null ? null : json["name"],
+        openingHours: json["opening_hours"] == null
+            ? null
+            : OpeningHours.fromJson(json["opening_hours"]),
+        photos: json["photos"] == null
+            ? null
+            : List<Photo>.from(json["photos"].map((x) => Photo.fromJson(x))),
+        placeId: json["place_id"] == null ? null : json["place_id"],
+        rating: json["rating"] == null ? null : json["rating"].toDouble(),
+        reference: json["reference"] == null ? null : json["reference"],
+        types: json["types"] == null
+            ? null
+            : List<String>.from(json["types"].map((x) => x)),
+        url: json["url"] == null ? null : json["url"],
+        userRatingsTotal: json["user_ratings_total"] == null
+            ? null
+            : json["user_ratings_total"],
+        utcOffset: json["utc_offset"] == null ? null : json["utc_offset"],
+        vicinity: json["vicinity"] == null ? null : json["vicinity"],
+        website: json["website"] == null ? null : json["website"],
       );
 
   Map<String, dynamic> toJson() => {
-        "address_components":
-            List<dynamic>.from(addressComponents.map((x) => x.toJson())),
-        "adr_address": adrAddress,
-        "formatted_address": formattedAddress,
-        "formatted_phone_number": formattedPhoneNumber,
-        "geometry": geometry.toJson(),
-        "icon": icon,
-        "id": id,
-        "international_phone_number": internationalPhoneNumber,
-        "name": name,
-        "place_id": placeId,
-        "rating": rating,
-        "reference": reference,
-        "reviews": List<dynamic>.from(reviews.map((x) => x.toJson())),
-        "types": List<dynamic>.from(types.map((x) => x)),
-        "url": url,
-        "utc_offset": utcOffset,
-        "vicinity": vicinity,
-        "website": website,
+        "address_components": addressComponents == null
+            ? null
+            : List<dynamic>.from((addressComponents as List<AddressComponent>)
+                .map((x) => x.toJson())),
+        "adr_address": adrAddress == null ? null : adrAddress,
+        "business_status": businessStatus == null ? null : businessStatus,
+        "formatted_address": formattedAddress == null ? null : formattedAddress,
+        "formatted_phone_number":
+            formattedPhoneNumber == null ? null : formattedPhoneNumber,
+        "icon": icon == null ? null : icon,
+        "international_phone_number":
+            internationalPhoneNumber == null ? null : internationalPhoneNumber,
+        "name": name == null ? null : name,
+        "opening_hours": openingHours == null ? null : openingHours?.toJson(),
+        "photos": photos == null
+            ? null
+            : List<dynamic>.from(
+                (photos as List<Photo>).map((x) => x.toJson())),
+        "place_id": placeId == null ? null : placeId,
+        "rating": rating == null ? null : rating,
+        "reference": reference == null ? null : reference,
+        "types": types == null
+            ? null
+            : List<dynamic>.from((types as List<String>).map((x) => x)),
+        "url": url == null ? null : url,
+        "user_ratings_total":
+            userRatingsTotal == null ? null : userRatingsTotal,
+        "utc_offset": utcOffset == null ? null : utcOffset,
+        "vicinity": vicinity == null ? null : vicinity,
+        "website": website == null ? null : website,
       };
 }
 
@@ -118,124 +153,131 @@ class AddressComponent {
     this.types,
   });
 
-  String longName;
-  String shortName;
-  List<String> types;
+  String? longName;
+  String? shortName;
+  List<String>? types;
 
   factory AddressComponent.fromJson(Map<String, dynamic> json) =>
       AddressComponent(
-        longName: json["long_name"],
-        shortName: json["short_name"],
-        types: List<String>.from(json["types"].map((x) => x)),
+        longName: json["long_name"] == null ? null : json["long_name"],
+        shortName: json["short_name"] == null ? null : json["short_name"],
+        types: json["types"] == null
+            ? null
+            : List<String>.from(json["types"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
-        "long_name": longName,
-        "short_name": shortName,
-        "types": List<dynamic>.from(types.map((x) => x)),
+        "long_name": longName == null ? null : longName,
+        "short_name": shortName == null ? null : shortName,
+        "types": types == null
+            ? null
+            : List<dynamic>.from((types as List<String>).map((x) => x)),
       };
 }
 
-class DetailGeometry {
-  DetailGeometry({
-    this.location,
-    this.viewport,
+class OpeningHours {
+  OpeningHours({
+    this.openNow,
+    this.periods,
+    this.weekdayText,
   });
 
-  DetailLocation location;
-  Viewport viewport;
+  bool? openNow;
+  List<Period>? periods;
+  List<String>? weekdayText;
 
-  factory DetailGeometry.fromJson(Map<String, dynamic> json) => DetailGeometry(
-        location: DetailLocation.fromJson(json["location"]),
-        viewport: Viewport.fromJson(json["viewport"]),
+  factory OpeningHours.fromJson(Map<String, dynamic> json) => OpeningHours(
+        openNow: json["open_now"] == null ? null : json["open_now"],
+        periods: json["periods"] == null
+            ? null
+            : List<Period>.from(json["periods"].map((x) => Period.fromJson(x))),
+        weekdayText: json["weekday_text"] == null
+            ? null
+            : List<String>.from(json["weekday_text"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
-        "location": location.toJson(),
-        "viewport": viewport.toJson(),
+        "open_now": openNow == null ? null : openNow,
+        "periods": periods == null
+            ? null
+            : List<dynamic>.from(
+                (periods as List<Period>).map((x) => x.toJson())),
+        "weekday_text": weekdayText == null
+            ? null
+            : List<dynamic>.from((weekdayText as List<String>).map((x) => x)),
       };
 }
 
-class DetailLocation {
-  DetailLocation({
-    this.lat,
-    this.lng,
+class Period {
+  Period({
+    this.close,
+    this.open,
   });
 
-  double lat;
-  double lng;
+  Close? close;
+  Close? open;
 
-  factory DetailLocation.fromJson(Map<String, dynamic> json) => DetailLocation(
-        lat: json["lat"].toDouble(),
-        lng: json["lng"].toDouble(),
+  factory Period.fromJson(Map<String, dynamic> json) => Period(
+        close: json["close"] == null ? null : Close.fromJson(json["close"]),
+        open: json["open"] == null ? null : Close.fromJson(json["open"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "lat": lat,
-        "lng": lng,
+        "close": close == null ? null : close?.toJson(),
+        "open": open == null ? null : open?.toJson(),
       };
 }
 
-class Viewport {
-  Viewport({
-    this.northeast,
-    this.southwest,
-  });
-
-  DetailLocation northeast;
-  DetailLocation southwest;
-
-  factory Viewport.fromJson(Map<String, dynamic> json) => Viewport(
-        northeast: DetailLocation.fromJson(json["northeast"]),
-        southwest: DetailLocation.fromJson(json["southwest"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "northeast": northeast.toJson(),
-        "southwest": southwest.toJson(),
-      };
-}
-
-class Review {
-  Review({
-    this.authorName,
-    this.authorUrl,
-    this.language,
-    this.profilePhotoUrl,
-    this.rating,
-    this.relativeTimeDescription,
-    this.text,
+class Close {
+  Close({
+    this.day,
     this.time,
   });
 
-  String authorName;
-  String authorUrl;
-  String language;
-  String profilePhotoUrl;
-  int rating;
-  String relativeTimeDescription;
-  String text;
-  int time;
+  int? day;
+  String? time;
 
-  factory Review.fromJson(Map<String, dynamic> json) => Review(
-        authorName: json["author_name"],
-        authorUrl: json["author_url"],
-        language: json["language"],
-        profilePhotoUrl: json["profile_photo_url"],
-        rating: json["rating"],
-        relativeTimeDescription: json["relative_time_description"],
-        text: json["text"],
-        time: json["time"],
+  factory Close.fromJson(Map<String, dynamic> json) => Close(
+        day: json["day"] == null ? null : json["day"],
+        time: json["time"] == null ? null : json["time"],
       );
 
   Map<String, dynamic> toJson() => {
-        "author_name": authorName,
-        "author_url": authorUrl,
-        "language": language,
-        "profile_photo_url": profilePhotoUrl,
-        "rating": rating,
-        "relative_time_description": relativeTimeDescription,
-        "text": text,
-        "time": time,
+        "day": day == null ? null : day,
+        "time": time == null ? null : time,
+      };
+}
+
+class Photo {
+  Photo({
+    this.height,
+    this.htmlAttributions,
+    this.photoReference,
+    this.width,
+  });
+
+  int? height;
+  List<String>? htmlAttributions;
+  String? photoReference;
+  int? width;
+
+  factory Photo.fromJson(Map<String, dynamic> json) => Photo(
+        height: json["height"] == null ? null : json["height"],
+        htmlAttributions: json["html_attributions"] == null
+            ? null
+            : List<String>.from(json["html_attributions"].map((x) => x)),
+        photoReference:
+            json["photo_reference"] == null ? null : json["photo_reference"],
+        width: json["width"] == null ? null : json["width"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "height": height == null ? null : height,
+        "html_attributions": htmlAttributions == null
+            ? null
+            : List<dynamic>.from(
+                (htmlAttributions as List<String>).map((x) => x)),
+        "photo_reference": photoReference == null ? null : photoReference,
+        "width": width == null ? null : width,
       };
 }

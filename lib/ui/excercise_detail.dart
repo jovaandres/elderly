@@ -7,14 +7,14 @@ class ExcerciseDetail extends StatefulWidget {
   static const routeName = '/excercise_detail_page';
   final Exercise exercise;
 
-  ExcerciseDetail({@required this.exercise});
+  ExcerciseDetail({required this.exercise});
 
   @override
   _ExcerciseDetailState createState() => _ExcerciseDetailState();
 }
 
 class _ExcerciseDetailState extends State<ExcerciseDetail> {
-  Exercise _exercise;
+  late Exercise _exercise;
 
   @override
   void initState() {
@@ -26,14 +26,14 @@ class _ExcerciseDetailState extends State<ExcerciseDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_exercise.name),
+        title: Text(_exercise.name.toString()),
       ),
       body: SingleChildScrollView(
         child: AnimationLimiter(
           child: ListView.builder(
             shrinkWrap: true,
             padding: const EdgeInsets.all(8),
-            itemCount: _exercise.video.description.length,
+            itemCount: _exercise.video?.description?.length,
             itemBuilder: (context, index) {
               return AnimationConfiguration.staggeredList(
                 position: index,
@@ -41,10 +41,11 @@ class _ExcerciseDetailState extends State<ExcerciseDetail> {
                 child: SlideAnimation(
                   verticalOffset: 50.0,
                   child: buildVideoList(
-                      context,
-                      'Video ${index + 1}',
-                      _exercise.video.description[index],
-                      _exercise.video.link[index]),
+                    context,
+                    'Video ${index + 1}',
+                    _exercise.video?.description?[index] as String,
+                    _exercise.video?.link?[index] as String,
+                  ),
                 ),
               );
             },

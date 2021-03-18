@@ -2,7 +2,6 @@ import 'dart:isolate';
 
 import 'dart:ui';
 
-import 'package:workout_flutter/data/db/database_helper.dart';
 import 'package:workout_flutter/data/model/medical.dart';
 import 'package:workout_flutter/main.dart';
 import 'package:workout_flutter/util/notification_helper.dart';
@@ -10,9 +9,9 @@ import 'package:workout_flutter/util/notification_helper.dart';
 final ReceivePort port = ReceivePort();
 
 class BackgroundService {
-  static BackgroundService _service;
+  static BackgroundService? _service;
   static String _isolateName = 'isolate';
-  static SendPort _uiSendPort;
+  static SendPort? _uiSendPort;
 
   BackgroundService._createObject();
 
@@ -20,7 +19,7 @@ class BackgroundService {
     if (_service == null) {
       _service = BackgroundService._createObject();
     }
-    return _service;
+    return _service as BackgroundService;
   }
 
   void initializeIsolate() {
@@ -35,8 +34,9 @@ class BackgroundService {
     await _notificationHelper.showNotification(flutterLocalNotificationsPlugin,
         Medical(docId: '423', name: 'adawd', rules: 'ada', id: 2));
 
-    _uiSendPort ??= IsolateNameServer.lookupPortByName(_isolateName);
-    _uiSendPort.send(null);
+    _uiSendPort ??=
+        IsolateNameServer.lookupPortByName(_isolateName) as SendPort;
+    _uiSendPort?.send(null);
   }
 
   Future<void> someTask() async {

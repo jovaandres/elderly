@@ -1,107 +1,908 @@
 {
-    "html_attributions" : [],
-    "results" : [
-       {
-          "geometry" : {
-             "location" : {
-                "lat" : -33.870775,
-                "lng" : 151.199025
-             }
-          },
-          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/travel_agent-71.png",
-          "id" : "21a0b251c9b8392186142c798263e289fe45b4aa",
-          "name" : "Rhythmboat Cruises",
-          "opening_hours" : {
-             "open_now" : true
-          },
-          "photos" : [
-             {
-                "height" : 270,
-                "html_attributions" : [],
-                "photo_reference" : "CnRnAAAAF-LjFR1ZV93eawe1cU_3QNMCNmaGkowY7CnOf-kcNmPhNnPEG9W979jOuJJ1sGr75rhD5hqKzjD8vbMbSsRnq_Ni3ZIGfY6hKWmsOf3qHKJInkm4h55lzvLAXJVc-Rr4kI9O1tmIblblUpg2oqoq8RIQRMQJhFsTr5s9haxQ07EQHxoUO0ICubVFGYfJiMUPor1GnIWb5i8",
-                "width" : 519
-             }
-          ],
-          "place_id" : "ChIJyWEHuEmuEmsRm9hTkapTCrk",
-          "reference" : "CoQBdQAAAFSiijw5-cAV68xdf2O18pKIZ0seJh03u9h9wk_lEdG-cP1dWvp_QGS4SNCBMk_fB06YRsfMrNkINtPez22p5lRIlj5ty_HmcNwcl6GZXbD2RdXsVfLYlQwnZQcnu7ihkjZp_2gk1-fWXql3GQ8-1BEGwgCxG-eaSnIJIBPuIpihEhAY1WYdxPvOWsPnb2-nGb6QGhTipN0lgaLpQTnkcMeAIEvCsSa0Ww",
-          "types" : [ "travel_agency", "restaurant", "food", "establishment" ],
-          "vicinity" : "Pyrmont Bay Wharf Darling Dr, Sydney"
-       },
-       {
-          "geometry" : {
-             "location" : {
-                "lat" : -33.866891,
-                "lng" : 151.200814
-             }
-          },
-          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
-          "id" : "45a27fd8d56c56dc62afc9b49e1d850440d5c403",
-          "name" : "Private Charter Sydney Habour Cruise",
-          "photos" : [
-             {
-                "height" : 426,
-                "html_attributions" : [],
-                "photo_reference" : "CnRnAAAAL3n0Zu3U6fseyPl8URGKD49aGB2Wka7CKDZfamoGX2ZTLMBYgTUshjr-MXc0_O2BbvlUAZWtQTBHUVZ-5Sxb1-P-VX2Fx0sZF87q-9vUt19VDwQQmAX_mjQe7UWmU5lJGCOXSgxp2fu1b5VR_PF31RIQTKZLfqm8TA1eynnN4M1XShoU8adzJCcOWK0er14h8SqOIDZctvU",
-                "width" : 640
-             }
-          ],
-          "place_id" : "ChIJqwS6fjiuEmsRJAMiOY9MSms",
-          "reference" : "CpQBhgAAAFN27qR_t5oSDKPUzjQIeQa3lrRpFTm5alW3ZYbMFm8k10ETbISfK9S1nwcJVfrP-bjra7NSPuhaRulxoonSPQklDyB-xGvcJncq6qDXIUQ3hlI-bx4AxYckAOX74LkupHq7bcaREgrSBE-U6GbA1C3U7I-HnweO4IPtztSEcgW09y03v1hgHzL8xSDElmkQtRIQzLbyBfj3e0FhJzABXjM2QBoUE2EnL-DzWrzpgmMEulUBLGrtu2Y",
-          "types" : [ "restaurant", "food", "establishment" ],
-          "vicinity" : "Australia"
-       },
-       {
-          "geometry" : {
-             "location" : {
-                "lat" : -33.870943,
-                "lng" : 151.190311
-             }
-          },
-          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
-          "id" : "30bee58f819b6c47bd24151802f25ecf11df8943",
-          "name" : "Bucks Party Cruise",
-          "opening_hours" : {
-             "open_now" : true
-          },
-          "photos" : [
-             {
-                "height" : 600,
-                "html_attributions" : [],
-                "photo_reference" : "CnRnAAAA48AX5MsHIMiuipON_Lgh97hPiYDFkxx_vnaZQMOcvcQwYN92o33t5RwjRpOue5R47AjfMltntoz71hto40zqo7vFyxhDuuqhAChKGRQ5mdO5jv5CKWlzi182PICiOb37PiBtiFt7lSLe1SedoyrD-xIQD8xqSOaejWejYHCN4Ye2XBoUT3q2IXJQpMkmffJiBNftv8QSwF4",
-                "width" : 800
-             }
-          ],
-          "place_id" : "ChIJLfySpTOuEmsRsc_JfJtljdc",
-          "reference" : "CoQBdQAAANQSThnTekt-UokiTiX3oUFT6YDfdQJIG0ljlQnkLfWefcKmjxax0xmUpWjmpWdOsScl9zSyBNImmrTO9AE9DnWTdQ2hY7n-OOU4UgCfX7U0TE1Vf7jyODRISbK-u86TBJij0b2i7oUWq2bGr0cQSj8CV97U5q8SJR3AFDYi3ogqEhCMXjNLR1k8fiXTkG2BxGJmGhTqwE8C4grdjvJ0w5UsAVoOH7v8HQ",
-          "types" : [ "restaurant", "food", "establishment" ],
-          "vicinity" : "37 Bank St, Pyrmont"
-       },
-       {
-          "geometry" : {
-             "location" : {
-                "lat" : -33.867591,
-                "lng" : 151.201196
-             }
-          },
-          "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/travel_agent-71.png",
-          "id" : "a97f9fb468bcd26b68a23072a55af82d4b325e0d",
-          "name" : "Australian Cruise Group",
-          "opening_hours" : {
-             "open_now" : true
-          },
-          "photos" : [
-             {
-                "height" : 242,
-                "html_attributions" : [],
-                "photo_reference" : "CnRnAAAABjeoPQ7NUU3pDitV4Vs0BgP1FLhf_iCgStUZUr4ZuNqQnc5k43jbvjKC2hTGM8SrmdJYyOyxRO3D2yutoJwVC4Vp_dzckkjG35L6LfMm5sjrOr6uyOtr2PNCp1xQylx6vhdcpW8yZjBZCvVsjNajLBIQ-z4ttAMIc8EjEZV7LsoFgRoU6OrqxvKCnkJGb9F16W57iIV4LuM",
-                "width" : 200
-             }
-          ],
-          "place_id" : "ChIJrTLr-GyuEmsRBfy61i59si0",
-          "reference" : "CoQBeQAAAFvf12y8veSQMdIMmAXQmus1zqkgKQ-O2KEX0Kr47rIRTy6HNsyosVl0CjvEBulIu_cujrSOgICdcxNioFDHtAxXBhqeR-8xXtm52Bp0lVwnO3LzLFY3jeo8WrsyIwNE1kQlGuWA4xklpOknHJuRXSQJVheRlYijOHSgsBQ35mOcEhC5IpbpqCMe82yR136087wZGhSziPEbooYkHLn9e5njOTuBprcfVw",
-          "types" : [ "travel_agency", "restaurant", "food", "establishment" ],
-          "vicinity" : "32 The Promenade, King Street Wharf 5, Sydney"
-       }
-    ],
-    "status" : "OK"
- }
+   "html_attributions": [],
+   "next_page_token": "ATtYBwJllfB48CxGNnjhBOxuaVpUJDS5tqlGVWsbtBSeTyeE0EhriPtAVMsic8SmmeQPEysV3dupt4aFIOccaQug2RMZ_CDIQ9jzLft8bldEtRmV8lNTbTsx8jEIewJTtI_IBrKwabjhsObHEvc5WTUIWmZj7luNN_AI037IgOpE-7kpFAoy03waRxdveWVRBAvVnpw8u8EiAMPnarCA42GhP_t7-XkxCm8lAmxBlpLpF6dSDep7vwmCCqi0lFy-Sps4THFaR9uOZWS6FB1kdTWjr2iInlQPy_4xSlZ3IJ7fs6XiXPuplBkFhEdqSRIp06fn6n_pq5Be5YImoJ5kwdz4GYntMHhIMO6RRpG-FlTVeMRHVy-wYx2pomctCDNZde4rx0_yLxX-RyfTdbA0zmjZuPTxcLRsFgJWEpWmEYHvvC0E83ip4HK5_fkHpQ",
+   "results": [
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": -6.9185474,
+               "lng": 107.6133476
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": -6.917212569708498,
+                  "lng": 107.6146895302915
+               },
+               "southwest": {
+                  "lat": -6.919910530291503,
+                  "lng": 107.6119915697085
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "name": "Rumah Sakit Umum Bungsu",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 3120,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/109045072490120089650\">Adeng Andrian</a>"
+               ],
+               "photo_reference": "ATtYBwJ6eT1gFxfJB_FQAsTkVvSFjEm7gu1ZdKMqwOO8cgx6oDArEJp6g1bB9m1lQ1K7qlpZdWTUKn8J9mMZhsNzu9igxm2E4kj9JFqURFcVRfr0MjO0jrEra5Ly9CUc79Nsp0xVVNbj92QhwLlVM31OcMbTncxwzrhbYDMNQ9-HM_gxtNzH",
+               "width": 4160
+            }
+         ],
+         "place_id": "ChIJe3de6C3maC4RG5EQreD2Gks",
+         "plus_code": {
+            "compound_code": "3JJ7+H8 Kebon Pisang, Kota Bandung, Jawa Barat, Indonesia",
+            "global_code": "6P593JJ7+H8"
+         },
+         "rating": 3.9,
+         "reference": "ChIJe3de6C3maC4RG5EQreD2Gks",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 96,
+         "vicinity": "Jalan Veteran No.6, Kebon Pisang"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": -6.923423499999998,
+               "lng": 107.6119423
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": -6.922068569708497,
+                  "lng": 107.6132440802915
+               },
+               "southwest": {
+                  "lat": -6.924766530291501,
+                  "lng": 107.6105461197085
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "name": "Doni Refleksi - Bandung",
+         "place_id": "ChIJVxTa0SjmaC4R1dAhTTOyUgo",
+         "plus_code": {
+            "compound_code": "3JG6+JQ Paledang, Kota Bandung, Jawa Barat, Indonesia",
+            "global_code": "6P593JG6+JQ"
+         },
+         "reference": "ChIJVxTa0SjmaC4R1dAhTTOyUgo",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity": "Jl. Lengkong BesarNo. No.64 G, Paledang"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": -6.919426400000001,
+               "lng": 107.6156944
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": -6.918054169708497,
+                  "lng": 107.6170535802915
+               },
+               "southwest": {
+                  "lat": -6.920752130291501,
+                  "lng": 107.6143556197085
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "name": "Rumah Sakit Veteran",
+         "place_id": "ChIJ5XeN2C3maC4R6zmzu6fdqaY",
+         "plus_code": {
+            "compound_code": "3JJ8+67 Kebon Pisang, Kota Bandung, Jawa Barat, Indonesia",
+            "global_code": "6P593JJ8+67"
+         },
+         "rating": 5,
+         "reference": "ChIJ5XeN2C3maC4R6zmzu6fdqaY",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 1,
+         "vicinity": "Jalan Veteran No. 6, Kebon Pisang, Sumur Bandung, Kebon Pisang"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": -6.913273900000001,
+               "lng": 107.6136448
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": -6.911943319708498,
+                  "lng": 107.6149546302915
+               },
+               "southwest": {
+                  "lat": -6.914641280291502,
+                  "lng": 107.6122566697085
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "name": "Netra Klinik Spesialis Mata - Bandung",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 2448,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/115410234733068955202\">Adjie Kencoy</a>"
+               ],
+               "photo_reference": "ATtYBwJ5rqPefmhGVmne2xtqtqYAC_9tg8RCkHSztJ_Bwef068UVMiMbXZZRondHyouf5tSg6WsIyITmUskwENFh7Z4g7RyXI91QU3vyhbVz4lFcMg2obhMCO5dDFqLbWCtipjN4chswr0FsfYKMXRbltMid-pV-vo_Q17NN9lmVJGB0wFwy",
+               "width": 3264
+            }
+         ],
+         "place_id": "ChIJR252OjHmaC4RPKobclThyUA",
+         "plus_code": {
+            "compound_code": "3JP7+MF Merdeka, Kota Bandung, Jawa Barat, Indonesia",
+            "global_code": "6P593JP7+MF"
+         },
+         "rating": 4,
+         "reference": "ChIJR252OjHmaC4RPKobclThyUA",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 125,
+         "vicinity": "Jalan Sumatera No.46-48, Merdeka"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": -6.907484299999999,
+               "lng": 107.6159514
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": -6.906164719708498,
+                  "lng": 107.6171952302915
+               },
+               "southwest": {
+                  "lat": -6.908862680291501,
+                  "lng": 107.6144972697085
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "name": "Halmahera Medika Klinik Utama",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 3264,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/106827089445983336517\">adi gunadi</a>"
+               ],
+               "photo_reference": "ATtYBwIe35i9aCvKkxa6-ub-Ra9N762nu0XaNkWheQRgZA3E4bS0PhW-OjEmLKsUbBW_vPAMEwrzWAJLaS0X649ND51BvBPvfIlEKH4Qz6U5SfY72D40krIEMYPVAtJ_Z1vFbTilagkqd4W9RW0Fpu5wM87VtYSFPZHAjLVC2jxD8eEHEnTn",
+               "width": 1836
+            }
+         ],
+         "place_id": "ChIJzUv5AErmaC4RVS2gs_Pnz78",
+         "plus_code": {
+            "compound_code": "3JV8+29 Citarum, Kota Bandung, Jawa Barat, Indonesia",
+            "global_code": "6P593JV8+29"
+         },
+         "rating": 4.3,
+         "reference": "ChIJzUv5AErmaC4RVS2gs_Pnz78",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 3,
+         "vicinity": "Jalan Halmahera No.2, Citarum"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": -6.907457000000001,
+               "lng": 107.6158563
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": -6.906126119708498,
+                  "lng": 107.6171405802915
+               },
+               "southwest": {
+                  "lat": -6.908824080291502,
+                  "lng": 107.6144426197085
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "name": "Halmahera Building",
+         "opening_hours": {
+            "open_now": true
+         },
+         "place_id": "ChIJMb6P_zXmaC4RGsrf5wSCA8k",
+         "plus_code": {
+            "compound_code": "3JV8+28 Citarum, Kota Bandung, Jawa Barat, Indonesia",
+            "global_code": "6P593JV8+28"
+         },
+         "rating": 5,
+         "reference": "ChIJMb6P_zXmaC4RGsrf5wSCA8k",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 1,
+         "vicinity": "Jalan Halmahera, Citarum"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": -6.9063255,
+               "lng": 107.6141109
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": -6.905037019708498,
+                  "lng": 107.6154637802915
+               },
+               "southwest": {
+                  "lat": -6.907734980291503,
+                  "lng": 107.6127658197085
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "name": "Rumah Sakit Khusus Gigi dan Mulut",
+         "opening_hours": {
+            "open_now": false
+         },
+         "photos": [
+            {
+               "height": 1152,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/111896291514834988379\">faridah fang</a>"
+               ],
+               "photo_reference": "ATtYBwLquLM1_ZdOIDkygJqYwxqvHtA-FMMKeEwbEFGAoDCwTwpdDl3K3l0ishbYNKIqODnFMYcEqwuesqW8qRhvsXEd6xB7aHz4fp8uHoqUm-BzlHM5_A4Dt2rPz74Pzfwj-0rrVIHNje-xpP2RPy60hxmIS_VtYJ08w3ismKljyS7np5FC",
+               "width": 2048
+            }
+         ],
+         "place_id": "ChIJoQQiwEnmaC4RZeTtiaJme84",
+         "plus_code": {
+            "compound_code": "3JV7+FJ Citarum, Kota Bandung, Jawa Barat, Indonesia",
+            "global_code": "6P593JV7+FJ"
+         },
+         "rating": 3.4,
+         "reference": "ChIJoQQiwEnmaC4RZeTtiaJme84",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "dentist",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 282,
+         "vicinity": "Jalan L. L. R.E. Martadinata No.45, Citarum"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": -6.906872299999999,
+               "lng": 107.6112986
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": -6.905583519708498,
+                  "lng": 107.6126478802915
+               },
+               "southwest": {
+                  "lat": -6.908281480291503,
+                  "lng": 107.6099499197085
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "name": "RS. Sariningsih",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 2448,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/108099655919541910486\">Muad Marzuki</a>"
+               ],
+               "photo_reference": "ATtYBwLYuF6uXwdimuTHHPJT2S0z2viYdyYb5F4qkLtHcVPVRCEkjp_JO6zmGqY6xOIK38OIYEFbwGT_PKXaR0JX4630N25CpR6yz2_ku1QHVrl_CsEDHuHxqDpDGM-Qxe4kyOPhedjo3ZlbUld7GLDiGIYD2_5fxycy1TGQGXopA6o7EzNG",
+               "width": 3264
+            }
+         ],
+         "place_id": "ChIJS0UEGEjmaC4RMa0bOiTYKSQ",
+         "plus_code": {
+            "compound_code": "3JV6+7G Citarum, Kota Bandung, Jawa Barat, Indonesia",
+            "global_code": "6P593JV6+7G"
+         },
+         "rating": 3.2,
+         "reference": "ChIJS0UEGEjmaC4RMa0bOiTYKSQ",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 134,
+         "vicinity": "Jalan L. L. R.E. Martadinata No.9, Citarum"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": -6.928369500000001,
+               "lng": 107.6093096
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": -6.927017269708497,
+                  "lng": 107.6106618302915
+               },
+               "southwest": {
+                  "lat": -6.929715230291501,
+                  "lng": 107.6079638697085
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "name": "klinik bekam bandung",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 896,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/106791673558336033548\">Bisnis Makmur</a>"
+               ],
+               "photo_reference": "ATtYBwKXxsdbKRqajb-nx3oxmZs9I4AeB-KlkPxl0HOy5ngSotl0r-dlqazaUM5USa_I1YNLTfzC2EZziAEPft5-l-8tU_q5MwVoIC6copW8uOvG3OoKE0cgnSrEE6apgyz66Qscx5xRlLcVSrUF4hbEpv9HeV2b6gWWo_OTIIf6RC9ChwVP",
+               "width": 672
+            }
+         ],
+         "place_id": "ChIJAxd5Vp3oaC4RnqNGxnp2LpY",
+         "plus_code": {
+            "compound_code": "3JC5+MP Pungkur, Kota Bandung, Jawa Barat, Indonesia",
+            "global_code": "6P593JC5+MP"
+         },
+         "rating": 5,
+         "reference": "ChIJAxd5Vp3oaC4RnqNGxnp2LpY",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 6,
+         "vicinity": "Jalan Pungkur No.94, Pungkur"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": -6.928535900000001,
+               "lng": 107.6094342
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": -6.927161019708499,
+                  "lng": 107.6108079802915
+               },
+               "southwest": {
+                  "lat": -6.929858980291503,
+                  "lng": 107.6081100197085
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "name": "pusat terapi lintah di bandung",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 270,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/100548755454356759005\">bekam syariah</a>"
+               ],
+               "photo_reference": "ATtYBwKhNKjqPETnwJoebDd-Su43_QpIVejfQqHw8dgMxF5TvklshWtX90s_5c6qugondS39S_EBcB3pvSmAKItcJHfT1_gMTr-ktP_KF_NxKDB3b8fDIuATqjC6DEs1cFnsZY513knA1NTIfrrvbF0pm8teagXqmJphBoy98-WXewNjV3VR",
+               "width": 360
+            }
+         ],
+         "place_id": "ChIJ4Wp0VJ3oaC4RCAgen6dZNoY",
+         "plus_code": {
+            "compound_code": "3JC5+HQ Balonggede, Kota Bandung, Jawa Barat, Indonesia",
+            "global_code": "6P593JC5+HQ"
+         },
+         "rating": 4.6,
+         "reference": "ChIJ4Wp0VJ3oaC4RCAgen6dZNoY",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 9,
+         "vicinity": "No.92 depan kantor pegadaian, Jalan Pungkur, Balonggede"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": -6.928491099999999,
+               "lng": 107.6091891
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": -6.927068419708498,
+                  "lng": 107.6106109802915
+               },
+               "southwest": {
+                  "lat": -6.929766380291501,
+                  "lng": 107.6079130197085
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "name": "pusat bekam bandung",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 2592,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/100194410804991485731\">ahmad yaman</a>"
+               ],
+               "photo_reference": "ATtYBwLNoSkqjrip0251PyglEEzRsX0_nWxZTBoV2N_lQQ66UHIKt5Xs0jrJoTxQYFCzFvkKvIRskCKQAzLY0EdB_UiIzfwHXocW2nUIWFCmbQx6hvkPB0vYEk_xsEdk0sfGpQaD_ip8OSJ7Fbw_sv9dtTtXIarCEzoxgVRaTTj1n3ITIWVQ",
+               "width": 1944
+            }
+         ],
+         "place_id": "ChIJ18OsVp3oaC4RmPY79qizo-s",
+         "plus_code": {
+            "compound_code": "3JC5+JM Pungkur, Kota Bandung, Jawa Barat, Indonesia",
+            "global_code": "6P593JC5+JM"
+         },
+         "rating": 4.8,
+         "reference": "ChIJ18OsVp3oaC4RmPY79qizo-s",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 12,
+         "vicinity": "Jalan Pungkur No.90, Pungkur"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": -6.9286713,
+               "lng": 107.6093097
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": -6.927228519708498,
+                  "lng": 107.6107454802915
+               },
+               "southwest": {
+                  "lat": -6.929926480291503,
+                  "lng": 107.6080475197085
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "name": "gurah suara",
+         "photos": [
+            {
+               "height": 2592,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/112253308241744575425\">Fatimah Azzahra</a>"
+               ],
+               "photo_reference": "ATtYBwJFfVwAdOaE2L5GcQ7hOR5jwHM-i3h95QkIXAmd_xEVHazW6VrG_8mea3xBA_w7PyPEiGNqE4cLz0m9j1CeGRBLwgNKrlDYb1K2CDAHjX1XqZfT8JPDkgzwxuEwJmM2Ch9Ia4tD63otHw_IwBk4hvMLcIoPq3f9i6eZRmY4eJseqAZd",
+               "width": 1944
+            }
+         ],
+         "place_id": "ChIJC_NhUZ3oaC4RBbwgPuoGI6o",
+         "plus_code": {
+            "compound_code": "3JC5+GP Pungkur, Kota Bandung, Jawa Barat, Indonesia",
+            "global_code": "6P593JC5+GP"
+         },
+         "rating": 4.7,
+         "reference": "ChIJC_NhUZ3oaC4RBbwgPuoGI6o",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 13,
+         "vicinity": "Jalan Pungkur No.92, Pungkur"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": -6.9286713,
+               "lng": 107.6093097
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": -6.927228519708498,
+                  "lng": 107.6107454802915
+               },
+               "southwest": {
+                  "lat": -6.929926480291503,
+                  "lng": 107.6080475197085
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "name": "gurah panggilan bandung",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 854,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/117981582016375880348\">gurah panggilan bandung</a>"
+               ],
+               "photo_reference": "ATtYBwKLr1ExyBumkTzIvK8ZQzcVjP_0Dxkd6NIGKjALZG_ij8llUBhqHdEM1e49VkmRze2c02KZThF35yb04wywkidVGnbVkkmUz3lvj8nfMR5awnweNhWuKZCZOziZ45elmoQrYzuBG3JXebzdUck_gF7LE9uRM-B68ZITFUOu0UeBNdTO",
+               "width": 480
+            }
+         ],
+         "place_id": "ChIJ-9TtVp3oaC4Roh0EqCD0DAU",
+         "plus_code": {
+            "compound_code": "3JC5+GP Pungkur, Kota Bandung, Jawa Barat, Indonesia",
+            "global_code": "6P593JC5+GP"
+         },
+         "rating": 5,
+         "reference": "ChIJ-9TtVp3oaC4Roh0EqCD0DAU",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 6,
+         "vicinity": "Jalan Pungkur No.92, Pungkur"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": -6.927505899999999,
+               "lng": 107.6073815
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": -6.926125869708498,
+                  "lng": 107.6087342302915
+               },
+               "southwest": {
+                  "lat": -6.928823830291502,
+                  "lng": 107.6060362697085
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "name": "RUQYAH DI BANDUNG",
+         "opening_hours": {
+            "open_now": true
+         },
+         "place_id": "ChIJ7031mifmaC4RuZj9lNQnPOg",
+         "plus_code": {
+            "compound_code": "3JC4+XX Pungkur, Kota Bandung, Jawa Barat, Indonesia",
+            "global_code": "6P593JC4+XX"
+         },
+         "rating": 4,
+         "reference": "ChIJ7031mifmaC4RuZj9lNQnPOg",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 9,
+         "vicinity": "Jalan A.H. Nasution No.67, Pakemitan"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": -6.9100905,
+               "lng": 107.6047604
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": -6.908897919708497,
+                  "lng": 107.6057845802915
+               },
+               "southwest": {
+                  "lat": -6.911595880291502,
+                  "lng": 107.6030866197085
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "name": "Rumah Sakit Mata Cicendo",
+         "opening_hours": {
+            "open_now": false
+         },
+         "photos": [
+            {
+               "height": 2268,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/110085254839898068685\">aris sarjito</a>"
+               ],
+               "photo_reference": "ATtYBwKm943Wb5TzDDQuRRGD2m4tWXOfZ8Nv0iAqLWmdfWlS7y4HSghDasBazOCPwoW3dgsi2AqsHs4qqlRqiTUg2kSmVmcKV8qsHnrlJ_ChLLjtHyAHvcsNJ9NJeplmSWzr_3ibGuK4StuveogoNBKFtdUnstrgq7G3TDfux51VrkvCx-Tq",
+               "width": 4032
+            }
+         ],
+         "place_id": "ChIJhV4z2jjmaC4RjOUUyBuLlxA",
+         "plus_code": {
+            "compound_code": "3JQ3+XW Babakan Ciamis, Kota Bandung, Jawa Barat, Indonesia",
+            "global_code": "6P593JQ3+XW"
+         },
+         "rating": 3.8,
+         "reference": "ChIJhV4z2jjmaC4RjOUUyBuLlxA",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 455,
+         "vicinity": "Jalan Cicendo No.4, Babakan Ciamis"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": -6.9068127,
+               "lng": 107.6114621
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": -6.905603469708497,
+                  "lng": 107.6129343302915
+               },
+               "southwest": {
+                  "lat": -6.908301430291502,
+                  "lng": 107.6102363697085
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "name": "Klinik Utama Jiwa Grha Atma",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 4248,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/108329739529107191806\">Om Yanto</a>"
+               ],
+               "photo_reference": "ATtYBwIx7a3b6AtEAlaqkCq77yjD8zDsdys4to8qqhqYHUTKMqTXAFiIilxM_86pW7_k8kAxdg9NY9_Qp-22P_Wza4e2MU5cigYwNIXaUzhnzUIiQT2th64XBgLhm6xxnQSQyMEcgxCzzSlnGw04PtqEI2ywfS064UPU4lor6A6OTeUCCVsn",
+               "width": 5664
+            }
+         ],
+         "place_id": "ChIJK06NO0jmaC4R6S6jO_TwTN4",
+         "plus_code": {
+            "compound_code": "3JV6+7H Citarum, Kota Bandung, Jawa Barat, Indonesia",
+            "global_code": "6P593JV6+7H"
+         },
+         "rating": 3.9,
+         "reference": "ChIJK06NO0jmaC4R6S6jO_TwTN4",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 42,
+         "vicinity": "Jalan L. L. R.E. Martadinata, Citarum"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": -6.906743199999999,
+               "lng": 107.6156917
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": -6.905351969708497,
+                  "lng": 107.6169550302915
+               },
+               "southwest": {
+                  "lat": -6.908049930291502,
+                  "lng": 107.6142570697085
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "name": "RSKB Halmahera Siaga",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 900,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/102260337437066703956\">RSKB Halmahera Siaga</a>"
+               ],
+               "photo_reference": "ATtYBwIugJdwFuq89ZHoPyLOdS8OhcNch9Oski4xkoDdkTFo5pswiAhjmCpIVwxKKKKP9geDI1IxISZKb6-v7oHROoELyeZgqwVn4eOph_yyhe8RfKGYXq3n3Oss2D0QreuZVrvWcqm4CnMXIPTHC-KnIwlfEiBl-ekIcz-JEuLMqcw0lKqC",
+               "width": 1300
+            }
+         ],
+         "place_id": "ChIJJXpkAUrmaC4R_lugSa7p93A",
+         "plus_code": {
+            "compound_code": "3JV8+87 Citarum, Kota Bandung, Jawa Barat, Indonesia",
+            "global_code": "6P593JV8+87"
+         },
+         "rating": 4,
+         "reference": "ChIJJXpkAUrmaC4R_lugSa7p93A",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 157,
+         "vicinity": "Jalan L. L. R.E. Martadinata No.28, Citarum"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": -6.917463899999999,
+               "lng": 107.6191228
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": -6.916080719708497,
+                  "lng": 107.6203318302915
+               },
+               "southwest": {
+                  "lat": -6.918778680291502,
+                  "lng": 107.6176338697085
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "name": "Pasir Kaliki",
+         "place_id": "ChIJK2cHlPfnaC4RFpz8M9UISvI",
+         "plus_code": {
+            "compound_code": "3JM9+2J Kebon Pisang, Kota Bandung, Jawa Barat, Indonesia",
+            "global_code": "6P593JM9+2J"
+         },
+         "reference": "ChIJK2cHlPfnaC4RFpz8M9UISvI",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity": "Kebon Pisang"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": -6.917463899999999,
+               "lng": 107.6191228
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": -6.916080719708497,
+                  "lng": 107.6203318302915
+               },
+               "southwest": {
+                  "lat": -6.918778680291502,
+                  "lng": 107.6176338697085
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "name": "klinikk Anggrek RSHS Bandung",
+         "place_id": "ChIJDUtfgjLmaC4Rm7dAPxfiEgk",
+         "reference": "ChIJDUtfgjLmaC4Rm7dAPxfiEgk",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity": "Kebon Pisang"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": -6.917463899999999,
+               "lng": 107.6191228
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": -6.916080719708497,
+                  "lng": 107.6203318302915
+               },
+               "southwest": {
+                  "lat": -6.918778680291502,
+                  "lng": 107.6176338697085
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "name": "Klinik istamedika",
+         "place_id": "ChIJJ8PTpmLnaC4RpSBXPG0Nimc",
+         "plus_code": {
+            "compound_code": "3JM9+2J Kebon Pisang, Kota Bandung, Jawa Barat, Indonesia",
+            "global_code": "6P593JM9+2J"
+         },
+         "reference": "ChIJJ8PTpmLnaC4RpSBXPG0Nimc",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity": "Kebon Pisang"
+      }
+   ],
+   "status": "OK"
+}

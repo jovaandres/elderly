@@ -26,11 +26,11 @@ Widget buildActivityList(BuildContext context, Activity activity) {
         child: ListTile(
           leading: Icon(Icons.people),
           title: Text(
-            activity.id,
+            activity.id as String,
             style: textStyle,
           ),
           subtitle: Text(
-            activity.activity,
+            activity.activity as String,
             style: textStyle,
           ),
         ),

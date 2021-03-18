@@ -5,7 +5,6 @@ import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/ui/login_page.dart';
 
 class IntroScreen extends StatefulWidget {
-  IntroScreen({Key key}) : super(key: key);
   static const routeName = '/intro_screen';
 
   @override

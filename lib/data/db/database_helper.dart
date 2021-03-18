@@ -2,8 +2,8 @@ import 'package:sqflite/sqflite.dart';
 import 'package:workout_flutter/data/model/user_data.dart';
 
 class DatabaseHelper {
-  static DatabaseHelper _databaseHelper;
-  static Database _database;
+  static DatabaseHelper? _databaseHelper;
+  static Database? _database;
   static String tblUserData = "tbl_user_data";
 
   DatabaseHelper._createObject();
@@ -13,7 +13,7 @@ class DatabaseHelper {
       _databaseHelper = DatabaseHelper._createObject();
     }
 
-    return _databaseHelper;
+    return _databaseHelper as DatabaseHelper;
   }
 
   Future<Database> _initializeDb() async {
@@ -36,7 +36,7 @@ class DatabaseHelper {
     return db;
   }
 
-  Future<Database> get database async {
+  Future<Database?> get database async {
     if (_database == null) {
       _database = await _initializeDb();
     }
@@ -46,15 +46,15 @@ class DatabaseHelper {
 
   Future<void> insertUserData(UserData userData) async {
     final db = await database;
-    await db.insert(tblUserData, userData.toJson());
+    await db?.insert(tblUserData, userData.toJson());
   }
 
-  Future<UserData> getUserData(String email) async {
+  Future<UserData?> getUserData(String email) async {
     final db = await database;
 
-    List<Map<String, dynamic>> results =
-        await db.query(tblUserData, where: 'email = ?', whereArgs: [email]);
+    List<Map<String, dynamic>>? results =
+        await db?.query(tblUserData, where: 'email = ?', whereArgs: [email]);
 
-    return results.map((res) => UserData.fromJson(res)).first;
+    return results?.map((res) => UserData.fromJson(res)).first;
   }
 }

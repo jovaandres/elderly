@@ -28,11 +28,11 @@ Widget buildMedicine(BuildContext context, Medical medical) {
         child: ListTile(
           leading: Icon(Icons.medical_services),
           title: Text(
-            medical.name,
+            medical.name as String,
             style: textStyle,
           ),
           subtitle: Text(
-            medical.rules,
+            medical.rules as String,
             style: textStyle,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,

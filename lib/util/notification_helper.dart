@@ -3,10 +3,10 @@ import 'package:rxdart/rxdart.dart';
 import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/data/model/medical.dart';
 
-final selectNotificationSubject = BehaviorSubject<String>();
+final selectNotificationSubject = BehaviorSubject<String?>();
 
 class NotificationHelper {
-  static NotificationHelper _instance;
+  static NotificationHelper? _instance;
 
   NotificationHelper._internal() {
     _instance = this;
@@ -29,10 +29,7 @@ class NotificationHelper {
         android: initializationSettingAndroid, iOS: initializationSettingIOS);
 
     await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: (String payload) async {
-      if (payload != null) {
-        print('notification payload: $payload');
-      }
+        onSelectNotification: (String? payload) async {
       selectNotificationSubject.add(payload);
     });
   }
@@ -65,8 +62,8 @@ class NotificationHelper {
   }
 
   void configureSelectNotificationSubject(String route) {
-    selectNotificationSubject.stream.listen((String payload) async {
-      Navigation.intentWithData(route, payload);
+    selectNotificationSubject.stream.listen((String? payload) async {
+      Navigation.intentWithData(route, payload as String);
     });
   }
 }

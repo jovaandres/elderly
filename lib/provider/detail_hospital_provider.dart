@@ -6,24 +6,24 @@ import 'package:workout_flutter/util/result_state.dart';
 class DetailHospitalProvider extends ChangeNotifier {
   final ApiService apiService;
 
-  DetailHospitalProvider({@required this.apiService});
+  DetailHospitalProvider({required this.apiService});
 
-  DetailPlaces _hospitalDetails;
-  String _message;
-  ResultState _state;
+  DetailPlaces? _hospitalDetails;
+  String? _message;
+  ResultState? _state;
 
-  DetailPlaces get result => _hospitalDetails;
+  DetailPlaces? get result => _hospitalDetails;
 
-  String get message => _message;
+  String? get message => _message;
 
-  ResultState get state => _state;
+  ResultState? get state => _state;
 
   Future<dynamic> fetchHospitalDetail(String placeId) async {
     try {
       _state = ResultState.Loading;
       notifyListeners();
       final hospital = await apiService.getHostpitalDetail(placeId);
-      if (hospital.result.placeId == null) {
+      if (hospital.result?.placeId == null) {
         _state = ResultState.NoData;
         notifyListeners();
         _message = 'Empty Data';

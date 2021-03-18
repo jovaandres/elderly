@@ -6,20 +6,20 @@ import 'package:workout_flutter/util/result_state.dart';
 class PreferencesProvider extends ChangeNotifier {
   final PreferencesHelper preferencesHelper;
 
-  PreferencesProvider({@required this.preferencesHelper}) {
+  PreferencesProvider({required this.preferencesHelper}) {
     _getDailyNewsPreferences();
     _getThemePreferences();
   }
 
-  UserData _userData;
-  String _message;
-  ResultState _state;
+  UserData? _userData;
+  String? _message;
+  ResultState? _state;
 
-  UserData get userData => _userData;
+  UserData? get userData => _userData;
 
-  String get message => _message;
+  String? get message => _message;
 
-  ResultState get state => _state;
+  ResultState? get state => _state;
 
   bool _isDailyReminderActive = false;
 

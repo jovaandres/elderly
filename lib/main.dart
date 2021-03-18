@@ -14,6 +14,8 @@ import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/data/api/api_service.dart';
 import 'package:workout_flutter/data/db/alarm_database.dart';
 import 'package:workout_flutter/data/db/database_helper.dart';
+import 'package:workout_flutter/data/model/excercise.dart';
+import 'package:workout_flutter/data/model/medical.dart';
 import 'package:workout_flutter/data/model/user_data.dart';
 import 'package:workout_flutter/data/preferences/preferences_helper.dart';
 import 'package:workout_flutter/provider/alarm_data_provider.dart';
@@ -38,12 +40,12 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
 final firestore = FirebaseFirestore.instance;
-String path;
+String? path;
 final ApiService apiService = ApiService();
 final auth = FirebaseAuth.instance;
 final storage = FirebaseStorage.instance;
 final databaseHelper = DatabaseHelper();
-UserData userData;
+UserData? userData;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -61,7 +63,7 @@ void main() async {
   }
 
   if (auth.currentUser != null) {
-    userData = await databaseHelper.getUserData(auth.currentUser.email);
+    userData = await databaseHelper.getUserData(auth.currentUser?.email as String);
   }
 
   await _notificationHelper.initNotification(flutterLocalNotificationsPlugin);
@@ -109,7 +111,7 @@ class MyApp extends StatelessWidget {
               visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
             initialRoute: (auth.currentUser != null)
-                ? (userData.role == 'elderly')
+                ? (userData?.role == 'elderly')
                     ? MyHomePage.routeName
                     : UserActivity.routeName
                 : IntroScreen.routeName,
@@ -118,21 +120,24 @@ class MyApp extends StatelessWidget {
               IntroScreen.routeName: (context) => IntroScreen(),
               LoginPage.routeName: (context) => LoginPage(),
               RegistrationPage.routeName: (context) => RegistrationPage(
-                    role: ModalRoute.of(context).settings.arguments,
+                    role: ModalRoute.of(context)?.settings.arguments as String,
                   ),
               MyHomePage.routeName: (context) => MyHomePage(),
               UserActivity.routeName: (context) => UserActivity(),
               MedicineDetail.routeName: (context) => MedicineDetail(
-                    medicine: ModalRoute.of(context).settings.arguments,
+                    medicine:
+                        ModalRoute.of(context)?.settings.arguments as Medical,
                   ),
               ExcerciseDetail.routeName: (context) => ExcerciseDetail(
-                    exercise: ModalRoute.of(context).settings.arguments,
+                    exercise:
+                        ModalRoute.of(context)?.settings.arguments as Exercise,
                   ),
               ExcercisePlayer.routeName: (context) => ExcercisePlayer(
-                    link: ModalRoute.of(context).settings.arguments,
+                    link: ModalRoute.of(context)?.settings.arguments as String,
                   ),
               DetailHospital.routeName: (context) => DetailHospital(
-                    hospitalId: ModalRoute.of(context).settings.arguments,
+                    hospitalId:
+                        ModalRoute.of(context)?.settings.arguments as String,
                   ),
             },
           );

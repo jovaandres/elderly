@@ -76,11 +76,12 @@ class _ThirdPageState extends State<ThirdPage> {
                     child: CircularProgressIndicator(),
                   );
                 } else if (snapshot.hasData) {
-                  final exercises = snapshot.data.docs;
+                  final exercises =
+                      snapshot.data?.docs as List<QueryDocumentSnapshot>;
                   for (var exercise in exercises) {
-                    final name = exercise.data()['name'];
+                    final name = exercise.data()?['name'];
                     final Video video =
-                        Video.fromJson(exercise.data()['video']);
+                        Video.fromJson(exercise.data()?['video']);
                     exerciseList.add(
                       Exercise(name: name, video: video),
                     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_flutter/common/constant.dart';
+import 'package:workout_flutter/data/model/nearby_search.dart';
 import 'package:workout_flutter/main.dart';
 import 'package:workout_flutter/provider/hospital_data_provider.dart';
 import 'package:workout_flutter/util/result_state.dart';
@@ -48,8 +49,8 @@ class _FirstPageState extends State<FirstPage> {
                   child: Column(
                     children: [
                       Text(
-                        (auth.currentUser != null)
-                            ? "Hello ${auth.currentUser.email}"
+                        (userData != null)
+                            ? "Hello ${userData?.name}"
                             : "Hello User!",
                         style: textStyle.copyWith(
                           fontSize: 18,
@@ -80,7 +81,7 @@ class _FirstPageState extends State<FirstPage> {
                     child: ListView.builder(
                         shrinkWrap: true,
                         padding: const EdgeInsets.all(8.0),
-                        itemCount: state.result.results.length,
+                        itemCount: state.result?.results?.length as int,
                         itemBuilder: (context, index) {
                           return AnimationConfiguration.staggeredList(
                             position: index,
@@ -89,7 +90,9 @@ class _FirstPageState extends State<FirstPage> {
                               verticalOffset: 50.0,
                               child: FadeInAnimation(
                                 child: buildHospitalList(
-                                    context, state.result.results[index]),
+                                  context,
+                                  state.result?.results?[index] as NearbyResult,
+                                ),
                               ),
                             ),
                           );
@@ -101,7 +104,8 @@ class _FirstPageState extends State<FirstPage> {
                   );
                 } else if (state.state == ResultState.Error) {
                   return Center(
-                    child: Text('Data not displayed successfully-eror'),
+                    child: Text(
+                        'Data not displayed successfully-eror ${state.message}'),
                   );
                 } else {
                   return Center(child: Text(''));
@@ -121,7 +125,7 @@ class _FirstPageState extends State<FirstPage> {
                   children: [
                     Text(
                       (auth.currentUser != null)
-                          ? "Hello ${auth.currentUser.email}"
+                          ? "Hello ${auth.currentUser?.email}"
                           : "Hello User!",
                       style: TextStyle(fontSize: 18),
                     ),

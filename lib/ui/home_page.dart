@@ -18,7 +18,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _bottomNavIndex = 0;
-  PageController _pageController;
+  late PageController _pageController;
 
   List<Widget> _listWidget = [
     FirstPage(),

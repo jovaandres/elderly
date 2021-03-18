@@ -1,92 +1,298 @@
 {
-    "html_attributions" : [],
-    "result" : {
-       "address_components" : [
-          {
-             "long_name" : "5",
-             "short_name" : "5",
-             "types" : [ "floor" ]
-          },
-          {
-             "long_name" : "48",
-             "short_name" : "48",
-             "types" : [ "street_number" ]
-          },
-          {
-             "long_name" : "Pirrama Road",
-             "short_name" : "Pirrama Rd",
-             "types" : [ "route" ]
-          },
-          {
-             "long_name" : "Pyrmont",
-             "short_name" : "Pyrmont",
-             "types" : [ "locality", "political" ]
-          },
-          {
-             "long_name" : "Council of the City of Sydney",
-             "short_name" : "Sydney",
-             "types" : [ "administrative_area_level_2", "political" ]
-          },
-          {
-             "long_name" : "New South Wales",
-             "short_name" : "NSW",
-             "types" : [ "administrative_area_level_1", "political" ]
-          },
-          {
-             "long_name" : "Australia",
-             "short_name" : "AU",
-             "types" : [ "country", "political" ]
-          },
-          {
-             "long_name" : "2009",
-             "short_name" : "2009",
-             "types" : [ "postal_code" ]
-          }
-       ],
-       "adr_address" : "5, \u003cspan class=\"street-address\"\u003e48 Pirrama Rd\u003c/span\u003e, \u003cspan class=\"locality\"\u003ePyrmont\u003c/span\u003e \u003cspan class=\"region\"\u003eNSW\u003c/span\u003e \u003cspan class=\"postal-code\"\u003e2009\u003c/span\u003e, \u003cspan class=\"country-name\"\u003eAustralia\u003c/span\u003e",
-       "formatted_address" : "5, 48 Pirrama Rd, Pyrmont NSW 2009, Australia",
-       "formatted_phone_number" : "(02) 9374 4000",
-       "geometry" : {
-          "location" : {
-             "lat" : -33.866651,
-             "lng" : 151.195827
-          },
-          "viewport" : {
-             "northeast" : {
-                "lat" : -33.8653881697085,
-                "lng" : 151.1969739802915
-             },
-             "southwest" : {
-                "lat" : -33.86808613029149,
-                "lng" : 151.1942760197085
-             }
-          }
-       },
-       "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
-       "id" : "4f89212bf76dde31f092cfc14d7506555d85b5c7",
-       "international_phone_number" : "+61 2 9374 4000",
-       "name" : "Google",
-       "place_id" : "ChIJN1t_tDeuEmsRUsoyG83frY4",
-       "rating" : 4.5,
-       "reference" : "CmRSAAAAjiEr2_A4yI-DyqGcfsceTv-IBJXHB5-W3ckmGk9QAYk4USgeV8ihBcGBEK5Z1w4ajRZNVAfSbROiKbbuniq0c9rIq_xqkrf_3HpZzX-pFJuJY3cBtG68LSAHzWXB8UzwEhAx04rgN0_WieYLfVp4K0duGhTU58LFaqwcaex73Kcyy0ghYOQTkg",
-       "reviews" : [
-          {
-             "author_name" : "Robert Ardill",
-             "author_url" : "https://www.google.com/maps/contrib/106422854611155436041/reviews",
-             "language" : "en",
-             "profile_photo_url" : "https://lh3.googleusercontent.com/-T47KxWuAoJU/AAAAAAAAAAI/AAAAAAAAAZo/BDmyI12BZAs/s128-c0x00000000-cc-rp-mo-ba1/photo.jpg",
-             "rating" : 5,
-             "relative_time_description" : "a month ago",
-             "text" : "Awesome offices. Great facilities, location and views. Staff are great hosts",
-             "time" : 1491144016
-          }
-       ],
-       "types" : [ "point_of_interest", "establishment" ],
-       "url" : "https://maps.google.com/?cid=10281119596374313554",
-       "utc_offset" : 600,
-       "vicinity" : "5, 48 Pirrama Road, Pyrmont",
-       "website" : "https://www.google.com.au/about/careers/locations/sydney/"
-    },
-    "status" : "OK"
- }
-       
+   "html_attributions": [],
+   "result": {
+      "address_components": [
+         {
+            "long_name": "48",
+            "short_name": "48",
+            "types": [
+               "street_number"
+            ]
+         },
+         {
+            "long_name": "Pirrama Road",
+            "short_name": "Pirrama Rd",
+            "types": [
+               "route"
+            ]
+         },
+         {
+            "long_name": "Pyrmont",
+            "short_name": "Pyrmont",
+            "types": [
+               "locality",
+               "political"
+            ]
+         },
+         {
+            "long_name": "Council of the City of Sydney",
+            "short_name": "Sydney",
+            "types": [
+               "administrative_area_level_2",
+               "political"
+            ]
+         },
+         {
+            "long_name": "New South Wales",
+            "short_name": "NSW",
+            "types": [
+               "administrative_area_level_1",
+               "political"
+            ]
+         },
+         {
+            "long_name": "Australia",
+            "short_name": "AU",
+            "types": [
+               "country",
+               "political"
+            ]
+         },
+         {
+            "long_name": "2009",
+            "short_name": "2009",
+            "types": [
+               "postal_code"
+            ]
+         }
+      ],
+      "adr_address": "<span class=\"street-address\">48 Pirrama Rd</span>, <span class=\"locality\">Pyrmont</span> <span class=\"region\">NSW</span> <span class=\"postal-code\">2009</span>, <span class=\"country-name\">Australia</span>",
+      "business_status": "OPERATIONAL",
+      "formatted_address": "48 Pirrama Rd, Pyrmont NSW 2009, Australia",
+      "formatted_phone_number": "(02) 9374 4000",
+      "geometry": {
+         "location": {
+            "lat": -33.866489,
+            "lng": 151.1958561
+         },
+         "viewport": {
+            "northeast": {
+               "lat": -33.8655112697085,
+               "lng": 151.1971156302915
+            },
+            "southwest": {
+               "lat": -33.86820923029149,
+               "lng": 151.1944176697085
+            }
+         }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+      "international_phone_number": "+61 2 9374 4000",
+      "name": "Google Sydney",
+      "opening_hours": {
+         "open_now": false,
+         "periods": [
+            {
+               "close": {
+                  "day": 1,
+                  "time": "1700"
+               },
+               "open": {
+                  "day": 1,
+                  "time": "0900"
+               }
+            },
+            {
+               "close": {
+                  "day": 2,
+                  "time": "1700"
+               },
+               "open": {
+                  "day": 2,
+                  "time": "0900"
+               }
+            },
+            {
+               "close": {
+                  "day": 3,
+                  "time": "1700"
+               },
+               "open": {
+                  "day": 3,
+                  "time": "0900"
+               }
+            },
+            {
+               "close": {
+                  "day": 4,
+                  "time": "1700"
+               },
+               "open": {
+                  "day": 4,
+                  "time": "0900"
+               }
+            },
+            {
+               "close": {
+                  "day": 5,
+                  "time": "1700"
+               },
+               "open": {
+                  "day": 5,
+                  "time": "0900"
+               }
+            }
+         ],
+         "weekday_text": [
+            "Senin: 09.00–17.00",
+            "Selasa: 09.00–17.00",
+            "Rabu: 09.00–17.00",
+            "Kamis: 09.00–17.00",
+            "Jumat: 09.00–17.00",
+            "Sabtu: Tutup",
+            "Minggu: Tutup"
+         ]
+      },
+      "photos": [
+         {
+            "height": 3024,
+            "html_attributions": [
+               "<a href=\"https://maps.google.com/maps/contrib/105067373811767106297\">Shaun Craig</a>"
+            ],
+            "photo_reference": "ATtYBwKqVo9t38jn5GOyT73qJb_2NZoIXNEhp5RpaMmoFjwk-5RtdTb0rhJu8OGYw3BtYbpFlG21XzsLZrV40VoQt9MhsRWNa2ZiAIh7K4aAFRY2yZ5xjLek7Xk8RQb23YrVb6sXWwCDhXuQILgiOIlDbidMIkezAsSAI5Q-rOz36wYwL8g0",
+            "width": 4032
+         },
+         {
+            "height": 3264,
+            "html_attributions": [
+               "<a href=\"https://maps.google.com/maps/contrib/102493344958625549078\">Heyang Li</a>"
+            ],
+            "photo_reference": "ATtYBwIArDD_pY_IL4YLkCm2pzsewAKMv9dck_dXAFo9xc_BSG5RKfy9Vw-9vdwxrp_4XXa7WP_W9PMJHWbhfEPuwOwwUHDFfGXh0T0qg1ah7Hvf52y8xOoDRcjxiDF45XQfEUV1pU4k4ONu1rJ7ORumMLduo9nRTOKwHT1Nd-HJwn5Vy6NB",
+            "width": 4912
+         },
+         {
+            "height": 1836,
+            "html_attributions": [
+               "<a href=\"https://maps.google.com/maps/contrib/116807455538142476628\">Anand Ema</a>"
+            ],
+            "photo_reference": "ATtYBwJ7X6B6YEASub7tRmMEO2RYtMG4th_grzMHDLar1AfZOP-no3btqiscpEP2TyJBYoWbibvD0rj2AzNh_Xa6jEtYZSyz8k_0yp1SipykIIAjkc9sWkgDhdQhpt2L7DkyV326J15qDCMLE9BumFFwqo7mvHCU6My0BHpwWHLAPsc3FxPn",
+            "width": 3264
+         },
+         {
+            "height": 3024,
+            "html_attributions": [
+               "<a href=\"https://maps.google.com/maps/contrib/100678816592586275978\">Jeremy Hsiao</a>"
+            ],
+            "photo_reference": "ATtYBwLY8x59K-jdzE_pI_sLTREFdvHAi1ZvptLx2Omhq0tlZpSdG5MeOYdNpGcQ8hwcfHC_h1z9L9_R4V4HfUxK2YP69Btb7BFgR8qj0dWKe8xDHGKM-D7POq3RJLkGrY74eHBlOdJtoRJCS-afEp9A8Ku0lsJ37Tb4YFNM2FfaS9wNoaNk",
+            "width": 4032
+         },
+         {
+            "height": 3024,
+            "html_attributions": [
+               "<a href=\"https://maps.google.com/maps/contrib/115886271727815775491\">Anthony Huynh</a>"
+            ],
+            "photo_reference": "ATtYBwLEQZNkNkbtuLpnbR4rZwKKbIHewlL7hzewj0PbTWxu7mGRM-YinUz0s13I_QY0o1Ze9o4UZqLtYpvuU8lQjd70Ie5iLE7nJE4-r4SQtKcVif3ekLatZn1BqLbILiYA5ywrc3Z3agZUzpNrmAItLGYxCNXjMJV9-6lYPoexLMbmz9EH",
+            "width": 4032
+         },
+         {
+            "height": 1515,
+            "html_attributions": [
+               "<a href=\"https://maps.google.com/maps/contrib/112343109286948028063\">Andrew W</a>"
+            ],
+            "photo_reference": "ATtYBwI2NPMkW6vsm_JtPLAAWoW59jX-efQww29EUOocawxqzkbGvfMWToblXpkGNGgWbqxguYnbTF2czHalJGYWol3IuQlPpom6tqzIgzFjAJYL2dUJNRGA_rC-1L9iFLln-YjZQ0st7DDV9HQig6Mi8E-KEzUuFZOgXLmqelrINH3i5npi",
+            "width": 2048
+         },
+         {
+            "height": 3024,
+            "html_attributions": [
+               "<a href=\"https://maps.google.com/maps/contrib/100678816592586275978\">Jeremy Hsiao</a>"
+            ],
+            "photo_reference": "ATtYBwLbPIqvAcUNiI3kGprobJjz1Irc2PINmEekg0b9AGoR85uzZs0xiQNFjBuglNQ44eN2AVjFyrV8ZDEMj8OKPqxmMr3mfWkUv7dvjmwM2JW8mkYkyNfk-Xlw2VOlMU3uf_oa-AI_Y1ixhBWQWP_OKI4yqkeXbUoOJVWgbOjiSrLNKMLk",
+            "width": 4032
+         },
+         {
+            "height": 3024,
+            "html_attributions": [
+               "<a href=\"https://maps.google.com/maps/contrib/102939237947063969663\">Jasen Baker</a>"
+            ],
+            "photo_reference": "ATtYBwK8suqxmZDwJSOE8Bgtc4ODqaz9fh5bh9_Ik-317CD7w-DlpzFN9cdNoGR4o87R8CrRuVHbFLVrtn2PsDgDTQyKRRk1JBJJ7RCAlsVVfsVYlHXm81nOn_yFCdx9mgtRt7a0NpTaFO-Kl--sias4TfiFFpt82f-3eFYfNdjXFo5sqIHq",
+            "width": 4032
+         },
+         {
+            "height": 2432,
+            "html_attributions": [
+               "<a href=\"https://maps.google.com/maps/contrib/103456711016089391251\">Damien</a>"
+            ],
+            "photo_reference": "ATtYBwLYtJ1nxbqdrmccK-dYGi1PJixvAhR32ozdumxdKoLpqsOrwXz36hwQ92Htf0TVzVaFKDarCmmdLeBTfULdWCo8ppn39SrdubXDlgK96Us_MVFrGdZd7ZuMioez94qoOZle7j_FBzlZcKM3ILLPw5kB7iijLDdH5pfI3xsbHp4RL7Ez",
+            "width": 3286
+         },
+         {
+            "height": 2160,
+            "html_attributions": [
+               "<a href=\"https://maps.google.com/maps/contrib/100659772571554240861\">Paul Newson</a>"
+            ],
+            "photo_reference": "ATtYBwLhpjGVtO3V8l8S3BZCm2BytUZV-f7bF21rjgTIW6GrdHkv90cUPy6RwbJoO8Lp49cx1VFCP9MB5-o2gOKEg7hJFaUtLNphJ41_wE4VGv5puDIiIQ27bks7VCYUVtsRL02KWoTkFO_7qz0YXaXwtNfV5ePV22MynODh-Un6n-E32HQ5",
+            "width": 2160
+         }
+      ],
+      "place_id": "ChIJN1t_tDeuEmsRUsoyG83frY4",
+      "plus_code": {
+         "compound_code": "45MW+C8 Pyrmont New South Wales, Australia",
+         "global_code": "4RRH45MW+C8"
+      },
+      "rating": 4.1,
+      "reference": "ChIJN1t_tDeuEmsRUsoyG83frY4",
+      "reviews": [
+         {
+            "author_name": "Heni Murhanayanti",
+            "author_url": "https://www.google.com/maps/contrib/116844498686105082971/reviews",
+            "language": "id",
+            "profile_photo_url": "https://lh3.googleusercontent.com/a-/AOh14Ggt_9K-qyXCrSRIGALs0Hnau5g6C9CduPp_dIajmWY=s128-c0x00000000-cc-rp-mo-ba7",
+            "rating": 5,
+            "relative_time_description": "setahun yang lalu",
+            "text": "Kesini karena menghadiri Google Product Expert Meet Up. Berlokasi di Pyrmont Bay, begitu melihat keluar langsung terlihat pemandangan yang menyegarkan. Rasanya kalau stress kerja bisa gampang refreshingnya.\n\nSeperti biasa di kantor google kita hanya bisa datang kesini atas undangan Googler. Security di depan sangat ketat. Tidak boleh memotret sembarangan apalagi laptop yang menyala.\n\nDisini ada piano yang digerakkan dengan applikasi. Ada ruangan istirahat dimana googler bisa tidur-tiduran. Di setiap lantai ada kantin atau coffeshop. Saya sempat ke ruangan meditasi untuk sholat. Toilet disini sayangnya masih biasa.",
+            "time": 1574585945
+         },
+         {
+            "author_name": "Titan Rahadian",
+            "author_url": "https://www.google.com/maps/contrib/108649720457341798661/reviews",
+            "language": "id",
+            "profile_photo_url": "https://lh3.googleusercontent.com/a-/AOh14Gg7vYQxCEYiAxzLHLCzy4gTgvX295JzdjOzKAdGHg=s128-c0x00000000-cc-rp-mo-ba6",
+            "rating": 5,
+            "relative_time_description": "setahun yang lalu",
+            "text": "Kantor yang bersahabat, para staf yang menyenangkan tepat di dekat pyrmont bay",
+            "time": 1567328370
+         },
+         {
+            "author_name": "Budiono Sukses",
+            "author_url": "https://www.google.com/maps/contrib/111188711451524069837/reviews",
+            "language": "id",
+            "profile_photo_url": "https://lh3.googleusercontent.com/a-/AOh14GiQ-YMD_-tff4i3zf-6cMBVPK_kWUxPI99hKeIo_w=s128-c0x00000000-cc-rp-mo-ba7",
+            "rating": 5,
+            "relative_time_description": "setahun yang lalu",
+            "text": "Kantor yang keren, besar, bersih, dengan lingkungan yang nyaman dan orang-orang yang bersahabat. Dekat dengan pelabuhan dan taman yang hijau dan indah. Datang ke sini untuk mengikuti Google Product Expert Meetup 2019",
+            "time": 1566972047
+         },
+         {
+            "author_name": "Wilfirmus Binaul",
+            "author_url": "https://www.google.com/maps/contrib/113261763558618457017/reviews",
+            "language": "id",
+            "profile_photo_url": "https://lh3.googleusercontent.com/a-/AOh14GjDeDcVXRIRlIKnRngbXy2LceKWmNcDkzZBqFJkG-o=s128-c0x00000000-cc-rp-mo-ba5",
+            "rating": 5,
+            "relative_time_description": "setahun yang lalu",
+            "text": "Sangat menyenangkan buat kerja dan santai.",
+            "time": 1566934287
+         },
+         {
+            "author_name": "Agent Cliff (The Mediator)",
+            "author_url": "https://www.google.com/maps/contrib/100253428394439543029/reviews",
+            "language": "id-ID",
+            "profile_photo_url": "https://lh3.googleusercontent.com/a-/AOh14GhSLTmC1QVzI8oXWkDvqv_fTq1Xmm7_gM2udfRlbw=s128-c0x00000000-cc-rp-mo-ba3",
+            "rating": 4,
+            "relative_time_description": "2 minggu yang lalu",
+            "text": "Melakukan tur kantor di sini beberapa tahun yang lalu dan benar-benar menyukai tampilannya, sebagai seorang AV, saya sangat terkesan dengan ruang rapat dan menyukai temanya. Sebagian besar staf pada umumnya ramah dan saya ditawari berbagai perairan yang berbeda ketika menunggu di resepsi.\n\nKantornya dirancang dengan indah, koki di tempat memasak makan siang yang cukup enak, wawancara staf juga cukup ramah dan tahu persis untuk wawancara teknis. Saya ingin kembali lagi suatu hari nanti untuk tur lain hanya untuk melihat bagaimana semuanya :)",
+            "time": 1614291725
+         }
+      ],
+      "types": [
+         "point_of_interest",
+         "establishment"
+      ],
+      "url": "https://maps.google.com/?cid=10281119596374313554",
+      "user_ratings_total": 926,
+      "utc_offset": 660,
+      "vicinity": "48 Pirrama Road, Pyrmont",
+      "website": "http://google.com/"
+   },
+   "status": "OK"
+}

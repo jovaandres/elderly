@@ -6,19 +6,19 @@ import 'package:workout_flutter/util/result_state.dart';
 class NearbyHostpitalProvider extends ChangeNotifier {
   final ApiService apiService;
 
-  NearbyHostpitalProvider({@required this.apiService}) {
+  NearbyHostpitalProvider({required this.apiService}) {
     fetchHostpitalList();
   }
 
-  NearbySearch _nearbySearchResult;
-  String _message;
-  ResultState _state;
+  NearbySearch? _nearbySearchResult;
+  String? _message;
+  ResultState? _state;
 
-  NearbySearch get result => _nearbySearchResult;
+  NearbySearch? get result => _nearbySearchResult;
 
-  String get message => _message;
+  String? get message => _message;
 
-  ResultState get state => _state;
+  ResultState? get state => _state;
 
   Future<dynamic> fetchHostpitalList() async {
     try {
@@ -26,7 +26,7 @@ class NearbyHostpitalProvider extends ChangeNotifier {
       notifyListeners();
       final hostpitalList =
           await apiService.getNearbyHospitalList(-6.917464, 107.619125, 5000);
-      if (hostpitalList.results.isEmpty) {
+      if (hostpitalList.results?.isEmpty == true) {
         _state = ResultState.NoData;
         notifyListeners();
         _message = 'Empty Data';
