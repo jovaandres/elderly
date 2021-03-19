@@ -125,7 +125,7 @@ class _FirstPageState extends State<FirstPage> {
                   children: [
                     Text(
                       (auth.currentUser != null)
-                          ? "Hello ${auth.currentUser?.email}"
+                          ? "Hello ${userData?.name}"
                           : "Hello User!",
                       style: TextStyle(fontSize: 18),
                     ),

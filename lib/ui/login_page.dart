@@ -191,12 +191,13 @@ class _LoginPageState extends State<LoginPage> {
                     final height = userDocs.data()?['height'];
                     final weight = userDocs.data()?['weight'];
                     final userData = UserData(
-                        age: age,
-                        email: email,
-                        height: height,
-                        name: name,
-                        weight: weight,
-                        role: role);
+                      age: age,
+                      email: email,
+                      height: height,
+                      name: name,
+                      weight: weight,
+                      role: role,
+                    );
                     databaseHelper.insertUserData(userData);
                     if (role == 'elderly') {
                       Navigation.intentReplace(MyHomePage.routeName);

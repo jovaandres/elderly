@@ -23,6 +23,7 @@ import 'package:workout_flutter/provider/detail_hospital_provider.dart';
 import 'package:workout_flutter/provider/hospital_data_provider.dart';
 import 'package:workout_flutter/provider/preferences_provider.dart';
 import 'package:workout_flutter/provider/scheduling_provider.dart';
+import 'package:workout_flutter/provider/search_user_provider.dart';
 import 'package:workout_flutter/ui/contact_picker.dart';
 import 'package:workout_flutter/ui/excercise_detail.dart';
 import 'package:workout_flutter/ui/excercise_player.dart';
@@ -33,6 +34,7 @@ import 'package:workout_flutter/ui/login_page.dart';
 import 'package:workout_flutter/ui/medicine_detail.dart';
 import 'package:workout_flutter/ui/registration_page.dart';
 import 'package:workout_flutter/ui/role_page.dart';
+import 'package:workout_flutter/ui/search_elderly_page.dart';
 import 'package:workout_flutter/ui/user_activity.dart';
 import 'package:workout_flutter/util/background_service.dart';
 import 'package:workout_flutter/util/notification_helper.dart';
@@ -102,6 +104,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<AlarmDataProvider>(
           create: (_) => AlarmDataProvider(),
+        ),
+        ChangeNotifierProvider<SearchUserProvider>(
+          create: (_) => SearchUserProvider(),
         )
       ],
       child: Consumer<PreferencesProvider>(
@@ -128,6 +133,7 @@ class MyApp extends StatelessWidget {
               MyHomePage.routeName: (context) => MyHomePage(),
               UserActivity.routeName: (context) => UserActivity(),
               ContactPciker.routeName: (context) => ContactPciker(),
+              SearchPage.routeName: (context) => SearchPage(),
               MedicineDetail.routeName: (context) => MedicineDetail(
                     medicine:
                         ModalRoute.of(context)?.settings.arguments as Medical,

@@ -7,6 +7,8 @@ import 'package:workout_flutter/ui/first_page.dart';
 import 'package:workout_flutter/ui/fourth_page.dart';
 import 'package:workout_flutter/ui/second_page.dart';
 import 'package:workout_flutter/ui/third_page.dart';
+import 'package:workout_flutter/util/background_service.dart';
+import 'package:workout_flutter/util/notification_helper.dart';
 import 'package:workout_flutter/widget/platform_widget.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -19,6 +21,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _bottomNavIndex = 0;
   late PageController _pageController;
+
+  final NotificationHelper _notificationHelper = NotificationHelper();
+  final BackgroundService _service = BackgroundService();
 
   List<Widget> _listWidget = [
     FirstPage(),
@@ -80,6 +85,15 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: _bottomNavIndex);
+    port.listen((_) async => await _service.someTask());
+    _notificationHelper
+        .configureSelectNotificationSubject(MyHomePage.routeName);
+  }
+
+  @override
+  void dispose() {
+    selectNotificationSubject.close();
+    super.dispose();
   }
 
   @override

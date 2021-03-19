@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/data/model/activity.dart';
+import 'package:workout_flutter/ui/search_elderly_page.dart';
 import 'package:workout_flutter/widget/build_activity_list.dart';
 import 'package:workout_flutter/widget/menu_tile.dart';
 import 'package:workout_flutter/widget/sign_in_button.dart';
@@ -20,6 +22,14 @@ class _UserActivityState extends State<UserActivity> {
     return Scaffold(
       appBar: AppBar(
         title: Text('User Activity'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              Navigation.intentNamed(SearchPage.routeName);
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Expanded(
@@ -84,7 +94,7 @@ class _UserActivityState extends State<UserActivity> {
                   children: [
                     Text(
                       (auth.currentUser != null)
-                          ? "Hello ${auth.currentUser?.email}"
+                          ? "Hello ${userData?.name?.split(" ").first}"
                           : "Hello User!",
                       style: TextStyle(fontSize: 18),
                     ),
