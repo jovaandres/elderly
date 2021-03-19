@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -108,11 +110,22 @@ class _FifthPageState extends State<FifthPage> {
     _rulesFieldController.clear();
     final encryptedName = encryptAESCryptoJS(name, passwordEncrypt);
     final encryptedRules = encryptAESCryptoJS(rules, passwordEncrypt);
+    final times = ["-", "-", "-"]
+        .map((e) => encryptAESCryptoJS(e, passwordEncrypt))
+        .toList();
+    final alarmId = [
+      Random().nextInt(pow(2, 31).toInt() - 1),
+      Random().nextInt(pow(2, 31).toInt() - 1),
+      Random().nextInt(pow(2, 31).toInt() - 1)
+    ];
 
     firestore.collection('medicine_bi13rb8').add({
       'id': auth.currentUser?.email,
       'name': encryptedName,
       'rules': encryptedRules,
+      'times': times,
+      'alarmId': alarmId,
+      'isScheduled': false
     });
   }
 
@@ -143,9 +156,29 @@ class _FifthPageState extends State<FifthPage> {
                   final rules = decryptAESCryptoJS(
                       medicine.data()?['rules'], passwordEncrypt);
                   final docId = medicine.id;
+                  final times = medicine.data()?['times'];
+                  final alarmId = medicine.data()?['alarmId'];
+                  List<String> reminderTime = [];
+                  List<int> alarmReminderId = [];
 
-                  final medical =
-                      Medical(name: name, rules: rules, docId: docId);
+                  for (var time in times) {
+                    reminderTime.add(decryptAESCryptoJS(
+                      time,
+                      passwordEncrypt,
+                    ));
+                  }
+
+                  for (var id in alarmId) {
+                    alarmReminderId.add(id);
+                  }
+
+                  final medical = Medical(
+                    name: name,
+                    rules: rules,
+                    docId: docId,
+                    times: reminderTime,
+                    alarmId: alarmReminderId,
+                  );
                   medicals.add(medical);
                 }
                 return AnimationLimiter(
@@ -172,16 +205,18 @@ class _FifthPageState extends State<FifthPage> {
                                 storage
                                     .ref()
                                     .child(
-                                        '${auth.currentUser?.email}/${medicals[index].name}.jpg')
+                                      '${auth.currentUser?.email}/${medicals[index].name}.jpg',
+                                    )
                                     .delete();
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                      content: Text(
-                                        'Deleted from medicine',
-                                        style: textStyle.copyWith(
-                                            color: Colors.white),
-                                      ),
-                                      backgroundColor: Colors.black45),
+                                    content: Text(
+                                      'Deleted from medicine',
+                                      style: textStyle.copyWith(
+                                          color: Colors.white),
+                                    ),
+                                    backgroundColor: Colors.black45,
+                                  ),
                                 );
                               },
                               background: Container(

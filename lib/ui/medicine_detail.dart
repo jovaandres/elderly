@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +8,11 @@ import 'package:full_screen_image/full_screen_image.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_flutter/common/constant.dart';
-import 'package:workout_flutter/data/model/alarm.dart';
 import 'package:workout_flutter/data/model/medical.dart';
 import 'package:workout_flutter/main.dart';
 import 'package:workout_flutter/provider/alarm_data_provider.dart';
+import 'package:workout_flutter/provider/scheduling_provider.dart';
+import 'package:workout_flutter/util/cryptojs_aes_encryption_helper.dart';
 import 'package:workout_flutter/util/encrypt_decrypt_file.dart';
 
 class MedicineDetail extends StatefulWidget {
@@ -32,6 +32,8 @@ class _MedicineDetailState extends State<MedicineDetail> {
 
   void initState() {
     medical = widget.medicine;
+    Provider.of<AlarmDataProvider>(context, listen: false)
+        .isAlarmScheduled(medical.docId as String);
     medicalImage = File('$path/${medical.name}.jpg');
     if (!medicalImage.existsSync()) {
       downloadImageFromFirebase();
@@ -104,12 +106,12 @@ class _MedicineDetailState extends State<MedicineDetail> {
                         shrinkWrap: true,
                         itemCount: 3,
                         itemBuilder: (context, index) {
-                          alarm.isAlarmScheduled('${medical.name}-$index');
                           return ListTile(
                             title: Text(
                               'Time-${index + 1}',
                               style: textStyle,
                             ),
+                            subtitle: Text(medical.times?[index] as String),
                             onTap: () {
                               DatePicker.showTimePicker(
                                 context,
@@ -117,22 +119,108 @@ class _MedicineDetailState extends State<MedicineDetail> {
                                 currentTime: DateTime.now(),
                                 locale: LocaleType.id,
                                 onConfirm: (date) {
-                                  alarm.addAlarm(
-                                    AlarmData(
-                                      id: Random()
-                                          .nextInt(pow(2, 31).toInt() - 1),
-                                      name: '${medical.name}-$index',
-                                      isScheduled: 1,
-                                      time:
-                                          "${date.hour}:${date.minute}:${date.second}",
-                                    ),
-                                  );
+                                  medical.times?[index] =
+                                      "${date.hour}:${date.minute}:${date.second}";
+                                  setState(() {
+                                    firestore
+                                        .collection("medicine_bi13rb8")
+                                        .doc(medical.docId)
+                                        .update({
+                                      'times': medical.times
+                                          ?.map((e) => encryptAESCryptoJS(
+                                              e, passwordEncrypt))
+                                          .toList()
+                                    });
+                                  });
                                 },
                               );
+                            },
+                            onLongPress: () {
+                              showDialog(
+                                  context: context,
+                                  barrierDismissible: true,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text('Delete'),
+                                      content: SingleChildScrollView(
+                                        child: ListBody(
+                                          children: <Widget>[
+                                            Text(
+                                                'Delete current reminder time?'),
+                                          ],
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: Text('OK'),
+                                          onPressed: () {
+                                            medical.times?[index] = '-';
+                                            setState(() {
+                                              firestore
+                                                  .collection(
+                                                      "medicine_bi13rb8")
+                                                  .doc(medical.docId)
+                                                  .update({
+                                                'times': medical.times
+                                                    ?.map((e) =>
+                                                        encryptAESCryptoJS(
+                                                            e, passwordEncrypt))
+                                                    .toList()
+                                              });
+                                            });
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                        TextButton(
+                                          child: Text('Cancel'),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  });
                             },
                           );
                         },
                       ),
+                      Consumer<SchedulingProvider>(
+                        builder: (context, scheduled, _) {
+                          return ListTile(
+                            title: Text('Reminder'),
+                            subtitle: Text('Turn on/off reminder'),
+                            trailing: Switch.adaptive(
+                              value: alarm.isReminderActive,
+                              onChanged: (value) async {
+                                await alarm.updateSchedule(
+                                    medical.docId as String, value);
+                                await alarm
+                                    .isAlarmScheduled(medical.docId as String);
+                                setState(() {
+                                  if (value) {
+                                    for (var i
+                                        in (medical.times as List<String>)) {
+                                      if (i != '-') {
+                                        scheduled.scheduleNotification(
+                                            medical.alarmId?[
+                                                medical.times?.indexOf(i) ??
+                                                    0] as int,
+                                            i,
+                                            medical);
+                                      }
+                                    }
+                                  } else {
+                                    medical.alarmId?.forEach((element) {
+                                      scheduled.cancelNotification(element);
+                                    });
+                                  }
+                                });
+                              },
+                            ),
+                          );
+                        },
+                      ),
+                      SizedBox(height: 16),
                     ],
                   ),
                 ),

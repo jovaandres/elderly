@@ -12,7 +12,6 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/data/api/api_service.dart';
-import 'package:workout_flutter/data/db/alarm_database.dart';
 import 'package:workout_flutter/data/db/database_helper.dart';
 import 'package:workout_flutter/data/model/excercise.dart';
 import 'package:workout_flutter/data/model/medical.dart';
@@ -102,9 +101,7 @@ class MyApp extends StatelessWidget {
           create: (_) => SchedulingProvider(),
         ),
         ChangeNotifierProvider<AlarmDataProvider>(
-          create: (_) => AlarmDataProvider(
-            alarmDatabase: AlarmDatabase(),
-          ),
+          create: (_) => AlarmDataProvider(),
         )
       ],
       child: Consumer<PreferencesProvider>(

@@ -8,7 +8,7 @@ class SchedulingProvider extends ChangeNotifier {
   Future<bool> scheduleNotification(
       int id, String time, Medical medical) async {
     notifyListeners();
-    print('Start Alarm');
+    print('Start Alarm $id');
     return await AndroidAlarmManager.periodic(
       Duration(hours: 24),
       id,
@@ -21,7 +21,7 @@ class SchedulingProvider extends ChangeNotifier {
 
   Future<bool> cancelNotification(int id) async {
     notifyListeners();
-    print('Cancel Alarm');
+    print('Cancel Alarm $id');
     return await AndroidAlarmManager.cancel(id);
   }
 }

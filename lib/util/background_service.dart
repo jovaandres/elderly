@@ -31,8 +31,10 @@ class BackgroundService {
 
   static Future<void> callback() async {
     final NotificationHelper _notificationHelper = NotificationHelper();
-    await _notificationHelper.showNotification(flutterLocalNotificationsPlugin,
-        Medical(docId: '423', name: 'adawd', rules: 'ada', id: 2));
+    await _notificationHelper.showNotification(
+      flutterLocalNotificationsPlugin,
+      Medical(),
+    );
 
     _uiSendPort ??=
         IsolateNameServer.lookupPortByName(_isolateName) as SendPort;

@@ -39,9 +39,7 @@ class NotificationHelper {
       Medical medical) async {
     var _channelId = '1';
     var _channelName = 'channel_01';
-    var _channelDescription = 'restaurant_channel';
-
-    var _remindedMedical = medical.name;
+    var _channelDescription = 'medicine_reminder_channel';
 
     var androidPlatformChannelSpesifics = AndroidNotificationDetails(
         _channelId, _channelName, _channelDescription,
@@ -53,17 +51,17 @@ class NotificationHelper {
         android: androidPlatformChannelSpesifics,
         iOS: iOSPlatformChannelSpesifics);
 
-    var titleNotification = 'Recommended restaurant';
-    var titleRestaurant = _remindedMedical;
+    var titleNotification = 'This is reminder Title';
+    var contentNotification = 'This is reminder content';
 
     await flutterLocalNotificationsPlugin.show(
-        0, titleNotification, titleRestaurant, platformChannelSpesifics,
-        payload: _remindedMedical);
+        0, titleNotification, contentNotification, platformChannelSpesifics,
+        payload: 'Payload content');
   }
 
   void configureSelectNotificationSubject(String route) {
     selectNotificationSubject.stream.listen((String? payload) async {
-      Navigation.intentWithData(route, payload as String);
+      Navigation.intentNamed(route);
     });
   }
 }
