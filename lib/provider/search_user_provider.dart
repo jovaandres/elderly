@@ -38,9 +38,11 @@ class SearchUserProvider extends ChangeNotifier {
         for (var user in users) {
           final name = user.data()?['name'];
           final age = user.data()?['age'];
+          final email = user.data()?['email'];
           data.add(UserData(
             name: name,
             age: age,
+            email: email,
           ));
         }
         notifyListeners();

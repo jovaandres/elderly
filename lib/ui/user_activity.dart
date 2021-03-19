@@ -36,10 +36,11 @@ class _UserActivityState extends State<UserActivity> {
           child: StreamBuilder<QuerySnapshot>(
             stream: firestore
                 .collection('user_activity_bi13rb8')
-                .where('id', isEqualTo: 'jovaandrea8721@gmail.com')
+                .where('id', isEqualTo: userData?.family)
                 .orderBy('time')
                 .snapshots(),
             builder: (context, snapshot) {
+              print(userData?.toJson());
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(
                   child: CircularProgressIndicator(),

@@ -56,7 +56,7 @@ class _RolePageState extends State<RolePage> {
                         ),
                       ),
                       onPressed: () {
-                        Navigation.intentWithData(
+                        Navigation.intentReplaceWithData(
                             RegistrationPage.routeName, 'elderly');
                       },
                     )

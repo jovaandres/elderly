@@ -190,15 +190,21 @@ class _LoginPageState extends State<LoginPage> {
                     final role = userDocs.data()?['role'];
                     final height = userDocs.data()?['height'];
                     final weight = userDocs.data()?['weight'];
-                    final userData = UserData(
+                    final family = userDocs.data()?['family'];
+                    final docId = userDocs.id;
+                    final userDatas = UserData(
                       age: age,
                       email: email,
                       height: height,
                       name: name,
                       weight: weight,
                       role: role,
+                      docId: docId,
+                      family: family,
                     );
-                    databaseHelper.insertUserData(userData);
+                    await databaseHelper.insertUserData(userDatas);
+                    userData = await databaseHelper
+                        .getUserData(auth.currentUser?.email as String);
                     if (role == 'elderly') {
                       Navigation.intentReplace(MyHomePage.routeName);
                     } else {
@@ -222,7 +228,7 @@ class _LoginPageState extends State<LoginPage> {
                               TextButton(
                                 child: Text('OK'),
                                 onPressed: () {
-                                  Navigator.of(context).pop();
+                                  Navigation.back();
                                 },
                               ),
                             ],

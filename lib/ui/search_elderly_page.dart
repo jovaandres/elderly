@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:workout_flutter/common/constant.dart';
+import 'package:workout_flutter/common/navigation.dart';
+import 'package:workout_flutter/main.dart';
 import 'package:workout_flutter/provider/search_user_provider.dart';
+import 'package:workout_flutter/ui/login_page.dart';
 import 'package:workout_flutter/util/result_state.dart';
 
 var _textQuery = BehaviorSubject<String>();
@@ -96,6 +99,76 @@ class _SearchPageState extends State<SearchPage> {
                           return ListTile(
                             title: Text(state.result?[index].name as String),
                             subtitle: Text(state.result?[index].age as String),
+                            onLongPress: () {
+                              showDialog(
+                                  context: context,
+                                  barrierDismissible: true,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text('Add Family'),
+                                      content: SingleChildScrollView(
+                                        child: ListBody(
+                                          children: <Widget>[
+                                            Text(
+                                                'Add ${state.result?[index].name} to family?'),
+                                          ],
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: Text('OK'),
+                                          onPressed: () {
+                                            firestore
+                                                .collection(
+                                                    'user_account_bi13rb8')
+                                                .doc(userData?.docId)
+                                                .update({
+                                              'family': state.result?[index]
+                                                  .email as String
+                                            });
+                                            Navigation.back();
+                                            showDialog(
+                                                context: context,
+                                                barrierDismissible: true,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: Text('Re-Login'),
+                                                    content:
+                                                        SingleChildScrollView(
+                                                      child: ListBody(
+                                                        children: <Widget>[
+                                                          Text(
+                                                              'Please re-login to load your new family activity'),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        child: Text('OK'),
+                                                        onPressed: () {
+                                                          auth.signOut();
+                                                          Navigation
+                                                              .intentReplace(
+                                                                  LoginPage
+                                                                      .routeName);
+                                                        },
+                                                      ),
+                                                    ],
+                                                  );
+                                                });
+                                          },
+                                        ),
+                                        TextButton(
+                                          child: Text('Cancel'),
+                                          onPressed: () {
+                                            Navigation.back();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  });
+                            },
                           );
                         });
                   } else if (state.state == ResultState.NoData) {

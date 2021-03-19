@@ -27,7 +27,9 @@ class DatabaseHelper {
           role TEXT,
           age TEXT,
           weight TEXT,
-          height TEXT
+          height TEXT,
+          docId TEXT,
+          family TEXT
         )''');
       },
       version: 1,
@@ -46,7 +48,8 @@ class DatabaseHelper {
 
   Future<void> insertUserData(UserData userData) async {
     final db = await database;
-    await db?.insert(tblUserData, userData.toJson());
+    await db?.insert(tblUserData, userData.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   Future<UserData?> getUserData(String email) async {

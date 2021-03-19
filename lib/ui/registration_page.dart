@@ -223,7 +223,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       "email": _emailFieldController.text,
                       "role": _role
                     });
-                    final userData = UserData(
+                    final userDatas = UserData(
                       age: _ageFieldController.text,
                       email: _emailFieldController.text,
                       weight: _weightFieldController.text,
@@ -231,7 +231,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       name: _nameFieldController.text,
                       role: _role,
                     );
-                    databaseHelper.insertUserData(userData);
+                    databaseHelper.insertUserData(userDatas);
+                    userData = await databaseHelper
+                        .getUserData(auth.currentUser?.email as String);
                     if (_role == 'elderly') {
                       Navigation.intentReplace(MyHomePage.routeName);
                     } else {
@@ -255,7 +257,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               TextButton(
                                 child: Text('OK'),
                                 onPressed: () {
-                                  Navigator.of(context).pop();
+                                  Navigation.back();
                                 },
                               ),
                             ],
