@@ -29,7 +29,7 @@ class _SecondPageState extends State<SecondPage> {
       body: _buildList(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigation.intentNamed(ContactPciker.routeName);
+          Navigation.intentNamed(ContactPicker.routeName);
         },
         tooltip: 'Add Contact',
         child: Icon(Icons.add),

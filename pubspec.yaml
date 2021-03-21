@@ -54,6 +54,8 @@ dependencies:
   youtube_player_flutter: ^7.0.0+7
   contacts_service: ^0.5.0-nullsafety.0
   permission_handler: ^6.1.0
+  geolocator: ^7.0.1
+  android_intent: ^2.0.0
 
 dev_dependencies:
   flutter_test:

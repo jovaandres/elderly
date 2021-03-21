@@ -4,9 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:workout_flutter/ui/fifth_page.dart';
 import 'package:workout_flutter/ui/first_page.dart';
-import 'package:workout_flutter/ui/fourth_page.dart';
+// import 'package:workout_flutter/ui/fourth_page.dart';
 import 'package:workout_flutter/ui/second_page.dart';
 import 'package:workout_flutter/ui/third_page.dart';
+import 'package:workout_flutter/ui/user_profile.dart';
 import 'package:workout_flutter/util/background_service.dart';
 import 'package:workout_flutter/util/notification_helper.dart';
 import 'package:workout_flutter/widget/platform_widget.dart';
@@ -29,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
     FirstPage(),
     SecondPage(),
     ThirdPage(),
-    FourthPage(),
+    UserProfile(),
     FifthPage(),
   ];
 

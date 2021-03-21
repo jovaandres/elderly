@@ -36,6 +36,7 @@ import 'package:workout_flutter/ui/registration_page.dart';
 import 'package:workout_flutter/ui/role_page.dart';
 import 'package:workout_flutter/ui/search_elderly_page.dart';
 import 'package:workout_flutter/ui/user_activity.dart';
+import 'package:workout_flutter/ui/user_profile.dart';
 import 'package:workout_flutter/util/background_service.dart';
 import 'package:workout_flutter/util/notification_helper.dart';
 
@@ -132,8 +133,9 @@ class MyApp extends StatelessWidget {
                   ),
               MyHomePage.routeName: (context) => MyHomePage(),
               UserActivity.routeName: (context) => UserActivity(),
-              ContactPciker.routeName: (context) => ContactPciker(),
+              ContactPicker.routeName: (context) => ContactPicker(),
               SearchPage.routeName: (context) => SearchPage(),
+              UserProfile.routeName: (context) => UserProfile(),
               MedicineDetail.routeName: (context) => MedicineDetail(
                     medicine:
                         ModalRoute.of(context)?.settings.arguments as Medical,

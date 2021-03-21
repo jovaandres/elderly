@@ -10,14 +10,14 @@ import 'package:workout_flutter/util/cryptojs_aes_encryption_helper.dart';
 import 'package:workout_flutter/util/result_state.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class ContactPciker extends StatefulWidget {
+class ContactPicker extends StatefulWidget {
   static const routeName = '/contact_picker';
 
   @override
-  _ContactPcikerState createState() => _ContactPcikerState();
+  _ContactPickerState createState() => _ContactPickerState();
 }
 
-class _ContactPcikerState extends State<ContactPciker> {
+class _ContactPickerState extends State<ContactPicker> {
   Iterable<Contact> contacts = [];
 
   @override

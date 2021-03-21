@@ -1,5 +1,7 @@
+import 'package:android_intent/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/data/model/nearby_search.dart';
@@ -18,6 +20,61 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
+  Position? _position;
+
+  void openLocationSetting() async {
+    final AndroidIntent intent = new AndroidIntent(
+      action: 'android.settings.LOCATION_SOURCE_SETTINGS',
+    );
+    await intent.launch();
+  }
+
+  Future<Position> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      openLocationSetting();
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.deniedForever) {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return SimpleDialog(
+                title: Text('Cannot access location'),
+                children: [
+                  Text(
+                      'Can\'t perform this feature without location service enabled')
+                ],
+              );
+            });
+        return Future.error(
+            'Location permissions are permanently denied, we cannot request permissions.');
+      }
+
+      if (permission == LocationPermission.denied) {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return SimpleDialog(
+                title: Text('Cannot access location'),
+                children: [
+                  Text(
+                      'Can\'t perform this feature without location service enabled')
+                ],
+              );
+            });
+        return Future.error('Location permissions are denied');
+      }
+    }
+    return await Geolocator.getCurrentPosition();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,6 +123,38 @@ class _FirstPageState extends State<FirstPage> {
                     ],
                   ),
                 ),
+              ),
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(0, 0),
+                  blurRadius: 22,
+                  color: Colors.grey,
+                )
+              ],
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
+              ),
+            ),
+            child: TextButton(
+              onPressed: () async {
+                _position = await _determinePosition();
+                Provider.of<NearbyHostpitalProvider>(context, listen: false)
+                    .fetchHostpitalList(
+                  _position?.latitude as double,
+                  _position?.longitude as double,
+                );
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text("Locate"),
+                  Icon(Icons.my_location),
+                ],
               ),
             ),
           ),
