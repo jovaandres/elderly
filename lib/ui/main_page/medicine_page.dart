@@ -32,10 +32,12 @@ class _MedicinePageState extends State<MedicinePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Fifth"),
+      // appBar: AppBar(
+      //   title: Text("Medicine"),
+      // ),
+      body: SafeArea(
+        child: _buildList(),
       ),
-      body: _buildList(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
         splashColor: Colors.blueAccent,
@@ -101,7 +103,7 @@ class _MedicinePageState extends State<MedicinePage> {
                 );
               });
         },
-        tooltip: 'Increment',
+        tooltip: 'Add Medicine',
         child: Icon(
           Icons.add_box,
           color: Colors.blueAccent,
@@ -139,6 +141,45 @@ class _MedicinePageState extends State<MedicinePage> {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.all(4),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0, 0),
+                    blurRadius: 22,
+                    color: Colors.grey,
+                  )
+                ],
+                borderRadius: BorderRadius.all(
+                  Radius.circular(8),
+                ),
+              ),
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Column(
+                  children: [
+                    Text(
+                      "Medicine",
+                      style: textStyle.copyWith(
+                        fontSize: 18,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Don\'t forget to get your medicine',
+                      style: textStyle,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
         Expanded(
           child: StreamBuilder<QuerySnapshot>(
             stream: firestore

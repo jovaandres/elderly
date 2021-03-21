@@ -35,15 +35,25 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<BottomNavigationBarItem> _bottomBarItem = [
     BottomNavigationBarItem(
-        icon: Icon(CupertinoIcons.house_fill), label: 'First'),
+      icon: Icon(Icons.local_hospital),
+      label: 'Hospital',
+    ),
     BottomNavigationBarItem(
-        icon: Icon(CupertinoIcons.heart_fill), label: 'Second'),
+      icon: Icon(Icons.contact_phone),
+      label: 'Contact',
+    ),
     BottomNavigationBarItem(
-        icon: Icon(Platform.isIOS ? CupertinoIcons.settings : Icons.settings),
-        label: 'Third'),
+      icon: Icon(Icons.explore_rounded),
+      label: 'Exercise',
+    ),
     BottomNavigationBarItem(
-        icon: Icon(Icons.medical_services), label: 'Fourth'),
-    BottomNavigationBarItem(icon: Icon(Icons.album), label: 'Fith')
+      icon: Icon(Icons.person),
+      label: 'Profile',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.medical_services),
+      label: 'Medicine',
+    )
   ];
 
   Widget _buildAndroid(BuildContext context) {

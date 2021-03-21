@@ -23,9 +23,9 @@ class _FamilyContactPageState extends State<FamilyContactPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Second"),
-      ),
+      // appBar: AppBar(
+      //   title: Text("Contact"),
+      // ),
       body: _buildList(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
@@ -43,117 +43,151 @@ class _FamilyContactPageState extends State<FamilyContactPage> {
   }
 
   Widget _buildList() {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        SizedBox(height: 8),
-        Center(
-          child: Text(
-            'Family Contact',
-            style: textStyle.copyWith(fontSize: 18),
+    return SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0, 0),
+                      blurRadius: 22,
+                      color: Colors.grey,
+                    )
+                  ],
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(8),
+                  ),
+                ),
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Family Contact',
+                        style: textStyle.copyWith(
+                          fontSize: 18,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        'Call your family faster',
+                        style: textStyle,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ),
-        ),
-        Expanded(
-          flex: 1,
-          child: StreamBuilder<QuerySnapshot>(
-            stream: firestore
-                .collection('family_contact_bi13rb8')
-                .where('id', isEqualTo: auth.currentUser?.email)
-                .orderBy('name')
-                .snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (snapshot.hasData) {
-                final contacts =
-                    snapshot.data?.docs as List<QueryDocumentSnapshot>;
-                List<FamilyNumber> familyNumbers = [];
-                for (var contact in contacts) {
-                  final name = decryptAESCryptoJS(
-                    contact.data()?['name'],
-                    passwordEncrypt,
+          Expanded(
+            flex: 1,
+            child: StreamBuilder<QuerySnapshot>(
+              stream: firestore
+                  .collection('family_contact_bi13rb8')
+                  .where('id', isEqualTo: auth.currentUser?.email)
+                  .orderBy('name')
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(),
                   );
-                  final phone = decryptAESCryptoJS(
-                    contact.data()?['phone'],
-                    passwordEncrypt,
-                  );
-                  final docId = contact.id;
+                } else if (snapshot.hasData) {
+                  final contacts =
+                      snapshot.data?.docs as List<QueryDocumentSnapshot>;
+                  List<FamilyNumber> familyNumbers = [];
+                  for (var contact in contacts) {
+                    final name = decryptAESCryptoJS(
+                      contact.data()?['name'],
+                      passwordEncrypt,
+                    );
+                    final phone = decryptAESCryptoJS(
+                      contact.data()?['phone'],
+                      passwordEncrypt,
+                    );
+                    final docId = contact.id;
 
-                  final familyNumber =
-                      FamilyNumber(name: name, number: phone, docId: docId);
-                  familyNumbers.add(familyNumber);
-                }
-                return AnimationLimiter(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.all(8),
-                    itemCount: familyNumbers.length,
-                    itemBuilder: (context, index) {
-                      return AnimationConfiguration.staggeredList(
-                        position: index,
-                        duration: const Duration(milliseconds: 375),
-                        child: SlideAnimation(
-                          verticalOffset: 50.0,
-                          child: FadeInAnimation(
-                            child: Dismissible(
-                              key: Key(familyNumbers[index].name as String),
-                              child: buildContactList(
-                                  context, familyNumbers[index]),
-                              direction: DismissDirection.endToStart,
-                              onDismissed: (direction) {
-                                firestore
-                                    .collection("family_contact_bi13rb8")
-                                    .doc(familyNumbers[index].docId)
-                                    .delete();
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      content: Text(
-                                        'Deleted from contact',
-                                        style: textStyle.copyWith(
-                                            color: Colors.white),
+                    final familyNumber =
+                        FamilyNumber(name: name, number: phone, docId: docId);
+                    familyNumbers.add(familyNumber);
+                  }
+                  return AnimationLimiter(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.all(8),
+                      itemCount: familyNumbers.length,
+                      itemBuilder: (context, index) {
+                        return AnimationConfiguration.staggeredList(
+                          position: index,
+                          duration: const Duration(milliseconds: 375),
+                          child: SlideAnimation(
+                            verticalOffset: 50.0,
+                            child: FadeInAnimation(
+                              child: Dismissible(
+                                key: Key(familyNumbers[index].name as String),
+                                child: buildContactList(
+                                    context, familyNumbers[index]),
+                                direction: DismissDirection.endToStart,
+                                onDismissed: (direction) {
+                                  firestore
+                                      .collection("family_contact_bi13rb8")
+                                      .doc(familyNumbers[index].docId)
+                                      .delete();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text(
+                                          'Deleted from contact',
+                                          style: textStyle.copyWith(
+                                              color: Colors.white),
+                                        ),
+                                        backgroundColor: Colors.black45),
+                                  );
+                                },
+                                background: Container(
+                                  alignment: Alignment.centerRight,
+                                  padding: const EdgeInsets.all(12),
+                                  color: Colors.red,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.delete,
+                                        color: Colors.white,
+                                        size: 20,
                                       ),
-                                      backgroundColor: Colors.black45),
-                                );
-                              },
-                              background: Container(
-                                alignment: Alignment.centerRight,
-                                padding: const EdgeInsets.all(12),
-                                color: Colors.red,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.delete,
-                                      color: Colors.white,
-                                      size: 20,
-                                    ),
-                                    SizedBox(height: 8),
-                                    Text(
-                                      'DELETE',
-                                      style: textStyle.copyWith(fontSize: 14),
-                                    )
-                                  ],
+                                      SizedBox(height: 8),
+                                      Text(
+                                        'DELETE',
+                                        style: textStyle.copyWith(fontSize: 14),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      );
-                    },
-                  ),
-                );
-              } else if (snapshot.hasError) {
-                return Center(child: Text(''));
-              } else {
-                return Center(child: Text(''));
-              }
-            },
+                        );
+                      },
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                  return Center(child: Text(''));
+                } else {
+                  return Center(child: Text(''));
+                }
+              },
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

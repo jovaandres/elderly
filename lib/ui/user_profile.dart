@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_flutter/common/constant.dart';
+import 'package:workout_flutter/main.dart';
+import 'package:workout_flutter/widget/sign_in_button.dart';
 
 class UserProfile extends StatefulWidget {
   static const routeName = '/profile_page';
@@ -78,6 +80,13 @@ class UserProfileState extends State<UserProfile> {
               style: textStyle,
             ),
           ),
+          Center(
+              child: TextButton(
+            child: signInButton(),
+            onPressed: () {
+              auth.signOut();
+            },
+          ))
         ],
       ),
     );

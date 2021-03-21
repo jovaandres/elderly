@@ -45,7 +45,7 @@ class _MedicineDetailState extends State<MedicineDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Medicine Detail"),
+        title: Text(medical.name ?? 'Medicine Detail'),
       ),
       body: Consumer<AlarmDataProvider>(
         builder: (context, alarm, _) {

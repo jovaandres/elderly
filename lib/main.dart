@@ -113,6 +113,7 @@ class MyApp extends StatelessWidget {
       child: Consumer<PreferencesProvider>(
         builder: (context, provider, child) {
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
             navigatorKey: navigatorKey,
             title: 'Elderly App',
             theme: ThemeData(

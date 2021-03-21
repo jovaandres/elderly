@@ -17,97 +17,99 @@ class _ExercisePageState extends State<ExercisePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Third"),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(4),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(0, 0),
-                      blurRadius: 22,
-                      color: Colors.grey,
-                    )
-                  ],
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(8),
-                  ),
-                ),
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    children: [
-                      Text(
-                        "Hello User!",
-                        style: textStyle.copyWith(
-                          fontSize: 18,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        'Let\'s do some excercise',
-                        style: textStyle,
-                      ),
+      // appBar: AppBar(
+      //   title: Text("Exercise"),
+      // ),
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(4),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(0, 0),
+                        blurRadius: 22,
+                        color: Colors.grey,
+                      )
                     ],
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(8),
+                    ),
+                  ),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      children: [
+                        Text(
+                          "Hello User!",
+                          style: textStyle.copyWith(
+                            fontSize: 18,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          'Let\'s do some excercise',
+                          style: textStyle,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          Expanded(
-            flex: 8,
-            child: StreamBuilder<QuerySnapshot>(
-              stream: firestore
-                  .collection('exercise_bi13rb8')
-                  .orderBy('name')
-                  .snapshots(),
-              builder: (context, snapshot) {
-                List<Exercise> exerciseList = [];
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (snapshot.hasData) {
-                  final exercises =
-                      snapshot.data?.docs as List<QueryDocumentSnapshot>;
-                  for (var exercise in exercises) {
-                    final name = exercise.data()?['name'];
-                    final Video video =
-                        Video.fromJson(exercise.data()?['video']);
-                    exerciseList.add(
-                      Exercise(name: name, video: video),
+            Expanded(
+              flex: 8,
+              child: StreamBuilder<QuerySnapshot>(
+                stream: firestore
+                    .collection('exercise_bi13rb8')
+                    .orderBy('name')
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  List<Exercise> exerciseList = [];
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(),
                     );
-                  }
-                }
-                return AnimationLimiter(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.all(8),
-                    itemCount: exerciseList.length,
-                    itemBuilder: (context, index) {
-                      return AnimationConfiguration.staggeredList(
-                        position: index,
-                        duration: const Duration(milliseconds: 375),
-                        child: SlideAnimation(
-                          verticalOffset: 50.0,
-                          child: buildExcercise(context, exerciseList[index]),
-                        ),
+                  } else if (snapshot.hasData) {
+                    final exercises =
+                        snapshot.data?.docs as List<QueryDocumentSnapshot>;
+                    for (var exercise in exercises) {
+                      final name = exercise.data()?['name'];
+                      final Video video =
+                          Video.fromJson(exercise.data()?['video']);
+                      exerciseList.add(
+                        Exercise(name: name, video: video),
                       );
-                    },
-                  ),
-                );
-              },
+                    }
+                  }
+                  return AnimationLimiter(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.all(8),
+                      itemCount: exerciseList.length,
+                      itemBuilder: (context, index) {
+                        return AnimationConfiguration.staggeredList(
+                          position: index,
+                          duration: const Duration(milliseconds: 375),
+                          child: SlideAnimation(
+                            verticalOffset: 50.0,
+                            child: buildExcercise(context, exerciseList[index]),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

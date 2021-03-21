@@ -27,13 +27,17 @@ Widget buildHospitalList(BuildContext context, NearbyResult result) {
         padding: const EdgeInsets.all(4),
         child: ListTile(
           leading: (result.photos != null)
-              ? Image.network(baseUrl +
-                  'photo?maxwidth=400&photoreference=' +
-                  ((result.photos as List<Photo>)..shuffle())
-                      .first
-                      .photoReference
-                      .toString() +
-                  '&key=$apiKey')
+              ? Image.network(
+                  baseUrl +
+                      'photo?maxwidth=400&photoreference=' +
+                      ((result.photos as List<Photo>)..shuffle())
+                          .first
+                          .photoReference
+                          .toString() +
+                      '&key=$apiKey',
+                  width: 80,
+                  height: 70,
+                )
               : Image.network(
                   result.icon as String,
                   width: 75,

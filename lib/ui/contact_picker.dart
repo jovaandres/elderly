@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_flutter/common/constant.dart';
-import 'package:workout_flutter/common/navigation.dart';
-import 'package:workout_flutter/main.dart';
 import 'package:workout_flutter/provider/contact_provider.dart';
-import 'package:workout_flutter/util/cryptojs_aes_encryption_helper.dart';
 import 'package:workout_flutter/util/result_state.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:workout_flutter/widget/contact_picker_list.dart';
 
 class ContactPicker extends StatefulWidget {
   static const routeName = '/contact_picker';
@@ -68,20 +66,10 @@ class _ContactPickerState extends State<ContactPicker> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Second"),
+        title: Text("List Contacts"),
       ),
       body: _buildList(),
     );
-  }
-
-  void saveContact(String name, String number) {
-    final encryptedName = encryptAESCryptoJS(name, passwordEncrypt);
-    final encryptedPhone = encryptAESCryptoJS(number, passwordEncrypt);
-    firestore.collection('family_contact_bi13rb8').add({
-      'id': auth.currentUser?.email,
-      'name': encryptedName,
-      'phone': encryptedPhone,
-    });
   }
 
   Widget _buildList() {
@@ -89,6 +77,13 @@ class _ContactPickerState extends State<ContactPicker> {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
+        Padding(
+          padding: EdgeInsets.all(4),
+          child: Text(
+            'Press and hold to add contact',
+            style: textStyle,
+          ),
+        ),
         Expanded(
           flex: 1,
           child: Consumer<ContactProvider>(
@@ -102,63 +97,8 @@ class _ContactPickerState extends State<ContactPicker> {
                 return ListView.builder(
                   itemCount: contacts.length,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      leading: Icon(Icons.people),
-                      title: Text(contacts.elementAt(index).displayName ?? ''),
-                      subtitle: Text(
-                          (contacts.elementAt(index).phones?.isNotEmpty == true)
-                              ? contacts.elementAt(index).phones?.first.value
-                                  as String
-                              : '-'),
-                      onLongPress: () {
-                        showDialog(
-                            context: context,
-                            barrierDismissible: true,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text('Pin Contact?'),
-                                content: SingleChildScrollView(
-                                  child: ListBody(
-                                    children: <Widget>[
-                                      Text(
-                                          'Add this contact to your main family?'),
-                                    ],
-                                  ),
-                                ),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: Text('Cancel'),
-                                    onPressed: () {
-                                      Navigation.back();
-                                    },
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      saveContact(
-                                          contacts
-                                                  .elementAt(index)
-                                                  .displayName ??
-                                              'Anonim',
-                                          (contacts
-                                                      .elementAt(index)
-                                                      .phones
-                                                      ?.isNotEmpty ==
-                                                  true)
-                                              ? contacts
-                                                  .elementAt(index)
-                                                  .phones
-                                                  ?.first
-                                                  .value as String
-                                              : '-');
-                                      Navigation.back();
-                                    },
-                                    child: Text('OK'),
-                                  )
-                                ],
-                              );
-                            });
-                      },
-                    );
+                    return contactPickerList(
+                        context, contacts.elementAt(index));
                   },
                 );
               } else if (provider.state == ResultState.NoData) {
