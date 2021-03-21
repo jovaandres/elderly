@@ -7,9 +7,11 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_flutter/common/constant.dart';
+import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/data/model/nearby_search.dart';
 import 'package:workout_flutter/main.dart';
 import 'package:workout_flutter/provider/hospital_data_provider.dart';
+import 'package:workout_flutter/ui/authentication/login_page.dart';
 import 'package:workout_flutter/util/result_state.dart';
 import 'package:workout_flutter/widget/build_hospital_item.dart';
 
@@ -76,6 +78,39 @@ class _HospitalNearbyPageState extends State<HospitalNearbyPage> {
       }
     }
     return await Geolocator.getCurrentPosition();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((_) async {
+      if (auth.currentUser?.emailVerified != true) {
+        showDialog(
+            context: context,
+            barrierDismissible: true,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Verify Email'),
+                content: SingleChildScrollView(
+                  child: ListBody(
+                    children: <Widget>[
+                      Text('Please verify your email to continue'),
+                    ],
+                  ),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: Text('OK'),
+                    onPressed: () async {
+                      await auth.signOut();
+                      Navigation.intentReplace(LoginPage.routeName);
+                    },
+                  ),
+                ],
+              );
+            });
+      }
+    });
   }
 
   @override

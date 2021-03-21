@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:workout_flutter/ui/main_page/medicine_page.dart';
@@ -95,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: _bottomNavIndex);
-    port.listen((_) async => await _service.someTask());
+    // port.listen((_) async => await _service.someTask());
     _notificationHelper
         .configureSelectNotificationSubject(MyHomePage.routeName);
   }
@@ -103,6 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void dispose() {
     selectNotificationSubject.close();
+    // port.close();
     super.dispose();
   }
 

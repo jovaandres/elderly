@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 import 'package:workout_flutter/common/constant.dart';

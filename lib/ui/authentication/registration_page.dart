@@ -214,6 +214,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
                     await auth.createUserWithEmailAndPassword(
                         email: email, password: password);
+                    await auth.currentUser?.sendEmailVerification();
 
                     firestore.collection('user_account_bi13rb8').add({
                       "name": _nameFieldController.text,
