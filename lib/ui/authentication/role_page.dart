@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/common/navigation.dart';
-import 'package:workout_flutter/ui/registration_page.dart';
+import 'package:workout_flutter/ui/authentication/registration_page.dart';
 
 class RolePage extends StatefulWidget {
   static const routeName = '/role_page';

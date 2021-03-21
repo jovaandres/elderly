@@ -5,7 +5,7 @@ import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/main.dart';
 import 'package:workout_flutter/provider/search_user_provider.dart';
-import 'package:workout_flutter/ui/login_page.dart';
+import 'package:workout_flutter/ui/authentication/login_page.dart';
 import 'package:workout_flutter/util/result_state.dart';
 
 var _textQuery = BehaviorSubject<String>();

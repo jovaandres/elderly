@@ -10,14 +10,14 @@ import 'package:workout_flutter/ui/contact_picker.dart';
 import 'package:workout_flutter/util/cryptojs_aes_encryption_helper.dart';
 import 'package:workout_flutter/widget/build_contact_list.dart';
 
-class SecondPage extends StatefulWidget {
-  static const routeName = '/second_page';
+class FamilyContactPage extends StatefulWidget {
+  static const routeName = '/family_contact_page';
 
   @override
-  _SecondPageState createState() => _SecondPageState();
+  _FamilyContactPageState createState() => _FamilyContactPageState();
 }
 
-class _SecondPageState extends State<SecondPage> {
+class _FamilyContactPageState extends State<FamilyContactPage> {
   Iterable<Contact> contacts = [];
 
   @override
@@ -28,11 +28,16 @@ class _SecondPageState extends State<SecondPage> {
       ),
       body: _buildList(),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        splashColor: Colors.blueAccent,
         onPressed: () {
           Navigation.intentNamed(ContactPicker.routeName);
         },
         tooltip: 'Add Contact',
-        child: Icon(Icons.add),
+        child: Icon(
+          Icons.add_ic_call,
+          color: Colors.blueAccent,
+        ),
       ),
     );
   }

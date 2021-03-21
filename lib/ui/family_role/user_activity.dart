@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/data/model/activity.dart';
-import 'package:workout_flutter/ui/search_elderly_page.dart';
+import 'package:workout_flutter/ui/family_role/search_elderly_page.dart';
 import 'package:workout_flutter/widget/build_activity_list.dart';
 import 'package:workout_flutter/widget/menu_tile.dart';
 import 'package:workout_flutter/widget/sign_in_button.dart';

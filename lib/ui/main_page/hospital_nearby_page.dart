@@ -1,4 +1,6 @@
-import 'package:android_intent/android_intent.dart';
+import 'dart:io';
+
+// import 'package:android_intent/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:geolocator/geolocator.dart';
@@ -12,21 +14,23 @@ import 'package:workout_flutter/widget/build_hospital_item.dart';
 import 'package:workout_flutter/widget/menu_tile.dart';
 import 'package:workout_flutter/widget/sign_in_button.dart';
 
-class FirstPage extends StatefulWidget {
-  static const routeName = '/first_page';
+class HospitalNearbyPage extends StatefulWidget {
+  static const routeName = '/hospital_nearby_page';
 
   @override
-  _FirstPageState createState() => _FirstPageState();
+  _HospitalNearbyPageState createState() => _HospitalNearbyPageState();
 }
 
-class _FirstPageState extends State<FirstPage> {
+class _HospitalNearbyPageState extends State<HospitalNearbyPage> {
   Position? _position;
 
   void openLocationSetting() async {
-    final AndroidIntent intent = new AndroidIntent(
-      action: 'android.settings.LOCATION_SOURCE_SETTINGS',
-    );
-    await intent.launch();
+    if (Platform.isAndroid) {
+      // final AndroidIntent intent = new AndroidIntent(
+      //   action: 'android.settings.LOCATION_SOURCE_SETTINGS',
+      // );
+      // await intent.launch();
+    }
   }
 
   Future<Position> _determinePosition() async {
@@ -126,38 +130,6 @@ class _FirstPageState extends State<FirstPage> {
               ),
             ),
           ),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  offset: Offset(0, 0),
-                  blurRadius: 22,
-                  color: Colors.grey,
-                )
-              ],
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
-              ),
-            ),
-            child: TextButton(
-              onPressed: () async {
-                _position = await _determinePosition();
-                Provider.of<NearbyHostpitalProvider>(context, listen: false)
-                    .fetchHostpitalList(
-                  _position?.latitude as double,
-                  _position?.longitude as double,
-                );
-              },
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text("Locate"),
-                  Icon(Icons.my_location),
-                ],
-              ),
-            ),
-          ),
           Expanded(
             child: Consumer<NearbyHostpitalProvider>(
               builder: (context, state, _) {
@@ -203,6 +175,22 @@ class _FirstPageState extends State<FirstPage> {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        splashColor: Colors.blue,
+        child: Icon(
+          Icons.my_location,
+          color: Colors.blueAccent,
+        ),
+        onPressed: () async {
+          _position = await _determinePosition();
+          Provider.of<NearbyHostpitalProvider>(context, listen: false)
+              .fetchHostpitalList(
+            _position?.latitude as double,
+            _position?.longitude as double,
+          );
+        },
       ),
       drawer: Drawer(
         child: SafeArea(

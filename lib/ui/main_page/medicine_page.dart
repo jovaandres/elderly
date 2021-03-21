@@ -10,14 +10,14 @@ import 'package:workout_flutter/main.dart';
 import 'package:workout_flutter/util/cryptojs_aes_encryption_helper.dart';
 import 'package:workout_flutter/widget/build_medicine_list.dart';
 
-class FifthPage extends StatefulWidget {
-  static const routeName = '/fifth_page';
+class MedicinePage extends StatefulWidget {
+  static const routeName = '/medicine_page';
 
   @override
-  _FifthPageState createState() => _FifthPageState();
+  _MedicinePageState createState() => _MedicinePageState();
 }
 
-class _FifthPageState extends State<FifthPage> {
+class _MedicinePageState extends State<MedicinePage> {
   final _nameFieldController = TextEditingController();
   final _rulesFieldController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -37,6 +37,8 @@ class _FifthPageState extends State<FifthPage> {
       ),
       body: _buildList(),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        splashColor: Colors.blueAccent,
         onPressed: () {
           showDialog(
               context: context,
@@ -100,7 +102,10 @@ class _FifthPageState extends State<FifthPage> {
               });
         },
         tooltip: 'Increment',
-        child: Icon(Icons.add),
+        child: Icon(
+          Icons.add_box,
+          color: Colors.blueAccent,
+        ),
       ),
     );
   }

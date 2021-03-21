@@ -6,14 +6,14 @@ import 'package:workout_flutter/data/model/excercise.dart';
 import 'package:workout_flutter/main.dart';
 import 'package:workout_flutter/widget/build_excercise_list.dart';
 
-class ThirdPage extends StatefulWidget {
-  static const routeName = '/third_page';
+class ExercisePage extends StatefulWidget {
+  static const routeName = '/exercise_page';
 
   @override
-  _ThirdPageState createState() => _ThirdPageState();
+  _ExercisePageState createState() => _ExercisePageState();
 }
 
-class _ThirdPageState extends State<ThirdPage> {
+class _ExercisePageState extends State<ExercisePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

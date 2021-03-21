@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
 import 'package:workout_flutter/common/navigation.dart';
-import 'package:workout_flutter/ui/login_page.dart';
+import 'package:workout_flutter/ui/authentication/login_page.dart';
 
 class IntroScreen extends StatefulWidget {
   static const routeName = '/intro_screen';

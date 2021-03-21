@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/main.dart';
-import 'package:workout_flutter/ui/login_page.dart';
+import 'package:workout_flutter/ui/authentication/login_page.dart';
 
 Widget signInButton() {
   return OutlinedButton(

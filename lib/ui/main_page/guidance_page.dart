@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:workout_flutter/common/constant.dart';
 
-class FourthPage extends StatefulWidget {
-  static const routeName = '/fourth_page';
+class GuidancePage extends StatefulWidget {
+  static const routeName = '/guidance_page';
 
   @override
-  _FourthPageState createState() => _FourthPageState();
+  _GuidancePageState createState() => _GuidancePageState();
 }
 
-class _FourthPageState extends State<FourthPage> {
+class _GuidancePageState extends State<GuidancePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/data/model/user_data.dart';
 import 'package:workout_flutter/main.dart';
-import 'package:workout_flutter/ui/home_page.dart';
-import 'package:workout_flutter/ui/role_page.dart';
-import 'package:workout_flutter/ui/user_activity.dart';
+import 'package:workout_flutter/ui/main_page/home_page.dart';
+import 'package:workout_flutter/ui/authentication/role_page.dart';
+import 'package:workout_flutter/ui/family_role/user_activity.dart';
 
 class LoginPage extends StatefulWidget {
   static const routeName = '/login_page';
