@@ -100,6 +100,14 @@ class _HospitalNearbyPageState extends State<HospitalNearbyPage> {
                 ),
                 actions: <Widget>[
                   TextButton(
+                    child: Text('Re-Send'),
+                    onPressed: () async {
+                      auth.currentUser?.sendEmailVerification();
+                      await auth.signOut();
+                      Navigation.intentReplace(LoginPage.routeName);
+                    },
+                  ),
+                  TextButton(
                     child: Text('OK'),
                     onPressed: () async {
                       await auth.signOut();

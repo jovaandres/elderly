@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:workout_flutter/common/constant.dart';
+import 'package:workout_flutter/main.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class ExcercisePlayer extends StatefulWidget {
@@ -16,6 +17,10 @@ class ExcercisePlayer extends StatefulWidget {
 
 class _ExcercisePlayerState extends State<ExcercisePlayer> {
   late YoutubePlayerController _controller;
+  late YoutubeMetaData _videoMetaData;
+  bool _isPlayerReady = false;
+  int timeStamp = 0;
+  int time = 0;
 
   @override
   void initState() {
@@ -33,7 +38,23 @@ class _ExcercisePlayerState extends State<ExcercisePlayer> {
         forceHD: false,
         enableCaption: true,
       ),
-    );
+    )..addListener(listener);
+    _videoMetaData = const YoutubeMetaData();
+  }
+
+  void listener() {
+    if (_isPlayerReady && mounted && !_controller.value.isFullScreen) {
+      setState(() {
+        _videoMetaData = _controller.metadata;
+      });
+    }
+    if (_controller.value.isPlaying) {
+      if (timeStamp == 0) {
+        timeStamp = DateTime.now().millisecondsSinceEpoch;
+      } else {
+        time = DateTime.now().millisecondsSinceEpoch - timeStamp;
+      }
+    }
   }
 
   @override
@@ -51,6 +72,10 @@ class _ExcercisePlayerState extends State<ExcercisePlayer> {
   @override
   Widget build(BuildContext context) {
     return YoutubePlayerBuilder(
+      onEnterFullScreen: () {
+        SystemChrome.setPreferredOrientations(
+            [DeviceOrientation.landscapeLeft]);
+      },
       onExitFullScreen: () {
         SystemChrome.setPreferredOrientations(DeviceOrientation.values);
       },
@@ -58,6 +83,9 @@ class _ExcercisePlayerState extends State<ExcercisePlayer> {
         controller: _controller,
         showVideoProgressIndicator: true,
         progressIndicatorColor: Colors.blueAccent,
+        onReady: () {
+          _isPlayerReady = true;
+        },
         topActions: [
           SizedBox(height: 8.0),
           Expanded(
@@ -85,14 +113,14 @@ class _ExcercisePlayerState extends State<ExcercisePlayer> {
                 player,
                 SizedBox(height: 16),
                 Text(
-                  _controller.metadata.title,
+                  _videoMetaData.title,
                   style: textStyle.copyWith(
                     fontSize: 18,
                   ),
                 ),
                 SizedBox(height: 8),
                 Text(
-                  _controller.metadata.author,
+                  _videoMetaData.author,
                   style: textStyle.copyWith(
                     fontSize: 14,
                   ),
@@ -102,9 +130,14 @@ class _ExcercisePlayerState extends State<ExcercisePlayer> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () async {
+            await firestore
+                .collection('user_account_bi13rb8')
+                .doc(userData?.docId)
+                .update({'point': (time ~/ 60000)});
+          },
           child: Icon(
-            Icons.keyboard_arrow_right,
+            Icons.check,
           ),
         ),
       ),
