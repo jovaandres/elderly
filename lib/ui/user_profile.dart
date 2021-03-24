@@ -127,10 +127,19 @@ class UserProfileState extends State<UserProfile> {
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Icon(
-                                          Icons.people,
-                                          size: 20,
+                                        Container(
+                                          height: 80,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: NetworkImage(
+                                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWuzX8xbUWWDaFoTE8M258wuLVD7OsCQQuWfDzklDRxQThbhft1YGYIvvs4JsZqMcJ-0k&usqp=CAU",
+                                              ),
+                                            ),
+                                          ),
                                         ),
+                                        SizedBox(height: 4),
                                         Text(
                                           userDatas.name ?? 'Name',
                                           style: textStyle,
