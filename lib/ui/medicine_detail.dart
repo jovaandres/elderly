@@ -107,6 +107,7 @@ class _MedicineDetailState extends State<MedicineDetail> {
                         itemCount: 3,
                         itemBuilder: (context, index) {
                           return ListTile(
+                            enabled: !alarm.isReminderActive,
                             title: Text(
                               'Time-${index + 1}',
                               style: textStyle,

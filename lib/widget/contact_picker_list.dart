@@ -27,6 +27,7 @@ Widget contactPickerList(BuildContext context, Contact contact) {
       child: Padding(
         padding: const EdgeInsets.all(4),
         child: ListTile(
+          enabled: contact.phones?.isNotEmpty == true,
           leading: Icon(
             Icons.people,
           ),

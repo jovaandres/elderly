@@ -163,17 +163,63 @@ class UserProfileState extends State<UserProfile> {
                                     padding: const EdgeInsets.all(8),
                                     child: Column(
                                       children: [
-                                        Text(
-                                          '${userDatas.point ?? 0}',
-                                          style: textStyle,
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Column(
+                                              children: [
+                                                Text(
+                                                  'Height',
+                                                  style: textStyle.copyWith(
+                                                      fontSize: 18),
+                                                ),
+                                                SizedBox(height: 4),
+                                                Text(
+                                                  (userDatas.height ?? '0') +
+                                                      ' cm',
+                                                  style: textStyle.copyWith(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                            Column(
+                                              children: [
+                                                Text(
+                                                  'Weight',
+                                                  style: textStyle.copyWith(
+                                                      fontSize: 18),
+                                                ),
+                                                SizedBox(height: 4),
+                                                Text(
+                                                  (userDatas.weight ?? '0') +
+                                                      ' kg',
+                                                  style: textStyle.copyWith(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          userDatas.weight ?? '0',
-                                          style: textStyle,
-                                        ),
-                                        Text(
-                                          userDatas.height ?? '0',
-                                          style: textStyle,
+                                        SizedBox(height: 4),
+                                        Divider(color: Colors.blueAccent),
+                                        SizedBox(height: 4),
+                                        Column(
+                                          children: [
+                                            Text(
+                                              'Point',
+                                              style: textStyle.copyWith(
+                                                  fontSize: 18),
+                                            ),
+                                            SizedBox(height: 4),
+                                            Text(
+                                              '${userDatas.point ?? 0}',
+                                              style: textStyle.copyWith(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -183,29 +229,57 @@ class UserProfileState extends State<UserProfile> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 50),
+                        SizedBox(height: 36),
                         Text(
-                          'Today:',
+                          'Progress:',
                           style: textStyle,
                         ),
-                        ListTile(
-                          title: Text(
-                            'Activity',
-                            style: textStyle,
-                          ),
-                          subtitle: Text(
-                            'Description',
-                            style: textStyle,
-                          ),
-                        ),
-                        ListTile(
-                          title: Text(
-                            'Activity',
-                            style: textStyle,
-                          ),
-                          subtitle: Text(
-                            'Description',
-                            style: textStyle,
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0, 0),
+                                    blurRadius: 22,
+                                    color: Colors.grey,
+                                  )
+                                ],
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(8),
+                                ),
+                              ),
+                              width: MediaQuery.of(context).size.width * 0.95,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: Column(
+                                  children: [
+                                    ListTile(
+                                      title: Text(
+                                        'Activity',
+                                        style: textStyle,
+                                      ),
+                                      subtitle: Text(
+                                        'Description',
+                                        style: textStyle,
+                                      ),
+                                    ),
+                                    ListTile(
+                                      title: Text(
+                                        'Activity',
+                                        style: textStyle,
+                                      ),
+                                      subtitle: Text(
+                                        'Description',
+                                        style: textStyle,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                         Center(
