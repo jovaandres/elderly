@@ -124,27 +124,44 @@ class UserProfileState extends State<UserProfile> {
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(8),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Container(
-                                          height: 80,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: NetworkImage(
-                                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWuzX8xbUWWDaFoTE8M258wuLVD7OsCQQuWfDzklDRxQThbhft1YGYIvvs4JsZqMcJ-0k&usqp=CAU",
+                                    child: StreamBuilder<String>(
+                                      stream: storage
+                                          .ref()
+                                          .child(
+                                              '${auth.currentUser?.email}/profile.jpg')
+                                          .getDownloadURL()
+                                          .asStream(),
+                                      builder: (context, snapshot) {
+                                        return Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            GestureDetector(
+                                              child: Container(
+                                                height: 80,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  image: DecorationImage(
+                                                    fit: (snapshot.hasData)
+                                                        ? BoxFit.cover
+                                                        : BoxFit.fill,
+                                                    image: NetworkImage(
+                                                      snapshot.data ??
+                                                          'https://www.searchpng.com/wp-content/uploads/2019/02/Profile-PNG-Icon-715x715.png',
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
+                                              onTap: () {},
                                             ),
-                                          ),
-                                        ),
-                                        SizedBox(height: 4),
-                                        Text(
-                                          userDatas.name ?? 'Name',
-                                          style: textStyle,
-                                        ),
-                                      ],
+                                            SizedBox(height: 4),
+                                            Text(
+                                              userDatas.name ??
+                                                  userData?.name as String,
+                                              style: textStyle,
+                                            ),
+                                          ],
+                                        );
+                                      },
                                     ),
                                   ),
                                 ),
@@ -185,7 +202,9 @@ class UserProfileState extends State<UserProfile> {
                                                 ),
                                                 SizedBox(height: 4),
                                                 Text(
-                                                  (userDatas.height ?? '0') +
+                                                  (userDatas.height ??
+                                                          userData?.height
+                                                              as String) +
                                                       ' cm',
                                                   style: textStyle.copyWith(
                                                       fontWeight:
@@ -202,7 +221,9 @@ class UserProfileState extends State<UserProfile> {
                                                 ),
                                                 SizedBox(height: 4),
                                                 Text(
-                                                  (userDatas.weight ?? '0') +
+                                                  (userDatas.weight ??
+                                                          userData?.weight
+                                                              as String) +
                                                       ' kg',
                                                   style: textStyle.copyWith(
                                                       fontWeight:
