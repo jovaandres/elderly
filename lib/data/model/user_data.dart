@@ -8,6 +8,7 @@ class UserData {
     this.weight,
     this.docId,
     this.family,
+    this.point,
   });
 
   String? age;
@@ -18,6 +19,7 @@ class UserData {
   String? weight;
   String? docId;
   String? family;
+  int? point;
 
   factory UserData.fromJson(Map<String, dynamic> json) => UserData(
         age: json["age"] == null ? null : json["age"],
@@ -28,6 +30,7 @@ class UserData {
         weight: json["weight"] == null ? null : json["weight"],
         docId: json["docId"] == null ? null : json["docId"],
         family: json["family"] == null ? null : json["family"],
+        point: json["point"] == null ? null : json["point"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -39,5 +42,6 @@ class UserData {
         "weight": weight == null ? null : weight,
         "docId": docId == null ? null : docId,
         "family": family == null ? null : family,
+        "point": point == null ? null : point,
       };
 }

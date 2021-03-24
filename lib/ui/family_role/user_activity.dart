@@ -5,8 +5,6 @@ import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/data/model/activity.dart';
 import 'package:workout_flutter/ui/family_role/search_elderly_page.dart';
 import 'package:workout_flutter/widget/build_activity_list.dart';
-import 'package:workout_flutter/widget/menu_tile.dart';
-import 'package:workout_flutter/widget/sign_in_button.dart';
 import 'package:workout_flutter/main.dart';
 
 class UserActivity extends StatefulWidget {
@@ -102,7 +100,12 @@ class _UserActivityState extends State<UserActivity> {
                     SizedBox(
                       width: 120,
                       height: 38,
-                      child: signInButton(),
+                      child: TextButton(
+                        child: Text('Sign Out'),
+                        onPressed: () {
+                          auth.signOut();
+                        },
+                      ),
                     ),
                   ],
                 ),
@@ -110,11 +113,6 @@ class _UserActivityState extends State<UserActivity> {
                   color: Colors.blue,
                 ),
               ),
-              MenuTile(title: 'Item 1'),
-              MenuTile(title: 'Item 2'),
-              MenuTile(title: 'Item 3'),
-              MenuTile(title: 'Item 4'),
-              MenuTile(title: 'Item 5'),
             ],
           ),
         ),
