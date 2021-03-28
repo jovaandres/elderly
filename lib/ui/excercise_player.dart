@@ -7,7 +7,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class ExcercisePlayer extends StatefulWidget {
   static const routeName = '/excercise_player_page';
-  final String link;
+  final List link;
 
   ExcercisePlayer({required this.link});
 
@@ -16,6 +16,7 @@ class ExcercisePlayer extends StatefulWidget {
 }
 
 class _ExcercisePlayerState extends State<ExcercisePlayer> {
+  late String title;
   late YoutubePlayerController _controller;
   late YoutubeMetaData _videoMetaData;
   bool _isPlayerReady = false;
@@ -24,9 +25,10 @@ class _ExcercisePlayerState extends State<ExcercisePlayer> {
 
   @override
   void initState() {
+    title = widget.link[0];
     super.initState();
     _controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(widget.link),
+      initialVideoId: YoutubePlayer.convertUrlToId(widget.link[1]),
       flags: const YoutubePlayerFlags(
         hideControls: false,
         controlsVisibleAtStart: true,
@@ -135,6 +137,13 @@ class _ExcercisePlayerState extends State<ExcercisePlayer> {
                 .collection('user_account_bi13rb8')
                 .doc(userData?.docId)
                 .update({'point': (time ~/ 60000)});
+            await firestore.collection('user_activity_bi13rb8').add({
+              "activity": 'Doing $title Exercise',
+              "id": auth.currentUser?.email,
+              "time": DateTime.now().toString()
+            });
+            final snackBar = SnackBar(content: Text('Your record saved'));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
           },
           child: Icon(
             Icons.check,

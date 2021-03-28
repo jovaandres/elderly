@@ -1,8 +1,15 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:workout_flutter/common/constant.dart';
+import 'package:workout_flutter/common/navigation.dart';
+import 'package:workout_flutter/data/model/notification.dart';
 import 'package:workout_flutter/data/model/user_data.dart';
 import 'package:workout_flutter/main.dart';
+import 'package:workout_flutter/ui/authentication/login_page.dart';
 
 class UserProfile extends StatefulWidget {
   static const routeName = '/profile_page';
@@ -12,6 +19,9 @@ class UserProfile extends StatefulWidget {
 }
 
 class UserProfileState extends State<UserProfile> {
+  final String profileImage = '';
+  final picker = ImagePicker();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -151,12 +161,18 @@ class UserProfileState extends State<UserProfile> {
                                                   ),
                                                 ),
                                               ),
-                                              onTap: () {},
+                                              onTap: () async {
+                                                await getImage();
+                                              },
                                             ),
                                             SizedBox(height: 4),
                                             Text(
-                                              userDatas.name ??
-                                                  userData?.name as String,
+                                              userDatas.name
+                                                      ?.split(' ')
+                                                      .first ??
+                                                  userData?.name
+                                                      ?.split(' ')
+                                                      .first as String,
                                               style: textStyle,
                                             ),
                                           ],
@@ -313,12 +329,67 @@ class UserProfileState extends State<UserProfile> {
                           ),
                         ),
                         Center(
-                            child: TextButton(
-                          child: Text('Sign Out'),
-                          onPressed: () {
-                            auth.signOut();
-                          },
-                        ))
+                          child: StreamBuilder<QuerySnapshot>(
+                            stream: firestore
+                                .collection('user_notification_bi13rb8')
+                                .where('id', isEqualTo: auth.currentUser?.email)
+                                .snapshots(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return CircularProgressIndicator();
+                              } else if (snapshot.hasData) {
+                                final List<NotificationModel> notifs = [];
+                                final notifications = snapshot.data?.docs
+                                    as List<QueryDocumentSnapshot>;
+                                for (var notification in notifications) {
+                                  final id = notification.data()?['id'];
+                                  final name = notification.data()?['name'];
+                                  final message =
+                                      notification.data()?['message'];
+                                  final sender = notification.data()?['sender'];
+                                  notifs.add(NotificationModel(
+                                    id: id,
+                                    name: name,
+                                    message: message,
+                                    sender: sender,
+                                  ));
+                                }
+                                return ListView.builder(
+                                  itemCount: notifs.length,
+                                  itemBuilder: (context, index) {
+                                    return ListTile(
+                                      title: Text(
+                                        notifs[index].sender as String,
+                                        style: textStyle,
+                                      ),
+                                      subtitle: Text(
+                                        '${notifs[index].name} ${notifs[index].message}',
+                                        style: textStyle,
+                                      ),
+                                    );
+                                  },
+                                );
+                              } else if (snapshot.hasError) {
+                                return Text(
+                                  'Error',
+                                  style: textStyle,
+                                );
+                              } else {
+                                return Text('No Data');
+                              }
+                            },
+                          ),
+                        ),
+                        Center(
+                          child: TextButton(
+                            child: Text('Sign Out'),
+                            onPressed: () {
+                              auth.signOut();
+                              Navigation.intentReplace(LoginPage.routeName);
+                            },
+                          ),
+                        ),
                       ],
                     );
                   } else if (snapshot.hasError) {
@@ -332,10 +403,34 @@ class UserProfileState extends State<UserProfile> {
                   }
                 },
               ),
-            )
+            ),
           ],
         ),
       ),
     );
+  }
+
+  Future getImage() async {
+    final pickedFile = await picker.getImage(
+      source: ImageSource.gallery,
+      imageQuality: 50,
+    );
+    if (pickedFile != null) {
+      await File(pickedFile.path).copy('$path/profile.jpg');
+    }
+
+    setState(() {
+      if (pickedFile != null) {
+        uploadImageToFirebase();
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  Future uploadImageToFirebase() async {
+    Reference firebaseStorageRef =
+        storage.ref().child('${auth.currentUser?.email}/profile.jpg');
+    await firebaseStorageRef.putFile(File('$path/profile.jpg'));
   }
 }

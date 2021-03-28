@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/data/model/activity.dart';
+import 'package:workout_flutter/ui/authentication/login_page.dart';
 import 'package:workout_flutter/ui/family_role/search_elderly_page.dart';
 import 'package:workout_flutter/widget/build_activity_list.dart';
 import 'package:workout_flutter/main.dart';
@@ -97,13 +99,15 @@ class _UserActivityState extends State<UserActivity> {
                           : "Hello User!",
                       style: TextStyle(fontSize: 18),
                     ),
-                    SizedBox(
-                      width: 120,
-                      height: 38,
+                    Center(
                       child: TextButton(
-                        child: Text('Sign Out'),
+                        child: Text(
+                          'Sign Out',
+                          style: textStyle.copyWith(color: Colors.white),
+                        ),
                         onPressed: () {
                           auth.signOut();
+                          Navigation.intentReplace(LoginPage.routeName);
                         },
                       ),
                     ),

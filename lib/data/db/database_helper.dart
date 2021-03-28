@@ -29,7 +29,8 @@ class DatabaseHelper {
           weight TEXT,
           height TEXT,
           docId TEXT,
-          family TEXT
+          family TEXT,
+          point INTEGER
         )''');
       },
       version: 1,

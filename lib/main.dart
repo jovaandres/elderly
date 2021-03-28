@@ -146,7 +146,8 @@ class MyApp extends StatelessWidget {
                         ModalRoute.of(context)?.settings.arguments as Exercise,
                   ),
               ExcercisePlayer.routeName: (context) => ExcercisePlayer(
-                    link: ModalRoute.of(context)?.settings.arguments as String,
+                    link: ModalRoute.of(context)?.settings.arguments
+                        as List<String>,
                   ),
               DetailHospital.routeName: (context) => DetailHospital(
                     hospitalId:

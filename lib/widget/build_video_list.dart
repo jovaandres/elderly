@@ -3,8 +3,8 @@ import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/ui/excercise_player.dart';
 
-Widget buildVideoList(
-    BuildContext context, String title, String description, String link) {
+Widget buildVideoList(BuildContext context, String name, String title,
+    String description, String link) {
   return Center(
     child: Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
@@ -40,7 +40,7 @@ Widget buildVideoList(
             style: textStyle,
           ),
           onTap: () {
-            Navigation.intentWithData(ExcercisePlayer.routeName, link);
+            Navigation.intentWithData(ExcercisePlayer.routeName, [name, link]);
           },
         ),
       ),

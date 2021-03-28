@@ -191,6 +191,7 @@ class _LoginPageState extends State<LoginPage> {
                     final height = userDocs.data()?['height'];
                     final weight = userDocs.data()?['weight'];
                     final family = userDocs.data()?['family'];
+                    final point = userDocs.data()?['point'];
                     final docId = userDocs.id;
                     final userDatas = UserData(
                       age: age,
@@ -201,6 +202,7 @@ class _LoginPageState extends State<LoginPage> {
                       role: role,
                       docId: docId,
                       family: family,
+                      point: point,
                     );
                     await databaseHelper.insertUserData(userDatas);
                     userData = await databaseHelper

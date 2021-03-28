@@ -24,34 +24,34 @@ class _MyHomePageState extends State<MyHomePage> {
   final BackgroundService _service = BackgroundService();
 
   List<Widget> _listWidget = [
-    HospitalNearbyPage(),
-    FamilyContactPage(),
-    ExercisePage(),
     UserProfile(),
+    ExercisePage(),
     MedicinePage(),
+    FamilyContactPage(),
+    HospitalNearbyPage(),
   ];
 
   List<BottomNavigationBarItem> _bottomBarItem = [
     BottomNavigationBarItem(
-      icon: Icon(Icons.local_hospital),
-      label: 'Hospital',
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.contact_phone),
-      label: 'Contact',
+      icon: Icon(Icons.person),
+      label: 'Profile',
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.explore_rounded),
       label: 'Exercise',
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.person),
-      label: 'Profile',
-    ),
-    BottomNavigationBarItem(
       icon: Icon(Icons.medical_services),
       label: 'Medicine',
-    )
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.contact_phone),
+      label: 'Contact',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.local_hospital),
+      label: 'Hospital',
+    ),
   ];
 
   Widget _buildAndroid(BuildContext context) {

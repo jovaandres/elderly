@@ -222,7 +222,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       "weight": _weightFieldController.text,
                       "height": _heightFieldController.text,
                       "email": _emailFieldController.text,
-                      "role": _role
+                      "role": _role,
+                      "point": 0,
                     });
                     final userDatas = UserData(
                       age: _ageFieldController.text,

@@ -42,6 +42,7 @@ class _ExcerciseDetailState extends State<ExcerciseDetail> {
                   verticalOffset: 50.0,
                   child: buildVideoList(
                     context,
+                    _exercise.name as String,
                     'Video ${index + 1}',
                     _exercise.video?.description?[index] as String,
                     _exercise.video?.link?[index] as String,

@@ -69,6 +69,10 @@ Widget contactPickerList(BuildContext context, Contact contact) {
                               (contact.phones?.isNotEmpty == true)
                                   ? contact.phones?.first.value as String
                                   : '-');
+                          final snackBar = SnackBar(
+                              content: Text(
+                                  '${contact.displayName} added to main contact'));
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           Navigation.back();
                         },
                         child: Text('OK'),

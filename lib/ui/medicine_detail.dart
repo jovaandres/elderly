@@ -240,7 +240,10 @@ class _MedicineDetailState extends State<MedicineDetail> {
   }
 
   Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    final pickedFile = await picker.getImage(
+      source: ImageSource.camera,
+      imageQuality: 50,
+    );
     if (pickedFile != null) {
       await File(pickedFile.path).copy('$path/${medical.name}.jpg');
     }
