@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/common/navigation.dart';
+import 'package:workout_flutter/main.dart';
 import 'package:workout_flutter/ui/excercise_player.dart';
 
 Widget buildVideoList(BuildContext context, String name, String title,
@@ -26,10 +27,25 @@ Widget buildVideoList(BuildContext context, String name, String title,
       child: Padding(
         padding: const EdgeInsets.all(4),
         child: ListTile(
-          leading: Image(
-            image: AssetImage('assets/yoga.jpg'),
-            width: 75,
-            height: 75,
+          leading: StreamBuilder<String>(
+            stream: storage
+                .ref()
+                .child('${name.trim().toLowerCase()}.jpg')
+                .getDownloadURL()
+                .asStream(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Image.network(
+                  snapshot.data as String,
+                  width: 75,
+                  height: 75,
+                );
+              }
+              return Container(
+                width: 75,
+                height: 75,
+              );
+            },
           ),
           title: Text(
             title,

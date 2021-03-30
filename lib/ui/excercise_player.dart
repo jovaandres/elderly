@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:workout_flutter/common/constant.dart';
+import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/main.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -132,18 +134,54 @@ class _ExcercisePlayerState extends State<ExcercisePlayer> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
+          backgroundColor:
+              (_controller.value.isPlaying || !_controller.value.isReady)
+                  ? Colors.grey
+                  : Colors.blueAccent,
           onPressed: () async {
-            await firestore
-                .collection('user_account_bi13rb8')
-                .doc(userData?.docId)
-                .update({'point': (time ~/ 60000)});
-            await firestore.collection('user_activity_bi13rb8').add({
-              "activity": 'Doing $title Exercise',
-              "id": auth.currentUser?.email,
-              "time": DateTime.now().toString()
-            });
-            final snackBar = SnackBar(content: Text('Your record saved'));
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            if (!_controller.value.isPlaying && _controller.value.isReady) {
+              final data = await firestore
+                  .collection('user_account_bi13rb8')
+                  .doc(userData?.docId)
+                  .get();
+              final currentPoint = data['point'];
+              print(currentPoint);
+              await firestore
+                  .collection('user_account_bi13rb8')
+                  .doc(userData?.docId)
+                  .update({'point': currentPoint + (time ~/ 1000)});
+              await firestore.collection('user_activity_bi13rb8').add({
+                "activity": 'Doing $title Exercise',
+                "id": auth.currentUser?.email,
+                "time": DateTime.now().toString()
+              });
+              await showDialog(
+                context: context,
+                builder: (_) => NetworkGiffyDialog(
+                  image: Image.network(
+                      "https://raw.githubusercontent.com/Shashank02051997/FancyGifDialog-Android/master/GIF's/gif14.gif"),
+                  title: Text(
+                    'Your Activity Recorded\n Yeaayy! You Got ${time ~/ 1000} point' +
+                        (((time ~/ 1000) > 1) ? 's' : ''),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  description: Text(
+                    'Always Do Exercise To Collect More Points',
+                    textAlign: TextAlign.center,
+                  ),
+                  entryAnimation: EntryAnimation.TOP,
+                  onOkButtonPressed: () {
+                    Navigation.back();
+                  },
+                ),
+              );
+              timeStamp = 0;
+              time = 0;
+            }
           },
           child: Icon(
             Icons.check,

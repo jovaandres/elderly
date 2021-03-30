@@ -255,20 +255,43 @@ class UserProfileState extends State<UserProfile> {
                                         SizedBox(height: 4),
                                         Divider(color: Colors.blueAccent),
                                         SizedBox(height: 4),
-                                        Column(
-                                          children: [
-                                            Text(
-                                              'Point',
-                                              style: textStyle.copyWith(
-                                                  fontSize: 18),
-                                            ),
-                                            SizedBox(height: 4),
-                                            Text(
-                                              '${userDatas.point ?? 0}',
-                                              style: textStyle.copyWith(
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
+                                        GestureDetector(
+                                          onTap: () {
+                                            showDialog(
+                                              context: context,
+                                              barrierDismissible: true,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  title: Text('Redeem Point'),
+                                                  content:
+                                                      SingleChildScrollView(
+                                                    child: ListBody(
+                                                      children: <Widget>[
+                                                        Text(
+                                                            'This feature will be coming soon'),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          },
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                'Point',
+                                                style: textStyle.copyWith(
+                                                    fontSize: 18),
+                                              ),
+                                              SizedBox(height: 4),
+                                              Text(
+                                                '${userDatas.point ?? 0}',
+                                                style: textStyle.copyWith(
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),

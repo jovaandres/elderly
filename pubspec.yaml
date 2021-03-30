@@ -57,6 +57,7 @@ dependencies:
   geolocator: ^7.0.1
   flutter_launcher_icons: ^0.8.1
   modal_bottom_sheet: ^2.0.0
+  giffy_dialog: ^1.8.0
 
 dev_dependencies:
   flutter_test:

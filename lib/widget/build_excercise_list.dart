@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/data/model/excercise.dart';
+import 'package:workout_flutter/main.dart';
 import 'package:workout_flutter/ui/excercise_detail.dart';
 
 Widget buildExcercise(BuildContext context, Exercise exercise) {
@@ -33,9 +34,24 @@ Widget buildExcercise(BuildContext context, Exercise exercise) {
               ),
             ),
             SizedBox(height: 8),
-            Image(
-              height: 80,
-              image: AssetImage('assets/yoga.jpg'),
+            StreamBuilder<String>(
+              stream: storage
+                  .ref()
+                  .child(
+                      '${exercise.name?.trim().replaceAll(' ', '').toLowerCase()}.jpg')
+                  .getDownloadURL()
+                  .asStream(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Image(
+                      image: NetworkImage(snapshot.data as String),
+                    ),
+                  );
+                }
+                return Container();
+              },
             ),
             TextButton(
               child: Text(

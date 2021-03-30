@@ -51,8 +51,8 @@ class NotificationHelper {
         android: androidPlatformChannelSpesifics,
         iOS: iOSPlatformChannelSpesifics);
 
-    var titleNotification = 'This is reminder Title';
-    var contentNotification = 'This is reminder content';
+    var titleNotification = 'MEDICATION REMINDER';
+    var contentNotification = 'DON\'T FORGET TO TAKE YOUR MEDICINE NOW';
 
     await flutterLocalNotificationsPlugin.show(
         0, titleNotification, contentNotification, platformChannelSpesifics,

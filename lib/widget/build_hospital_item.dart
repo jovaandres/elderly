@@ -71,9 +71,11 @@ Widget buildHospitalList(BuildContext context, NearbyResult result) {
                           final DetailResult _hospital =
                               state.result?.result as DetailResult;
                           if (state.state == ResultState.Loading) {
-                            print('Loading');
-                            return Center(
-                              child: CircularProgressIndicator(),
+                            return Padding(
+                              padding: EdgeInsets.only(top: 32),
+                              child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
                             );
                           } else if (state.state == ResultState.HasData) {
                             return Center(
@@ -100,33 +102,19 @@ Widget buildHospitalList(BuildContext context, NearbyResult result) {
                                             '&key=$apiKey')
                                         : Image.network(
                                             _hospital.icon as String),
-                                    TextButton(
-                                      child: Text(
-                                        _hospital.internationalPhoneNumber ??
-                                            '-',
-                                        style: textStyle.copyWith(
-                                          color: Colors.blue,
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        makingPhoneCall(
-                                            _hospital.internationalPhoneNumber
-                                                as String);
-                                      },
-                                    ),
                                     SizedBox(height: 16),
                                     Text(
                                       _hospital.formattedAddress as String,
                                       textAlign: TextAlign.center,
-                                      style: textStyle.copyWith(fontSize: 18),
+                                      style: textStyle.copyWith(fontSize: 16),
                                     ),
                                     SizedBox(height: 32),
                                     Container(
-                                      height: 40,
-                                      width: 270,
+                                      height: 50,
+                                      width: 100,
                                       decoration: BoxDecoration(
                                         color: Colors.blue,
-                                        borderRadius: BorderRadius.circular(16),
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
                                       child: TextButton(
                                         onPressed: () {
@@ -138,12 +126,10 @@ Widget buildHospitalList(BuildContext context, NearbyResult result) {
                                                 as String);
                                           }
                                         },
-                                        child: Text(
-                                          'CALL',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                          ),
+                                        child: Icon(
+                                          Icons.call,
+                                          color: Colors.white,
+                                          size: 24,
                                         ),
                                       ),
                                     )
@@ -171,10 +157,6 @@ Widget buildHospitalList(BuildContext context, NearbyResult result) {
                 ),
               ),
             );
-            // Navigation.intentWithData(
-            //   DetailHospital.routeName,
-            //   result.placeId as String,
-            // );
           },
         ),
       ),

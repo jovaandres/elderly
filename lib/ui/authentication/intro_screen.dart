@@ -40,6 +40,7 @@ class IntroScreenState extends State<IntroScreen> {
             TextButton(
               child: Text(
                 "Icons vector created by rawpixel.com - www.freepik.com",
+                style: TextStyle(color: Colors.grey.shade100),
                 textAlign: TextAlign.center,
               ),
               onPressed: () async {
@@ -50,7 +51,7 @@ class IntroScreenState extends State<IntroScreen> {
                 }
               },
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 32),
             Text(
               "One Exercise A Day Keeps The Whole Worries Away!",
               textAlign: TextAlign.center,
@@ -83,6 +84,7 @@ class IntroScreenState extends State<IntroScreen> {
               child: Text(
                 "Background vector created by rawpixel.com - www.freepik.com",
                 textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.grey.shade100),
               ),
               onPressed: () async {
                 if (await canLaunch(
@@ -93,7 +95,7 @@ class IntroScreenState extends State<IntroScreen> {
                 }
               },
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 32),
             Text(
               "Be Happy And Enjoy Life",
               textAlign: TextAlign.center,

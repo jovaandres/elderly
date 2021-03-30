@@ -98,37 +98,38 @@ class _HospitalNearbyPageState extends State<HospitalNearbyPage> {
     WidgetsBinding.instance?.addPostFrameCallback((_) async {
       if (auth.currentUser?.emailVerified != true) {
         showDialog(
-            context: context,
-            barrierDismissible: true,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text('Verify Email'),
-                content: SingleChildScrollView(
-                  child: ListBody(
-                    children: <Widget>[
-                      Text('Please verify your email to continue'),
-                    ],
-                  ),
+          context: context,
+          barrierDismissible: true,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Verify Email'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Text('Please verify your email to continue'),
+                  ],
                 ),
-                actions: <Widget>[
-                  TextButton(
-                    child: Text('Re-Send'),
-                    onPressed: () async {
-                      auth.currentUser?.sendEmailVerification();
-                      await auth.signOut();
-                      Navigation.intentReplace(LoginPage.routeName);
-                    },
-                  ),
-                  TextButton(
-                    child: Text('OK'),
-                    onPressed: () async {
-                      await auth.signOut();
-                      Navigation.intentReplace(LoginPage.routeName);
-                    },
-                  ),
-                ],
-              );
-            });
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('Re-Send'),
+                  onPressed: () async {
+                    auth.currentUser?.sendEmailVerification();
+                    await auth.signOut();
+                    Navigation.intentReplace(LoginPage.routeName);
+                  },
+                ),
+                TextButton(
+                  child: Text('OK'),
+                  onPressed: () async {
+                    await auth.signOut();
+                    Navigation.intentReplace(LoginPage.routeName);
+                  },
+                ),
+              ],
+            );
+          },
+        );
       }
     });
   }
