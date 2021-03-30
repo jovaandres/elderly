@@ -124,10 +124,6 @@ class _HospitalNearbyPageState extends State<HospitalNearbyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text("Hospital Nearby"),
-      //   toolbarHeight: _showAppbar ? 56.0 : 0,
-      // ),
       body: SafeArea(
         child: Column(
           children: [
@@ -154,9 +150,7 @@ class _HospitalNearbyPageState extends State<HospitalNearbyPage> {
                     child: Column(
                       children: [
                         Text(
-                          (userData != null)
-                              ? "Hello ${userData?.name}"
-                              : "Hello User!",
+                          "AeraCall",
                           style: textStyle.copyWith(
                             fontSize: 18,
                           ),

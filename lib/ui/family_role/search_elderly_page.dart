@@ -117,14 +117,17 @@ class _SearchPageState extends State<SearchPage> {
                                       actions: <Widget>[
                                         TextButton(
                                           child: Text('OK'),
-                                          onPressed: () {
-                                            firestore
+                                          onPressed: () async {
+                                            await firestore
                                                 .collection(
-                                                    'user_account_bi13rb8')
-                                                .doc(userData?.docId)
-                                                .update({
-                                              'family': state.result?[index]
-                                                  .email as String
+                                                    'user_notification_bi13rb8')
+                                                .add({
+                                              "id": state.result?[index].email,
+                                              "message":
+                                                  "want to add you as family",
+                                              "name": userData?.name,
+                                              "sender": auth.currentUser?.email,
+                                              "userDocId": userData?.docId,
                                             });
                                             Navigation.back();
                                             showDialog(

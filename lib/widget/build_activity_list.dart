@@ -20,7 +20,7 @@ Widget buildActivityList(BuildContext context, Activity activity) {
         ),
       ),
       height: 75,
-      width: MediaQuery.of(context).size.width * 0.9,
+      width: MediaQuery.of(context).size.width * 0.95,
       child: Padding(
         padding: EdgeInsets.all(4),
         child: ListTile(

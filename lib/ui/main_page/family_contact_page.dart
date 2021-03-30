@@ -23,9 +23,6 @@ class _FamilyContactPageState extends State<FamilyContactPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text("Contact"),
-      // ),
       body: _buildList(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
@@ -71,7 +68,7 @@ class _FamilyContactPageState extends State<FamilyContactPage> {
                   child: Column(
                     children: [
                       Text(
-                        'Family Contact',
+                        'AeraCall',
                         style: textStyle.copyWith(
                           fontSize: 18,
                         ),

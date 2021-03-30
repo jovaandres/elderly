@@ -23,7 +23,7 @@ Widget contactPickerList(BuildContext context, Contact contact) {
         ),
       ),
       height: 75,
-      width: MediaQuery.of(context).size.width * 0.9,
+      width: MediaQuery.of(context).size.width * 0.95,
       child: Padding(
         padding: const EdgeInsets.all(4),
         child: ListTile(

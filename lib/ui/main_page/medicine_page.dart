@@ -32,9 +32,6 @@ class _MedicinePageState extends State<MedicinePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text("Medicine"),
-      // ),
       body: SafeArea(
         child: _buildList(),
       ),
@@ -164,7 +161,7 @@ class _MedicinePageState extends State<MedicinePage> {
                 child: Column(
                   children: [
                     Text(
-                      "Medicine",
+                      "AeraMed",
                       style: textStyle.copyWith(
                         fontSize: 18,
                       ),

@@ -21,7 +21,7 @@ Widget buildExcercise(BuildContext context, Exercise exercise) {
           Radius.circular(8),
         ),
       ),
-      width: MediaQuery.of(context).size.width * 0.9,
+      width: MediaQuery.of(context).size.width * 0.95,
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(

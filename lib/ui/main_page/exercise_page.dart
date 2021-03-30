@@ -17,9 +17,6 @@ class _ExercisePageState extends State<ExercisePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text("Exercise"),
-      // ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +44,7 @@ class _ExercisePageState extends State<ExercisePage> {
                     child: Column(
                       children: [
                         Text(
-                          "Hello User!",
+                          "AeraHealth",
                           style: textStyle.copyWith(
                             fontSize: 18,
                           ),
