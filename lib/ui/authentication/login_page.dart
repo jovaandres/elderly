@@ -172,8 +172,8 @@ class _LoginPageState extends State<LoginPage> {
                   });
                   try {
                     FocusScope.of(context).unfocus();
-                    final inputEmail = _emailFieldController.text;
-                    final inputPassword = _passwordFieldController.text;
+                    final inputEmail = _emailFieldController.text.trim();
+                    final inputPassword = _passwordFieldController.text.trim();
 
                     await auth.signInWithEmailAndPassword(
                         email: inputEmail, password: inputPassword);

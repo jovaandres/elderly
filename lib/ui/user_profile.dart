@@ -145,20 +145,24 @@ class UserProfileState extends State<UserProfile> {
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             GestureDetector(
-                                              child: Container(
-                                                height: 80,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  image: DecorationImage(
-                                                    fit: (snapshot.hasData)
-                                                        ? BoxFit.cover
-                                                        : BoxFit.fill,
-                                                    image: NetworkImage(
-                                                      snapshot.data ??
-                                                          'https://www.searchpng.com/wp-content/uploads/2019/02/Profile-PNG-Icon-715x715.png',
+                                              child: Tooltip(
+                                                child: Container(
+                                                  height: 80,
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    image: DecorationImage(
+                                                      fit: (snapshot.hasData)
+                                                          ? BoxFit.cover
+                                                          : BoxFit.fill,
+                                                      image: NetworkImage(
+                                                        snapshot.data ??
+                                                            'https://www.searchpng.com/wp-content/uploads/2019/02/Profile-PNG-Icon-715x715.png',
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
+                                                message:
+                                                    'People vector created by pch.vector - www.freepik.com',
                                               ),
                                               onTap: () async {
                                                 await getImage();
