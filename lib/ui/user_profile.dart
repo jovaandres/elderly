@@ -291,7 +291,6 @@ class UserProfileState extends State<UserProfile> {
                                 .orderBy('time')
                                 .snapshots(),
                             builder: (context, snapshot) {
-                              print(userData?.toJson());
                               if (snapshot.connectionState ==
                                   ConnectionState.waiting) {
                                 return Center(
@@ -373,6 +372,8 @@ class UserProfileState extends State<UserProfile> {
                                   ));
                                 }
                                 return ListView.builder(
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
                                   itemCount: notifs.length,
                                   itemBuilder: (context, index) {
                                     return ListTile(

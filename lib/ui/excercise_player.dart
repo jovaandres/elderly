@@ -105,7 +105,7 @@ class _ExcercisePlayerState extends State<ExcercisePlayer> {
       ),
       builder: (context, player) => Scaffold(
         appBar: AppBar(
-          title: Text("Medicine Detail"),
+          title: Text("Exercise Player"),
         ),
         body: Center(
           child: Padding(
