@@ -1,6 +1,3 @@
-import 'dart:io';
-
-// import 'package:android_intent/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -25,22 +22,37 @@ class HospitalNearbyPage extends StatefulWidget {
 class _HospitalNearbyPageState extends State<HospitalNearbyPage> {
   Position? _position;
 
-  void openLocationSetting() async {
-    if (Platform.isAndroid) {
-      // final AndroidIntent intent = new AndroidIntent(
-      //   action: 'android.settings.LOCATION_SOURCE_SETTINGS',
-      // );
-      // await intent.launch();
-    }
-  }
-
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
+
     if (!serviceEnabled) {
-      openLocationSetting();
+      showDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Can\'t Perform This Feature'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Text(
+                        "Please turn on location services to use this feature"),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('OK'),
+                  onPressed: () {
+                    Navigation.back();
+                  },
+                ),
+              ],
+            );
+          });
     }
 
     permission = await Geolocator.checkPermission();

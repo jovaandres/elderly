@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/common/navigation.dart';
+import 'package:workout_flutter/data/model/detail_places.dart';
 import 'package:workout_flutter/data/model/nearby_search.dart';
-import 'package:workout_flutter/ui/hospital_detail.dart';
+import 'package:workout_flutter/provider/detail_hospital_provider.dart';
+import 'package:workout_flutter/util/phone_call.dart';
+import 'package:workout_flutter/util/result_state.dart';
 
 Widget buildHospitalList(BuildContext context, NearbyResult result) {
   return Center(
@@ -54,10 +58,123 @@ Widget buildHospitalList(BuildContext context, NearbyResult result) {
             overflow: TextOverflow.ellipsis,
           ),
           onTap: () {
-            Navigation.intentWithData(
-              DetailHospital.routeName,
-              result.placeId as String,
+            Provider.of<DetailHospitalProvider>(context, listen: false)
+                .fetchHospitalDetail(result.placeId as String);
+            showModalBottomSheet(
+              context: context,
+              builder: (context) => Scaffold(
+                body: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Consumer<DetailHospitalProvider>(
+                        builder: (context, state, _) {
+                          final DetailResult _hospital =
+                              state.result?.result as DetailResult;
+                          if (state.state == ResultState.Loading) {
+                            print('Loading');
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else if (state.state == ResultState.HasData) {
+                            return Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      _hospital.name as String,
+                                      style: textStyle.copyWith(
+                                        fontSize: 24,
+                                      ),
+                                    ),
+                                    SizedBox(height: 16),
+                                    (_hospital.photos?.isNotEmpty == true)
+                                        ? Image.network(baseUrl +
+                                            'photo?maxwidth=400&photoreference=' +
+                                            ((_hospital.photos
+                                                    as List<PhotoDetail>)
+                                                  ..shuffle())
+                                                .first
+                                                .photoReference
+                                                .toString() +
+                                            '&key=$apiKey')
+                                        : Image.network(
+                                            _hospital.icon as String),
+                                    TextButton(
+                                      child: Text(
+                                        _hospital.internationalPhoneNumber ??
+                                            '-',
+                                        style: textStyle.copyWith(
+                                          color: Colors.blue,
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        makingPhoneCall(
+                                            _hospital.internationalPhoneNumber
+                                                as String);
+                                      },
+                                    ),
+                                    SizedBox(height: 16),
+                                    Text(
+                                      _hospital.formattedAddress as String,
+                                      textAlign: TextAlign.center,
+                                      style: textStyle.copyWith(fontSize: 18),
+                                    ),
+                                    SizedBox(height: 32),
+                                    Container(
+                                      height: 40,
+                                      width: 270,
+                                      decoration: BoxDecoration(
+                                        color: Colors.blue,
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                      child: TextButton(
+                                        onPressed: () {
+                                          if (_hospital
+                                                  .internationalPhoneNumber !=
+                                              null) {
+                                            makingPhoneCall(_hospital
+                                                    .internationalPhoneNumber
+                                                as String);
+                                          }
+                                        },
+                                        child: Text(
+                                          'CALL',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          } else if (state.state == ResultState.NoData) {
+                            return Center(
+                              child: Text(
+                                  'Data not displayed successfully ${state.message}'),
+                            );
+                          } else if (state.state == ResultState.Error) {
+                            return Center(
+                              child: Text(
+                                  'Data not displayed successfully ${state.message}'),
+                            );
+                          } else {
+                            return Center(child: Text(''));
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             );
+            // Navigation.intentWithData(
+            //   DetailHospital.routeName,
+            //   result.placeId as String,
+            // );
           },
         ),
       ),

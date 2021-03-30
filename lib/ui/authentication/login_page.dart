@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Container(
                   width: 200,
                   height: 150,
-                  child: Image.asset('assets/flutter-logo.png'),
+                  child: Image.asset('assets/logo.png'),
                 ),
               ),
             ),

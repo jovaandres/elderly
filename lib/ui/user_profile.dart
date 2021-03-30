@@ -3,13 +3,16 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/common/navigation.dart';
+import 'package:workout_flutter/data/model/activity.dart';
 import 'package:workout_flutter/data/model/notification.dart';
 import 'package:workout_flutter/data/model/user_data.dart';
 import 'package:workout_flutter/main.dart';
 import 'package:workout_flutter/ui/authentication/login_page.dart';
+import 'package:workout_flutter/widget/build_activity_list.dart';
 
 class UserProfile extends StatefulWidget {
   static const routeName = '/profile_page';
@@ -25,9 +28,6 @@ class UserProfileState extends State<UserProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('User Profile'),
-      // ),
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -279,164 +279,166 @@ class UserProfileState extends State<UserProfile> {
                           'Progress:',
                           style: textStyle,
                         ),
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(0, 0),
-                                    blurRadius: 22,
-                                    color: Colors.grey,
-                                  )
-                                ],
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(8),
-                                ),
-                              ),
-                              width: MediaQuery.of(context).size.width * 0.95,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8),
-                                child: Column(
-                                  children: [
-                                    ListTile(
-                                      title: Text(
-                                        'Activity',
-                                        style: textStyle,
-                                      ),
-                                      subtitle: Text(
-                                        'Description',
-                                        style: textStyle,
-                                      ),
-                                    ),
-                                    ListTile(
-                                      title: Text(
-                                        'Activity',
-                                        style: textStyle,
-                                      ),
-                                      subtitle: Text(
-                                        'Description',
-                                        style: textStyle,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 8),
                         Expanded(
-                          child: Center(
-                            child: StreamBuilder<QuerySnapshot>(
-                              stream: firestore
-                                  .collection('user_notification_bi13rb8')
-                                  .where('id',
-                                      isEqualTo: auth.currentUser?.email)
-                                  .snapshots(),
-                              builder: (context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return CircularProgressIndicator();
-                                } else if (snapshot.hasData) {
-                                  final List<NotificationModel> notifs = [];
-                                  final notifications = snapshot.data?.docs
-                                      as List<QueryDocumentSnapshot>;
-                                  for (var notification in notifications) {
-                                    final id = notification.data()?['id'];
-                                    final name = notification.data()?['name'];
-                                    final message =
-                                        notification.data()?['message'];
-                                    final sender =
-                                        notification.data()?['sender'];
-                                    final docId = notification.id;
-                                    final userDocId =
-                                        notification.data()?['userDocId'];
-                                    notifs.add(NotificationModel(
-                                      id: id,
-                                      name: name,
-                                      message: message,
-                                      sender: sender,
-                                      docId: docId,
-                                      userDocId: userDocId,
-                                    ));
-                                  }
-                                  return ListView.builder(
-                                    itemCount: notifs.length,
+                          child: StreamBuilder<QuerySnapshot>(
+                            stream: firestore
+                                .collection('user_activity_bi13rb8')
+                                .where('id', isEqualTo: userData?.family)
+                                .orderBy('time')
+                                .snapshots(),
+                            builder: (context, snapshot) {
+                              print(userData?.toJson());
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              } else if (snapshot.hasData) {
+                                final datas = snapshot.data?.docs
+                                    as List<QueryDocumentSnapshot>;
+                                List<Activity> listActivity = [];
+                                for (var data in datas) {
+                                  final id = data.data()?['id'];
+                                  final activity = data.data()?['activity'];
+
+                                  final activityData =
+                                      Activity(id: id, activity: activity);
+                                  listActivity.add(activityData);
+                                }
+                                return AnimationLimiter(
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    padding: const EdgeInsets.all(8),
+                                    itemCount: listActivity.length,
                                     itemBuilder: (context, index) {
-                                      return ListTile(
-                                        title: Center(
-                                          child: Text(
-                                            notifs[index].sender as String,
-                                            style: textStyle,
+                                      return AnimationConfiguration
+                                          .staggeredList(
+                                        position: index,
+                                        duration:
+                                            const Duration(milliseconds: 375),
+                                        child: SlideAnimation(
+                                          verticalOffset: 50.0,
+                                          child: FadeInAnimation(
+                                            child: buildActivityList(
+                                                context, listActivity[index]),
                                           ),
-                                        ),
-                                        subtitle: Column(
-                                          children: [
-                                            Text(
-                                              '${notifs[index].name} ${notifs[index].message}',
-                                              style: textStyle,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                TextButton(
-                                                  onPressed: () async {
-                                                    await firestore
-                                                        .collection(
-                                                            'user_account_bi13rb8')
-                                                        .doc(notifs[index]
-                                                            .userDocId)
-                                                        .update({
-                                                      'family': auth.currentUser
-                                                          ?.email as String
-                                                    });
-                                                    await firestore
-                                                        .collection(
-                                                            'user_notification_bi13rb8')
-                                                        .doc(
-                                                            notifs[index].docId)
-                                                        .delete();
-                                                  },
-                                                  child: Text(
-                                                    'Confirm',
-                                                    style: textStyle,
-                                                  ),
-                                                ),
-                                                TextButton(
-                                                  onPressed: () async {
-                                                    await firestore
-                                                        .collection(
-                                                            'user_notification_bi13rb8')
-                                                        .doc(
-                                                            notifs[index].docId)
-                                                        .delete();
-                                                  },
-                                                  child: Text(
-                                                    'Remove',
-                                                    style: textStyle,
-                                                  ),
-                                                ),
-                                              ],
-                                            )
-                                          ],
                                         ),
                                       );
                                     },
-                                  );
-                                } else if (snapshot.hasError) {
-                                  return Text(
-                                    'Error',
-                                    style: textStyle,
-                                  );
-                                } else {
-                                  return Text('No Data');
+                                  ),
+                                );
+                              } else if (snapshot.hasError) {
+                                return Center(child: Text(''));
+                              } else {
+                                return Center(child: Text(''));
+                              }
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Center(
+                          child: StreamBuilder<QuerySnapshot>(
+                            stream: firestore
+                                .collection('user_notification_bi13rb8')
+                                .where('id', isEqualTo: auth.currentUser?.email)
+                                .snapshots(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return CircularProgressIndicator();
+                              } else if (snapshot.hasData) {
+                                final List<NotificationModel> notifs = [];
+                                final notifications = snapshot.data?.docs
+                                    as List<QueryDocumentSnapshot>;
+                                for (var notification in notifications) {
+                                  final id = notification.data()?['id'];
+                                  final name = notification.data()?['name'];
+                                  final message =
+                                      notification.data()?['message'];
+                                  final sender = notification.data()?['sender'];
+                                  final docId = notification.id;
+                                  final userDocId =
+                                      notification.data()?['userDocId'];
+                                  notifs.add(NotificationModel(
+                                    id: id,
+                                    name: name,
+                                    message: message,
+                                    sender: sender,
+                                    docId: docId,
+                                    userDocId: userDocId,
+                                  ));
                                 }
-                              },
-                            ),
+                                return ListView.builder(
+                                  itemCount: notifs.length,
+                                  itemBuilder: (context, index) {
+                                    return ListTile(
+                                      title: Center(
+                                        child: Text(
+                                          notifs[index].sender as String,
+                                          style: textStyle,
+                                        ),
+                                      ),
+                                      subtitle: Column(
+                                        children: [
+                                          Text(
+                                            '${notifs[index].name} ${notifs[index].message}',
+                                            style: textStyle,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              TextButton(
+                                                onPressed: () async {
+                                                  await firestore
+                                                      .collection(
+                                                          'user_account_bi13rb8')
+                                                      .doc(notifs[index]
+                                                          .userDocId)
+                                                      .update({
+                                                    'family': auth.currentUser
+                                                        ?.email as String
+                                                  });
+                                                  await firestore
+                                                      .collection(
+                                                          'user_notification_bi13rb8')
+                                                      .doc(notifs[index].docId)
+                                                      .delete();
+                                                },
+                                                child: Text(
+                                                  'Confirm',
+                                                  style: textStyle,
+                                                ),
+                                              ),
+                                              TextButton(
+                                                onPressed: () async {
+                                                  await firestore
+                                                      .collection(
+                                                          'user_notification_bi13rb8')
+                                                      .doc(notifs[index].docId)
+                                                      .delete();
+                                                },
+                                                child: Text(
+                                                  'Remove',
+                                                  style: textStyle,
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                );
+                              } else if (snapshot.hasError) {
+                                return Text(
+                                  'Error',
+                                  style: textStyle,
+                                );
+                              } else {
+                                return Text('No Data');
+                              }
+                            },
                           ),
                         ),
                       ],

@@ -61,7 +61,7 @@ class DetailResult {
   String? internationalPhoneNumber;
   String? name;
   OpeningHours? openingHours;
-  List<Photo>? photos;
+  List<PhotoDetail>? photos;
   String? placeId;
   double? rating;
   String? reference;
@@ -96,7 +96,8 @@ class DetailResult {
             : OpeningHours.fromJson(json["opening_hours"]),
         photos: json["photos"] == null
             ? null
-            : List<Photo>.from(json["photos"].map((x) => Photo.fromJson(x))),
+            : List<PhotoDetail>.from(
+                json["photos"].map((x) => PhotoDetail.fromJson(x))),
         placeId: json["place_id"] == null ? null : json["place_id"],
         rating: json["rating"] == null ? null : json["rating"].toDouble(),
         reference: json["reference"] == null ? null : json["reference"],
@@ -130,7 +131,7 @@ class DetailResult {
         "photos": photos == null
             ? null
             : List<dynamic>.from(
-                (photos as List<Photo>).map((x) => x.toJson())),
+                (photos as List<PhotoDetail>).map((x) => x.toJson())),
         "place_id": placeId == null ? null : placeId,
         "rating": rating == null ? null : rating,
         "reference": reference == null ? null : reference,
@@ -248,8 +249,8 @@ class Close {
       };
 }
 
-class Photo {
-  Photo({
+class PhotoDetail {
+  PhotoDetail({
     this.height,
     this.htmlAttributions,
     this.photoReference,
@@ -261,7 +262,7 @@ class Photo {
   String? photoReference;
   int? width;
 
-  factory Photo.fromJson(Map<String, dynamic> json) => Photo(
+  factory PhotoDetail.fromJson(Map<String, dynamic> json) => PhotoDetail(
         height: json["height"] == null ? null : json["height"],
         htmlAttributions: json["html_attributions"] == null
             ? null

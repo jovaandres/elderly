@@ -27,7 +27,6 @@ import 'package:workout_flutter/provider/search_user_provider.dart';
 import 'package:workout_flutter/ui/contact_picker.dart';
 import 'package:workout_flutter/ui/excercise_detail.dart';
 import 'package:workout_flutter/ui/excercise_player.dart';
-import 'package:workout_flutter/ui/hospital_detail.dart';
 import 'package:workout_flutter/ui/authentication/intro_screen.dart';
 import 'package:workout_flutter/ui/authentication/login_page.dart';
 import 'package:workout_flutter/ui/main_page/home_page.dart';
@@ -148,10 +147,6 @@ class MyApp extends StatelessWidget {
               ExcercisePlayer.routeName: (context) => ExcercisePlayer(
                     link: ModalRoute.of(context)?.settings.arguments
                         as List<String>,
-                  ),
-              DetailHospital.routeName: (context) => DetailHospital(
-                    hospitalId:
-                        ModalRoute.of(context)?.settings.arguments as String,
                   ),
             },
           );

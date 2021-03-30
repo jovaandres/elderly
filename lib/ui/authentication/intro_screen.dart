@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
+import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/common/navigation.dart';
 import 'package:workout_flutter/ui/authentication/login_page.dart';
 
@@ -20,29 +21,36 @@ class IntroScreenState extends State<IntroScreen> {
 
     slides.add(
       Slide(
-        title: "Lorem Ipsum",
-        description:
-            "Allow miles wound place the leave had. To sitting subject no improve studied limited",
+        title: "Are You Healthy?",
+        description: "One Exercise A Day Keeps The Whole Worries Away!",
         pathImage: "assets/slide_1.jpg",
         backgroundColor: Color(0xfff5a623),
+        styleTitle: textStyle.copyWith(
+          fontSize: 24,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+        styleDescription: textStyle.copyWith(
+          fontSize: 20,
+          color: Colors.white,
+        ),
       ),
     );
     slides.add(
       Slide(
-        title: "Lorem Ipsum",
-        description:
-            "Ye indulgence unreserved connection alteration appearance",
-        pathImage: "assets/slide_2.jpg",
-        backgroundColor: Color(0xff203152),
-      ),
-    );
-    slides.add(
-      Slide(
-        title: "Lorem Ipsum",
-        description:
-            "Much evil soon high in hope do view. Out may few northward believing attempted. Yet timed being songs marry one defer men our. Although finished blessing do of",
+        title: "Are Your Happy?",
+        description: "Be Happy And Enjoy Life",
         pathImage: "assets/slide_3.jpg",
         backgroundColor: Color(0xff9932CC),
+        styleTitle: textStyle.copyWith(
+          fontSize: 24,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+        styleDescription: textStyle.copyWith(
+          fontSize: 20,
+          color: Colors.white,
+        ),
       ),
     );
   }

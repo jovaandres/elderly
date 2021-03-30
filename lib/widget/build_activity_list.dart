@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_flutter/common/constant.dart';
 import 'package:workout_flutter/data/model/activity.dart';
+import 'package:workout_flutter/main.dart';
 
 Widget buildActivityList(BuildContext context, Activity activity) {
   return Center(
@@ -12,7 +13,7 @@ Widget buildActivityList(BuildContext context, Activity activity) {
           BoxShadow(
             offset: Offset(0, 0),
             blurRadius: 22,
-            color: Colors.grey,
+            color: Colors.grey.shade50,
           )
         ],
         borderRadius: BorderRadius.all(
@@ -26,7 +27,9 @@ Widget buildActivityList(BuildContext context, Activity activity) {
         child: ListTile(
           leading: Icon(Icons.people),
           title: Text(
-            activity.id as String,
+            (userData?.role == 'family')
+                ? activity.id as String
+                : 'Your Activity',
             style: textStyle,
           ),
           subtitle: Text(
