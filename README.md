@@ -20,14 +20,16 @@ Cognitive decline and heart diseases are among the most common problems found in
 Aera app is equipped with 3 main features,
 
 (1) AeraMed, a medication reminder to help elders remember to consume their medicines. It is completed with a picture and time, which is connected to phone calendar and reminds each time they have to take medicine. 
+
 ![app3](https://user-images.githubusercontent.com/64909665/113159043-7f00a400-9266-11eb-824b-dd231d4a8e7f.png)
 
 
 (2) AeraHealth shows tutorials of effective exercises for elders to boost circulations. To overcome losing motivation in keeping up with the routines, AeraHealth allows users to receive reward points which can later be exchanged with healthcare vouchers. 
+
 ![app2](https://user-images.githubusercontent.com/64909665/113159196-9c357280-9266-11eb-9a98-c8730cc9b4e4.png)
 
-
 (3) Last one, the AeraCall! a feature that lists hospitals’ hotlines and locations.
+
 ![app4](https://user-images.githubusercontent.com/64909665/113159227-a3f51700-9266-11eb-8f05-ee1a4fc2aca7.png)
 
 
