@@ -35,6 +35,16 @@ Aera app is equipped with 3 main features,
 
 AeraApp uses 2 services of firebase, firestore to store all the data and storage to save pictures. In building the whole structure, we utilize the features from flutter.
 
+![storage](https://user-images.githubusercontent.com/64909665/113160956-26320b00-9268-11eb-8d2a-93cad525f5ff.png)
+![firestore](https://user-images.githubusercontent.com/64909665/113161234-62656b80-9268-11eb-88fa-7fc28c685ba8.png)
+
+
+We also used Google Maps Platform In Our App
+
+![maps](https://user-images.githubusercontent.com/64909665/113161611-bff9b800-9268-11eb-9189-23b5013357a7.png)
+
+
+
 # Credit For Images Used In Our App
 
 - [Christopher Campbell](https://unsplash.com/photos/kFCdfLbu6zA)
