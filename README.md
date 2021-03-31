@@ -1,16 +1,70 @@
-# workout_flutter
+# Elderly App Flutter
 
-A new Flutter project.
+A flutter project for Google Solution Challenge 2021.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To Build This Project
+> flutter build apk --split-per-abi --no-sound-null-safety
 
-A few resources to get you started if this is your first Flutter project:
+Build In Debug Version
+> flutter build apk --debug --no-sound-null-safety
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+No Sound Null Safety used because this project depend on dependencies that not support null safety yet.
+For now, this app is optimize for android user only, we will arrange the things needed to run on iOS in future update.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Introduce
+Introducing, AERA, a healthcare application that provides elders with an easily-access self-care system
+Cognitive decline and heart diseases are among the most common problems found in elders. When designing our platform, we decided to start from these 2 concerns.
+
+Aera app is equipped with 3 main features,
+
+(1) AeraMed, a medication reminder to help elders remember to consume their medicines. It is completed with a picture and time, which is connected to phone calendar and reminds each time they have to take medicine. 
+
+(2) AeraHealth shows tutorials of effective exercises for elders to boost circulations. To overcome losing motivation in keeping up with the routines, AeraHealth allows users to receive reward points which can later be exchanged with healthcare vouchers. 
+
+(3) Last one, the AeraCall! a feature that lists hospitals’ hotlines and locations.
+
+AeraApp uses 2 services of firebase, firestore to store all the data and storage to save pictures. In building the whole structure, we utilize the features from flutter.
+
+# Credit For Images Used In Our App
+
+- [Christopher Campbell](https://unsplash.com/photos/kFCdfLbu6zA)
+- [Manu B](https://unsplash.com/photos/6RI9-xSaELE)
+- [Alex McCarthy](https://unsplash.com/photos/a6FHROHuQ9o)
+- [Carl Barcelo](https://unsplash.com/photos/nqUHQkuVj3c)
+- [People vector created by pch.vector - www.freepik.com](https://www.freepik.com/vectors/people)
+
+# Dependencies Used In Our App
+- [cupertino_icons](https://pub.dev/packages/cupertino_icons)
+- [intro_slider](https://pub.dev/packages/intro_slider)
+- [provider](https://pub.dev/packages/provider)
+- [path_provider](https://pub.dev/packages/path_provider)
+- [sqflite](https://pub.dev/packages/sqflite)
+- [intl](https://pub.dev/packages/intl)
+- [flutter_staggered_animations](https://pub.dev/packages/flutter_staggered_animations)
+- [url_launcher](https://pub.dev/packages/url_launcher)
+- [flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications)
+- [android_alarm_manager](https://pub.dev/packages/android_alarm_manager)
+- [rxdart](https://pub.dev/packages/rxdart)
+- [shared_preferences](https://pub.dev/packages/shared_preferences)
+- [cloud_firestore](https://pub.dev/packages/cloud_firestore)
+- [firebase_core](https://pub.dev/packages/firebase_core)
+- [firebase_auth](https://pub.dev/packages/firebase_auth)
+- [firebase_storage](https://pub.dev/packages/firebase_storage)
+- [path](https://pub.dev/packages/path)
+- [image_picker](https://pub.dev/packages/image_picker)
+- [full_screen_image](https://pub.dev/packages/full_screen_image)
+- [http](https://pub.dev/packages/http)
+- [tuple](https://pub.dev/packages/tuple)
+- [encrypt](https://pub.dev/packages/encrypt)
+- [aes_crypt](https://pub.dev/packages/aes_crypt)
+- [flutter_datetime_picker](https://pub.dev/packages/flutter_datetime_picker)
+- [youtube_player_flutter](https://pub.dev/packages/youtube_player_flutter)
+- [contacts_service](https://pub.dev/packages/contacts_service)
+- [permission_handler](https://pub.dev/packages/permission_handler)
+- [geolocator](https://pub.dev/packages/geolocator)
+- [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons)
+- [modal_bottom_sheet](https://pub.dev/packages/modal_bottom_sheet)
+- [giffy_dialog](https://pub.dev/packages/giffy_dialog)
+
