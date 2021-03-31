@@ -39,7 +39,7 @@ AeraApp uses 2 services of firebase, firestore to store all the data and storage
 ![firestore](https://user-images.githubusercontent.com/64909665/113161234-62656b80-9268-11eb-88fa-7fc28c685ba8.png)
 
 
-We also used Google Maps Platform In Our App
+We also use Google Maps Platform In Our App
 
 ![maps](https://user-images.githubusercontent.com/64909665/113161611-bff9b800-9268-11eb-9189-23b5013357a7.png)
 
