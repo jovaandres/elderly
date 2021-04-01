@@ -8,7 +8,7 @@ To Build This Project
 > flutter build apk --split-per-abi --no-sound-null-safety
 
 Build In Debug Version
-> flutter build apk --debug --no-sound-null-safety
+> flutter run --debug --no-sound-null-safety
 
 No Sound Null Safety used because this project depend on dependencies that not support null safety yet.
 For now, this app is optimize for android user only, we will arrange the things needed to run on iOS in future update.
