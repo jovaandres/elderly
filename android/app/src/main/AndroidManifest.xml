@@ -14,7 +14,7 @@
     <application
         android:requestLegacyExternalStorage="true"
         android:name="io.flutter.app.FlutterApplication"
-        android:label="Elderly App"
+        android:label="AERA"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
