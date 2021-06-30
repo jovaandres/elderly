@@ -28,6 +28,7 @@ class MedicineDetail extends StatefulWidget {
 class _MedicineDetailState extends State<MedicineDetail> {
   late Medical medical;
   late File medicalImage;
+  bool setelahMakan = false;
   final picker = ImagePicker();
 
   void initState() {
@@ -226,7 +227,13 @@ class _MedicineDetailState extends State<MedicineDetail> {
                         title: Text('Setelah makan?'),
                         subtitle: Text('Iya/Tidak'),
                         trailing: Switch.adaptive(
-                            value: false, onChanged: (value) {}),
+                          value: setelahMakan,
+                          onChanged: (value) {
+                            setState(() {
+                              setelahMakan = value;
+                            });
+                          },
+                        ),
                       )
                     ],
                   ),
