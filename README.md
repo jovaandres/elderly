@@ -88,4 +88,5 @@ We also use Google Maps Platform In Our App
 - [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons)
 - [modal_bottom_sheet](https://pub.dev/packages/modal_bottom_sheet)
 - [giffy_dialog](https://pub.dev/packages/giffy_dialog)
+- [linkify](https://pub.dev/packages/flutter_linkify)
 
