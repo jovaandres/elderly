@@ -58,6 +58,7 @@ dependencies:
   flutter_launcher_icons: ^0.8.1
   modal_bottom_sheet: ^2.0.0
   giffy_dialog: ^1.8.0
+  flutter_linkify: ^5.0.2
 
 dev_dependencies:
   flutter_test:

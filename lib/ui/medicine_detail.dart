@@ -222,6 +222,12 @@ class _MedicineDetailState extends State<MedicineDetail> {
                         },
                       ),
                       SizedBox(height: 16),
+                      ListTile(
+                        title: Text('Setelah makan?'),
+                        subtitle: Text('Iya/Tidak'),
+                        trailing: Switch.adaptive(
+                            value: false, onChanged: (value) {}),
+                      )
                     ],
                   ),
                 ),

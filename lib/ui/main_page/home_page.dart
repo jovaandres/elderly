@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:workout_flutter/ui/main_page/chat_page.dart';
 import 'package:workout_flutter/ui/main_page/medicine_page.dart';
 import 'package:workout_flutter/ui/main_page/hospital_nearby_page.dart';
 import 'package:workout_flutter/ui/main_page/family_contact_page.dart';
@@ -25,6 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<Widget> _listWidget = [
     UserProfile(),
+    ChatPage(),
     ExercisePage(),
     MedicinePage(),
     FamilyContactPage(),
@@ -35,6 +37,10 @@ class _MyHomePageState extends State<MyHomePage> {
     BottomNavigationBarItem(
       icon: Icon(Icons.person),
       label: 'Profile',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.chat),
+      label: 'Chat',
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.explore_rounded),
